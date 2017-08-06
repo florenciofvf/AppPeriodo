@@ -37,6 +37,7 @@ public class BancoHelper extends SQLiteOpenHelper {
         sb.append("           _id integer not null primary key autoincrement,");
         sb.append("        mes_id integer not null,");
         sb.append("        numero integer not null,");
+        sb.append("          nome text not null,");
         sb.append("           obs text,");
         sb.append("     manha_ini Time,");
         sb.append("     manha_fim Time,");

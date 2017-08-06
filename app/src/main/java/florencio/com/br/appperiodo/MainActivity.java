@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.Calendar;
@@ -17,23 +18,27 @@ import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.fragmentos.AnoFragment;
+import florencio.com.br.appperiodo.fragmentos.DiaDialog;
 import florencio.com.br.appperiodo.fragmentos.DiaFragment;
 import florencio.com.br.appperiodo.fragmentos.MesFragment;
+import florencio.com.br.appperiodo.persistencia.Repositorio;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        AnoFragment.AnoFragmentListener,
-        MesFragment.MesFragmentListener,
-        DiaFragment.DiaFragmentListener {
+        AnoFragment.AnoFragmentListener, MesFragment.MesFragmentListener,
+        DiaFragment.DiaFragmentListener, DiaDialog.DiaDialogListener {
 
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private Repositorio repositorio;
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+        repositorio = new Repositorio(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
@@ -56,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.itemAno) {
             AnoFragment fragment = AnoFragment.newInstance(getAnoAtual());
             transaction.replace(R.id.container, fragment);
-            drawerLayout.closeDrawers();
+            transaction.addToBackStack(null);
         }
 
+        drawerLayout.closeDrawers();
         transaction.commit();
-
         return true;
     }
 
@@ -76,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         MesFragment fragment = MesFragment.newInstance(ano);
         transaction.replace(R.id.container, fragment);
-
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -86,13 +91,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction transaction = manager.beginTransaction();
 
         DiaFragment fragment = DiaFragment.newInstance(mes);
-        transaction.replace(R.id.container, fragment);
-
+        transaction.replace(R.id.container, fragment, "DIA_FRAGMENT");
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
     @Override
     public void clickDia(Dia dia) {
+        DiaDialog dialog = DiaDialog.newInstance(dia);
+        dialog.show(getSupportFragmentManager(), "DIA_DIALOG");
+    }
 
+    @Override
+    public void salvarDia(Dia dia) {
+        repositorio.salvarDia(dia);
+        FragmentManager manager = getSupportFragmentManager();
+        DiaFragment fragment = (DiaFragment) manager.findFragmentByTag("DIA_FRAGMENT");
+        if(fragment != null) {
+            fragment.atualizar();
+        }
     }
 }

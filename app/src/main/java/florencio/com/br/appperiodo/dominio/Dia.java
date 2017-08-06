@@ -26,15 +26,30 @@ public class Dia extends Entidade {
     private String noiteFimFmt;
     private String noiteCalFmt;
 
-    private boolean calculado;
+    private String debito;
+    private String credito;
 
-    public Dia(Integer numero, Mes mes) {
+    public Dia(Integer numero, Mes mes, String nome) {
         this.numero = numero;
+        this.nome = nome;
         this.mes = mes;
     }
 
     public void calcular() {
+        manhaIniFmt = Util.formatarHora(manhaIni);
+        manhaFimFmt = Util.formatarHora(manhaFim);
+        manhaCalFmt = "00:00";
 
+        tardeIniFmt = Util.formatarHora(tardeIni);
+        tardeFimFmt = Util.formatarHora(tardeFim);
+        tardeCalFmt = "00:00";
+
+        noiteIniFmt = Util.formatarHora(noiteIni);
+        noiteFimFmt = Util.formatarHora(noiteFim);
+        noiteCalFmt = "00:00";
+
+        debito = "00:00";
+        credito = "00:00";
     }
 
     public Integer getNumero() {
@@ -181,14 +196,6 @@ public class Dia extends Entidade {
         this.noiteCalFmt = noiteCalFmt;
     }
 
-    public boolean isCalculado() {
-        return calculado;
-    }
-
-    public void setCalculado(boolean calculado) {
-        this.calculado = calculado;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -203,6 +210,7 @@ public class Dia extends Entidade {
 
         cv.put("mes_id", mes.get_id());
         cv.put("numero", numero);
+        cv.put("nome", nome);
         cv.put("obs", obs);
         cv.put("manha_ini", manhaIni);
         cv.put("manha_fim", manhaFim);

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     private DiaFragmentListener listener;
     private Repositorio repositorio;
     private ProgressBar progressBar;
+    private DiaAdapter adapter;
     private ListView listView;
     private Mes mes;
 
@@ -94,9 +96,13 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
 
         @Override
         protected void onPostExecute(List<Dia> objetos) {
-            DiaAdapter adapter = new DiaAdapter(objetos, getActivity());
+            adapter = new DiaAdapter(objetos, getActivity());
             listView.setAdapter(adapter);
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    public void atualizar() {
+        adapter.notifyDataSetChanged();
     }
 }

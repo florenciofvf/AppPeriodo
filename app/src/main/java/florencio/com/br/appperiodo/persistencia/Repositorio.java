@@ -93,7 +93,7 @@ public class Repositorio {
         List<Dia> lista = new ArrayList<>();
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim from Dia where mes_id=" + mes.get_id(), null);
+        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome from Dia where mes_id=" + mes.get_id(), null);
 
         while (cursor.moveToNext()) {
             Dia d = criarDia(cursor, mes);
@@ -107,7 +107,7 @@ public class Repositorio {
     }
 
     private Dia criarDia(Cursor cursor, Mes mes) {
-        Dia dia = new Dia(cursor.getInt(1), mes);
+        Dia dia = new Dia(cursor.getInt(1), mes, cursor.getString(9));
         dia.set_id(cursor.getLong(0));
 
         dia.setObs(cursor.getString(2));
@@ -160,8 +160,10 @@ public class Repositorio {
         Map<Integer, Dia> mapa = new LinkedHashMap<>();
 
         for(int i=1; i<=mes.getMaximoDias(); i++) {
-            Dia dia = new Dia(i, mes);
+            Dia dia = new Dia(i, mes, "SEG");
             dia.set_id(new Long(i));
+            dia.calcular();
+
             mapa.put(i, dia);
         }
 

@@ -1,6 +1,7 @@
 package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,8 @@ public class DiaAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.atualizarView(obj);
 
+        convertView.setBackgroundColor(obj.getNumero() % 2 == 0 ? Color.GRAY : Color.LTGRAY);
+
         return convertView;
     }
 
@@ -69,6 +72,9 @@ public class DiaAdapter extends BaseAdapter {
         TextView txtNoiteFim;
         TextView txtNoiteCal;
 
+        TextView txtDebito;
+        TextView txtCredito;
+
         ViewHolder(View view) {
             txtNumero = (TextView) view.findViewById(R.id.txtNumero);
             txtNome = (TextView) view.findViewById(R.id.txtNome);
@@ -85,10 +91,13 @@ public class DiaAdapter extends BaseAdapter {
             txtNoiteIni = (TextView) view.findViewById(R.id.txtNoiteIni);
             txtNoiteFim = (TextView) view.findViewById(R.id.txtNoiteFim);
             txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
+
+            txtDebito = (TextView) view.findViewById(R.id.txtDebito);
+            txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         }
 
         void atualizarView(Dia obj) {
-            txtNumero.setText(obj.getNumero().toString());
+            txtNumero.setText(get(obj.getNumero().toString()));
             txtNome.setText(obj.getNome());
             txtObs.setText(obj.getObs());
 
@@ -103,6 +112,13 @@ public class DiaAdapter extends BaseAdapter {
             txtNoiteIni.setText(obj.getNoiteIniFmt());
             txtNoiteFim.setText(obj.getNoiteFimFmt());
             txtNoiteCal.setText(obj.getNoiteCalFmt());
+
+            txtDebito.setText(obj.getNoiteCalFmt());
+            txtCredito.setText(obj.getNoiteCalFmt());
+        }
+
+        String get(String s) {
+            return s.length() == 1 ? "0" + s : s;
         }
     }
 }
