@@ -3,6 +3,7 @@ package florencio.com.br.appperiodo.fragmentos;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,12 +19,12 @@ import java.util.Calendar;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
-import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAtualFragment extends Fragment {
     private static final String DIA_PARAM = "dia";
     private DiaAtualFragmentListener listener;
+    private TextView txtCredito;
     private Button btnManhaIni;
     private Button btnManhaFim;
     private Button btnTardeIni;
@@ -31,7 +32,11 @@ public class DiaAtualFragment extends Fragment {
     private Button btnNoiteIni;
     private Button btnNoiteFim;
     private TextView txtTitulo;
+    private TextView txtDebito;
+    private TextView txtTotal;
     private EditText edtObs;
+    private TextView txtObs;
+
     private Dia dia;
 
     @Override
@@ -63,8 +68,12 @@ public class DiaAtualFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dia_atual_layout, null);
 
+        txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+        txtDebito = (TextView) view.findViewById(R.id.txtDebito);
+        txtTotal = (TextView) view.findViewById(R.id.txtTotal);
         edtObs = (EditText) view.findViewById(R.id.edtObs);
+        txtObs = (TextView) view.findViewById(R.id.txtObs);
 
         Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -88,15 +97,32 @@ public class DiaAtualFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        txtTitulo.setText(criarTitulo(dia));
-        edtObs.setText(dia.getObs());
-
+        atualizar();
         btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
         btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
         btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
         btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
         btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
         btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
+    }
+
+    public void atualizar() {
+        edtObs.setText(dia.getObs());
+        txtObs.setText(dia.getObs());
+        txtDebito.setText(dia.getDebito());
+        txtTitulo.setText(criarTitulo(dia));
+        txtTotal.setText(dia.getTotalFmt());
+        txtCredito.setText(dia.getCredito());
+
+        txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
+
+        if (dia.isValido()) {
+            txtDebito.setTextColor(Util.ZERO_ZERO.equals(dia.getDebito()) ? Color.BLACK : Color.RED);
+            txtCredito.setTextColor(Util.ZERO_ZERO.equals(dia.getCredito()) ? Color.BLACK : 0xFF008800);
+        } else {
+            txtDebito.setTextColor(Color.BLACK);
+            txtCredito.setTextColor(Color.BLACK);
+        }
     }
 
     private class OnClick implements View.OnClickListener {

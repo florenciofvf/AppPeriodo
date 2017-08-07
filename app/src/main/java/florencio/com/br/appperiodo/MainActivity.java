@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Util.atualizarData();
         repositorio = new Repositorio(this);
         repositorio.sincronizarDia(Util.diaAtual);
+        Util.diaAtual.calcular();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -84,10 +85,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.itemAno) {
             AnoFragment fragment = AnoFragment.newInstance(getAnoAtual());
             transaction.replace(R.id.container, fragment, "FRAGMENTO");
-            transaction.addToBackStack(null);
+        } else if (item.getItemId() == R.id.itemHoje) {
+            repositorio.sincronizarDia(Util.diaAtual);
+            Util.diaAtual.calcular();
+            DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
+            transaction.replace(R.id.container, fragment, "FRAGMENTO");
         }
 
         drawerLayout.closeDrawers();
+        transaction.addToBackStack(null);
         transaction.commit();
         return true;
     }
@@ -135,10 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dia.calcular();
 
         FragmentManager manager = getSupportFragmentManager();
-        DiaFragment fragment = (DiaFragment) manager.findFragmentByTag("FRAGMENTO");
+        Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
 
         if (fragment instanceof DiaFragment) {
             ((DiaFragment)fragment).atualizar();
+        } else if (fragment instanceof DiaAtualFragment) {
+            ((DiaAtualFragment)fragment).atualizar();
         }
     }
 

@@ -45,10 +45,8 @@ public class Dia extends Entidade {
 
         manhaIni = d.manhaIni;
         manhaFim = d.manhaFim;
-
         tardeIni = d.tardeIni;
         tardeFim = d.tardeFim;
-
         noiteIni = d.noiteIni;
         noiteFim = d.noiteFim;
     }

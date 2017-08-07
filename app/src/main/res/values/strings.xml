@@ -18,4 +18,6 @@
     <string name="label_entrada">Entrada</string>
     <string name="label_saida">Saída</string>
     <string name="label_total">Total:</string>
+    <string name="label_anos">Anos</string>
+    <string name="label_hoje">Hoje</string>
 </resources>

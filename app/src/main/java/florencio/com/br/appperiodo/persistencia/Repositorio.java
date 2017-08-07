@@ -136,7 +136,7 @@ public class Repositorio {
         int total = 0;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome from Dia d");
+        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id from Dia d");
         sb.append(" inner join Mes m on m._id = d.mes_id");
         sb.append(" inner join Ano a on a._id = m.ano_id");
         sb.append(" where d.numero=" + d.getNumero());
@@ -149,6 +149,7 @@ public class Repositorio {
         int num_idx = cursor.getColumnIndex("numero");
         int obs_idx = cursor.getColumnIndex("obs");
         int nom_idx = cursor.getColumnIndex("nome");
+        int mes_idx = cursor.getColumnIndex("mes_id");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -170,6 +171,8 @@ public class Repositorio {
             dia.setTardeFim(cursor.getLong(t_f_idx));
             dia.setNoiteIni(cursor.getLong(n_i_idx));
             dia.setNoiteFim(cursor.getLong(n_f_idx));
+
+            d.getMes().set_id(cursor.getLong(mes_idx));
 
             d.copiar(dia);
         }

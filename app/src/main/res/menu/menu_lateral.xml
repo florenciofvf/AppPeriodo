@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/itemAno" android:title="Anos" android:icon="@android:drawable/btn_star" />
+    <item android:id="@+id/itemAno" android:title="@string/label_anos" android:icon="@android:drawable/btn_star" />
+    <item android:id="@+id/itemHoje" android:title="@string/label_hoje" android:icon="@android:drawable/btn_star" />
 
 </menu>
