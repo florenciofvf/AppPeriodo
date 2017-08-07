@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        if(item.getItemId() == R.id.itemAno) {
+        if (item.getItemId() == R.id.itemAno) {
             AnoFragment fragment = AnoFragment.newInstance(getAnoAtual());
             transaction.replace(R.id.container, fragment);
             transaction.addToBackStack(null);
@@ -105,9 +105,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void salvarDia(Dia dia) {
         repositorio.salvarDia(dia);
+        dia.calcular();
+
         FragmentManager manager = getSupportFragmentManager();
         DiaFragment fragment = (DiaFragment) manager.findFragmentByTag("DIA_FRAGMENT");
-        if(fragment != null) {
+
+        if (fragment != null) {
             fragment.atualizar();
         }
     }

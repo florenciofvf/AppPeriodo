@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/margem_superior"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/margem_inferior"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/margem_superior">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,18 +15,16 @@
             android:id="@+id/txtNumero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/esp_esquerdo_2"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/fonte_item_dia"
             android:layout_marginLeft="@dimen/esp_esquerdo"
-            android:layout_marginRight="@dimen/esp_direito" />
-
-
-
+            android:layout_marginRight="@dimen/esp_direito"
+            android:textSize="@dimen/fonte_item_dia" />
 
 
         <TextView
@@ -36,9 +34,9 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_barra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_barra"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
@@ -48,20 +46,17 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_igual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_igual"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtManhaCal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/fonte_item_dia"
-            android:layout_marginRight="@dimen/esp_direito" />
-
-
-
+            android:layout_marginRight="@dimen/esp_direito"
+            android:textSize="@dimen/fonte_item_dia" />
 
 
         <TextView
@@ -71,9 +66,9 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_barra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_barra"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
@@ -83,20 +78,17 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_igual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_igual"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtTardeCal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/fonte_item_dia"
-            android:layout_marginRight="@dimen/esp_direito" />
-
-
-
+            android:layout_marginRight="@dimen/esp_direito"
+            android:textSize="@dimen/fonte_item_dia" />
 
 
         <TextView
@@ -106,9 +98,9 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_barra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_barra"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
@@ -118,9 +110,9 @@
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
-            android:text="@string/label_igual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_igual"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
@@ -136,53 +128,62 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/label_debito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/esp_esquerdo_2"
+            android:text="@string/label_total"
+            android:textSize="@dimen/fonte_item_dia" />
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/esp_esquerdo_3"
+            android:layout_marginRight="@dimen/esp_direito_2"
+            android:textSize="@dimen/fonte_item_dia" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_debito"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtDebito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/fonte_item_dia"
-            android:layout_marginLeft="@dimen/esp_esquerdo"
-            android:layout_marginRight="@dimen/esp_direito"
-            />
-
-
-
+            android:layout_marginLeft="@dimen/esp_esquerdo_3"
+            android:layout_marginRight="@dimen/esp_direito_2"
+            android:textSize="@dimen/fonte_item_dia" />
 
 
         <TextView
-            android:text="@string/label_credito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_credito"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtCredito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/fonte_item_dia"
-            android:layout_marginLeft="@dimen/esp_esquerdo"
-            android:layout_marginRight="@dimen/esp_direito"
-            />
-
-
-
+            android:layout_marginLeft="@dimen/esp_esquerdo_3"
+            android:layout_marginRight="@dimen/esp_direito_2"
+            android:textSize="@dimen/fonte_item_dia" />
 
 
         <TextView
-            android:text="@string/label_obs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_obs"
             android:textSize="@dimen/fonte_item_dia" />
 
         <TextView
             android:id="@+id/txtObs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/esp_esquerdo_3"
             android:textSize="@dimen/fonte_item_dia" />
     </LinearLayout>
 

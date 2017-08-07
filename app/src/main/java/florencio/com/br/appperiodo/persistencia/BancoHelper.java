@@ -39,12 +39,12 @@ public class BancoHelper extends SQLiteOpenHelper {
         sb.append("        numero integer not null,");
         sb.append("          nome text not null,");
         sb.append("           obs text,");
-        sb.append("     manha_ini Time,");
-        sb.append("     manha_fim Time,");
-        sb.append("     tarde_ini Time,");
-        sb.append("     tarde_fim Time,");
-        sb.append("     noite_ini Time,");
-        sb.append("     noite_fim Time,");
+        sb.append("     manha_ini integer not null,");
+        sb.append("     manha_fim integer not null,");
+        sb.append("     tarde_ini integer not null,");
+        sb.append("     tarde_fim integer not null,");
+        sb.append("     noite_ini integer not null,");
+        sb.append("     noite_fim integer not null,");
         sb.append("   foreign key(mes_id) references Mes(_id)");
         sb.append(")");
         db.execSQL(sb.toString());
@@ -58,7 +58,7 @@ public class BancoHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
-        if(!db.isReadOnly()) {
+        if (!db.isReadOnly()) {
             db.setForeignKeyConstraintsEnabled(true);
         }
     }

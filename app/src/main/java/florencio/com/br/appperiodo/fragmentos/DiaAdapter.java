@@ -12,6 +12,7 @@ import java.util.List;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
+import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAdapter extends BaseAdapter {
     private List<Dia> objetos;
@@ -20,6 +21,10 @@ public class DiaAdapter extends BaseAdapter {
     public DiaAdapter(List<Dia> objetos, Context context) {
         this.objetos = objetos;
         this.context = context;
+    }
+
+    public List<Dia> getObjetos() {
+        return objetos;
     }
 
     @Override
@@ -47,10 +52,12 @@ public class DiaAdapter extends BaseAdapter {
             convertView.setTag(new ViewHolder(convertView));
         }
 
+        final int cor = obj.getNumero() % 2 == 0 ? Color.WHITE : Color.LTGRAY;
+
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.atualizarView(obj);
 
-        convertView.setBackgroundColor(obj.getNumero() % 2 == 0 ? Color.GRAY : Color.LTGRAY);
+        //convertView.setBackgroundColor(cor);
 
         return convertView;
     }
@@ -72,6 +79,7 @@ public class DiaAdapter extends BaseAdapter {
         TextView txtNoiteFim;
         TextView txtNoiteCal;
 
+        TextView txtTotal;
         TextView txtDebito;
         TextView txtCredito;
 
@@ -92,6 +100,7 @@ public class DiaAdapter extends BaseAdapter {
             txtNoiteFim = (TextView) view.findViewById(R.id.txtNoiteFim);
             txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
 
+            txtTotal = (TextView) view.findViewById(R.id.txtTotal);
             txtDebito = (TextView) view.findViewById(R.id.txtDebito);
             txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         }
@@ -113,8 +122,19 @@ public class DiaAdapter extends BaseAdapter {
             txtNoiteFim.setText(obj.getNoiteFimFmt());
             txtNoiteCal.setText(obj.getNoiteCalFmt());
 
-            txtDebito.setText(obj.getNoiteCalFmt());
-            txtCredito.setText(obj.getNoiteCalFmt());
+            txtTotal.setText(obj.getTotalFmt());
+            txtDebito.setText(obj.getDebito());
+            txtCredito.setText(obj.getCredito());
+
+            txtTotal.setTextColor(obj.isValido() ? Color.BLUE : Color.BLACK);
+
+            if (obj.isValido()) {
+                txtDebito.setTextColor(Util.ZERO_ZERO.equals(obj.getDebito()) ? Color.BLACK : Color.RED);
+                txtCredito.setTextColor(Util.ZERO_ZERO.equals(obj.getCredito()) ? Color.BLACK : 0xFF008800);
+            } else {
+                txtDebito.setTextColor(Color.BLACK);
+                txtCredito.setTextColor(Color.BLACK);
+            }
         }
 
         String get(String s) {

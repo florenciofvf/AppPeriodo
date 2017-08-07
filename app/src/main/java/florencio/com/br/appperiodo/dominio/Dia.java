@@ -2,32 +2,44 @@ package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
 
+import florencio.com.br.appperiodo.util.Util;
+
 public class Dia extends Entidade {
     private Integer numero;
     private String nome;
     private String obs;
     private Mes mes;
 
-    private Long manhaIni;
-    private Long manhaFim;
+    private long manhaIni;
+    private long manhaFim;
     private String manhaIniFmt;
     private String manhaFimFmt;
     private String manhaCalFmt;
 
-    private Long tardeIni;
-    private Long tardeFim;
+    private long tardeIni;
+    private long tardeFim;
     private String tardeIniFmt;
     private String tardeFimFmt;
     private String tardeCalFmt;
 
-    private Long noiteIni;
-    private Long noiteFim;
+    private long noiteIni;
+    private long noiteFim;
     private String noiteIniFmt;
     private String noiteFimFmt;
     private String noiteCalFmt;
 
+    private long total;
     private String debito;
     private String credito;
+    private String totalFmt;
+    private boolean valido;
+
+    @Override
+    public String toString() {
+        return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +
+                ", TARDE_INI=" + tardeIni + ", TARDE_FIM=" + tardeFim +
+                ", NOITE_INI=" + noiteIni + ", NOITE_FIM=" + noiteFim;
+    }
 
     public Dia(Integer numero, Mes mes, String nome) {
         this.numero = numero;
@@ -36,20 +48,40 @@ public class Dia extends Entidade {
     }
 
     public void calcular() {
+        total = 0;
+
         manhaIniFmt = Util.formatarHora(manhaIni);
         manhaFimFmt = Util.formatarHora(manhaFim);
-        manhaCalFmt = "00:00";
+        manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
+        total += Util.diferenca(manhaIni, manhaFim);
 
         tardeIniFmt = Util.formatarHora(tardeIni);
         tardeFimFmt = Util.formatarHora(tardeFim);
-        tardeCalFmt = "00:00";
+        tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
+        total += Util.diferenca(tardeIni, tardeFim);
 
         noiteIniFmt = Util.formatarHora(noiteIni);
         noiteFimFmt = Util.formatarHora(noiteFim);
-        noiteCalFmt = "00:00";
+        noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
+        total += Util.diferenca(noiteIni, noiteFim);
 
-        debito = "00:00";
-        credito = "00:00";
+        totalFmt = Util.totalFmt(total);
+
+        valido = total > 0;
+        debito = Util.ZERO_ZERO;
+        credito = Util.ZERO_ZERO;
+
+        if (total > Util.OITO_HORAS && valido) {
+            credito = Util.diferencaFmt(Util.OITO_HORAS, total);
+        }
+
+        if (total < Util.OITO_HORAS && valido) {
+            debito = Util.diferencaFmt(total, Util.OITO_HORAS);
+        }
+    }
+
+    public String getTotalFmt() {
+        return totalFmt;
     }
 
     public Integer getNumero() {
@@ -76,20 +108,26 @@ public class Dia extends Entidade {
         this.mes = mes;
     }
 
-    public Long getManhaIni() {
+    public long getManhaIni() {
         return manhaIni;
     }
 
-    public void setManhaIni(Long manhaIni) {
+    public void setManhaIni(long manhaIni) {
         this.manhaIni = manhaIni;
     }
 
-    public Long getManhaFim() {
+    public long getManhaFim() {
         return manhaFim;
     }
 
-    public void setManhaFim(Long manhaFim) {
-        this.manhaFim = manhaFim;
+    public void setManhaFim(long manhaFim) {
+        if (manhaIni == 0 || manhaFim == 0) {
+            return;
+        }
+
+        if (manhaIni < manhaFim) {
+            this.manhaFim = manhaFim;
+        }
     }
 
     public String getManhaIniFmt() {
@@ -116,20 +154,26 @@ public class Dia extends Entidade {
         this.manhaCalFmt = manhaCalFmt;
     }
 
-    public Long getTardeIni() {
+    public long getTardeIni() {
         return tardeIni;
     }
 
-    public void setTardeIni(Long tardeIni) {
+    public void setTardeIni(long tardeIni) {
         this.tardeIni = tardeIni;
     }
 
-    public Long getTardeFim() {
+    public long getTardeFim() {
         return tardeFim;
     }
 
-    public void setTardeFim(Long tardeFim) {
-        this.tardeFim = tardeFim;
+    public void setTardeFim(long tardeFim) {
+        if (tardeIni == 0 || tardeFim == 0) {
+            return;
+        }
+
+        if (tardeIni < tardeFim) {
+            this.tardeFim = tardeFim;
+        }
     }
 
     public String getTardeIniFmt() {
@@ -156,20 +200,26 @@ public class Dia extends Entidade {
         this.tardeCalFmt = tardeCalFmt;
     }
 
-    public Long getNoiteIni() {
+    public long getNoiteIni() {
         return noiteIni;
     }
 
-    public void setNoiteIni(Long noiteIni) {
+    public void setNoiteIni(long noiteIni) {
         this.noiteIni = noiteIni;
     }
 
-    public Long getNoiteFim() {
+    public long getNoiteFim() {
         return noiteFim;
     }
 
-    public void setNoiteFim(Long noiteFim) {
-        this.noiteFim = noiteFim;
+    public void setNoiteFim(long noiteFim) {
+        if (noiteIni == 0 || noiteFim == 0) {
+            return;
+        }
+
+        if (noiteIni < noiteFim) {
+            this.noiteFim = noiteFim;
+        }
     }
 
     public String getNoiteIniFmt() {
@@ -202,6 +252,42 @@ public class Dia extends Entidade {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDebito() {
+        return debito;
+    }
+
+    public void setDebito(String debito) {
+        this.debito = debito;
+    }
+
+    public String getCredito() {
+        return credito;
+    }
+
+    public void setCredito(String credito) {
+        this.credito = credito;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public boolean isValido() {
+        return valido;
+    }
+
+    public void setValido(boolean valido) {
+        this.valido = valido;
+    }
+
+    public void setTotalFmt(String totalFmt) {
+        this.totalFmt = totalFmt;
     }
 
     @Override

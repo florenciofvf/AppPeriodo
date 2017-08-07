@@ -5,27 +5,29 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
 import florencio.com.br.appperiodo.R;
-import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
+import florencio.com.br.appperiodo.util.Util;
 
 public class DiaFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String MES_PARAM = "mes";
     private DiaFragmentListener listener;
     private Repositorio repositorio;
     private ProgressBar progressBar;
+    private TextView txtRodape;
     private DiaAdapter adapter;
     private ListView listView;
     private Mes mes;
@@ -67,6 +69,10 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         repositorio = new Repositorio(getActivity());
+        txtRodape = new TextView(getActivity());
+        txtRodape.setGravity(Gravity.RIGHT);
+        txtRodape.setPadding(8,8,8,8);
+        listView.addFooterView(txtRodape);
         new Tarefa().execute(mes);
     }
 
@@ -79,7 +85,9 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Dia obj = (Dia) listView.getAdapter().getItem(position);
-        listener.clickDia(obj);
+        if (obj != null) {
+            listener.clickDia(obj);
+        }
     }
 
     public interface DiaFragmentListener {
@@ -99,10 +107,24 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
             adapter = new DiaAdapter(objetos, getActivity());
             listView.setAdapter(adapter);
             progressBar.setVisibility(View.GONE);
+
+            int total = 0;
+            for (Dia d : objetos) {
+                total += d.getTotal();
+            }
+
+            txtRodape.setText("TOTAL DE HORAS: " + Util.totalFmt(total));
         }
     }
 
     public void atualizar() {
         adapter.notifyDataSetChanged();
+
+        int total = 0;
+        for (Dia d : adapter.getObjetos()) {
+            total += d.getTotal();
+        }
+
+        txtRodape.setText("TOTAL DE HORAS: " + Util.totalFmt(total));
     }
 }

@@ -17,4 +17,5 @@
     <string name="label_noite">Noite</string>
     <string name="label_entrada">Entrada</string>
     <string name="label_saida">Saída</string>
+    <string name="label_total">Total:</string>
 </resources>

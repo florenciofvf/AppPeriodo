@@ -1,5 +1,6 @@
 package florencio.com.br.appperiodo.fragmentos;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -20,14 +22,15 @@ import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaDialog extends DialogFragment {
-    private final String MANHA_INI = "MANHA_INI";
-    private final String MANHA_FIM = "MANHA_FIM";
-    private final String TARDE_INI = "TARDE_INI";
-    private final String TARDE_FIM = "TARDE_FIM";
-    private final String NOITE_INI = "NOITE_INI";
-    private final String NOITE_FIM = "NOITE_FIM";
     private static final String DIA_PARAM = "dia";
     private DiaDialogListener listener;
+    private Button btnManhaIni;
+    private Button btnManhaFim;
+    private Button btnTardeIni;
+    private Button btnTardeFim;
+    private Button btnNoiteIni;
+    private Button btnNoiteFim;
+    private EditText edtObs;
     private Dia dia;
 
     @Override
@@ -61,7 +64,10 @@ public class DiaDialog extends DialogFragment {
         TextView txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         txtTitulo.setText(criarTitulo(dia));
 
-        Button btnCancelar = (Button)view.findViewById(R.id.btnCancelar);
+        edtObs = (EditText) view.findViewById(R.id.edtObs);
+        edtObs.setText(dia.getObs());
+
+        Button btnCancelar = (Button) view.findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,22 +75,33 @@ public class DiaDialog extends DialogFragment {
             }
         });
 
-        Button btnSalvar = (Button)view.findViewById(R.id.btnSalvar);
+        Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setObs(edtObs.getText().toString());
                 listener.salvarDia(dia);
+                dismiss();
             }
         });
 
-        view.findViewById(R.id.btnManhaIni).setOnClickListener(new OnClick(MANHA_INI));
-        view.findViewById(R.id.btnManhaFim).setOnClickListener(new OnClick(MANHA_FIM));
+        btnManhaIni = (Button) view.findViewById(R.id.btnManhaIni);
+        btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
 
-        view.findViewById(R.id.btnTardeIni).setOnClickListener(new OnClick(TARDE_INI));
-        view.findViewById(R.id.btnTardeFim).setOnClickListener(new OnClick(TARDE_FIM));
+        btnManhaFim = (Button) view.findViewById(R.id.btnManhaFim);
+        btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
 
-        view.findViewById(R.id.btnNoiteIni).setOnClickListener(new OnClick(NOITE_INI));
-        view.findViewById(R.id.btnNoiteFim).setOnClickListener(new OnClick(NOITE_FIM));
+        btnTardeIni = (Button) view.findViewById(R.id.btnTardeIni);
+        btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
+
+        btnTardeFim = (Button) view.findViewById(R.id.btnTardeFim);
+        btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
+
+        btnNoiteIni = (Button) view.findViewById(R.id.btnNoiteIni);
+        btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
+
+        btnNoiteFim = (Button) view.findViewById(R.id.btnNoiteFim);
+        btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
 
         return view;
     }
@@ -92,52 +109,16 @@ public class DiaDialog extends DialogFragment {
     private class OnClick implements View.OnClickListener {
         final String campo;
 
-        public OnClick(String campo) {
+        public OnClick(String campo, Dia dia, Button button) {
+            Util.atualizarText(campo, dia, button);
             this.campo = campo;
         }
 
         @Override
         public void onClick(View v) {
-            TimePickerDialog dialog = new TimePickerDialog(getActivity(), new AtualizaHora(campo), getHora(campo), getMinuto(campo), true);
+            TimePickerDialog dialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,
+                    new AtualizaHora(campo), Util.getHora(campo, dia), Util.getMinuto(campo, dia), true);
             dialog.show();
-        }
-
-        Integer getHora(String campo) {
-            if(MANHA_INI.equals(campo)) {
-                return Util.getHora(dia.getManhaIni());
-            } else if(MANHA_FIM.equals(campo)) {
-                return Util.getHora(dia.getManhaFim());
-
-            } else if(TARDE_INI.equals(campo)) {
-                return Util.getHora(dia.getTardeIni());
-            } else if(TARDE_FIM.equals(campo)) {
-                return Util.getHora(dia.getTardeFim());
-
-            } else if(NOITE_INI.equals(campo)) {
-                return Util.getHora(dia.getNoiteIni());
-            } else if(NOITE_FIM.equals(campo)) {
-                return Util.getHora(dia.getNoiteFim());
-            }
-            return 0;
-        }
-
-        Integer getMinuto(String campo) {
-            if(MANHA_INI.equals(campo)) {
-                return Util.getMinuto(dia.getManhaIni());
-            } else if(MANHA_FIM.equals(campo)) {
-                return Util.getMinuto(dia.getManhaFim());
-
-            } else if(TARDE_INI.equals(campo)) {
-                return Util.getMinuto(dia.getTardeIni());
-            } else if(TARDE_FIM.equals(campo)) {
-                return Util.getMinuto(dia.getTardeFim());
-
-            } else if(NOITE_INI.equals(campo)) {
-                return Util.getMinuto(dia.getNoiteIni());
-            } else if(NOITE_FIM.equals(campo)) {
-                return Util.getMinuto(dia.getNoiteFim());
-            }
-            return 0;
         }
     }
 
@@ -177,26 +158,35 @@ public class DiaDialog extends DialogFragment {
             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
             c.set(Calendar.MINUTE, minute);
 
-            if(MANHA_INI.equals(campo)) {
-                dia.setManhaIni(c.getTimeInMillis());
-            } else if(MANHA_FIM.equals(campo)) {
-                dia.setManhaFim(c.getTimeInMillis());
+            long valor = hourOfDay == 0 && minute == 0 ? 0 : c.getTimeInMillis();
 
-            } else if(TARDE_INI.equals(campo)) {
-                dia.setTardeIni(c.getTimeInMillis());
-            } else if(TARDE_FIM.equals(campo)) {
-                dia.setTardeFim(c.getTimeInMillis());
+            if (Util.MANHA_INI.equals(campo)) {
+                dia.setManhaIni(valor);
+                Util.atualizarText(campo, dia, btnManhaIni);
+            } else if (Util.MANHA_FIM.equals(campo)) {
+                dia.setManhaFim(valor);
+                Util.atualizarText(campo, dia, btnManhaFim);
 
-            } else if(NOITE_INI.equals(campo)) {
-                dia.setNoiteIni(c.getTimeInMillis());
-            } else if(NOITE_FIM.equals(campo)) {
-                dia.setNoiteFim(c.getTimeInMillis());
+            } else if (Util.TARDE_INI.equals(campo)) {
+                dia.setTardeIni(valor);
+                Util.atualizarText(campo, dia, btnTardeIni);
+            } else if (Util.TARDE_FIM.equals(campo)) {
+                dia.setTardeFim(valor);
+                Util.atualizarText(campo, dia, btnTardeFim);
+
+            } else if (Util.NOITE_INI.equals(campo)) {
+                dia.setNoiteIni(valor);
+                Util.atualizarText(campo, dia, btnNoiteIni);
+            } else if (Util.NOITE_FIM.equals(campo)) {
+                dia.setNoiteFim(valor);
+                Util.atualizarText(campo, dia, btnNoiteFim);
             }
         }
 
         private Calendar criarCalendar() {
             Calendar c = Calendar.getInstance();
             c.set(Calendar.DAY_OF_MONTH, 0);
+            c.set(Calendar.MILLISECOND, 0);
             c.set(Calendar.SECOND, 0);
             c.set(Calendar.MONTH, 0);
             c.set(Calendar.DATE, 0);
