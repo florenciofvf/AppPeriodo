@@ -13,8 +13,8 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Mes;
 
 public class MesAdapter extends BaseAdapter {
-    private List<Mes> objetos;
-    private Context context;
+    private final List<Mes> objetos;
+    private final Context context;
 
     public MesAdapter(List<Mes> objetos, Context context) {
         this.objetos = objetos;

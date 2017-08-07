@@ -16,8 +16,8 @@ import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAdapter extends BaseAdapter {
-    private List<Dia> objetos;
-    private Context context;
+    private final List<Dia> objetos;
+    private final Context context;
 
     public DiaAdapter(List<Dia> objetos, Context context) {
         this.objetos = objetos;

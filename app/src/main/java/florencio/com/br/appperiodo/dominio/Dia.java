@@ -28,12 +28,12 @@ public class Dia extends Entidade {
     private String noiteFimFmt;
     private String noiteCalFmt;
 
-    private long total;
-    private String debito;
-    private String credito;
     private String totalFmt;
+    private String credito;
     private boolean valido;
+    private String debito;
     private boolean atual;
+    private long total;
 
     public void copiar(Dia d) {
         set_id(d.get_id());
@@ -297,7 +297,6 @@ public class Dia extends Entidade {
     @Override
     public ContentValues criarContentValues() {
         ContentValues cv = new ContentValues();
-
         cv.put("mes_id", mes.get_id());
         cv.put("numero", numero);
         cv.put("nome", nome);
@@ -308,7 +307,6 @@ public class Dia extends Entidade {
         cv.put("tarde_fim", tardeFim);
         cv.put("noite_ini", noiteIni);
         cv.put("noite_fim", noiteFim);
-
         return cv;
     }
 

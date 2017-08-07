@@ -13,8 +13,8 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 
 public class AnoAdapter extends BaseAdapter {
-    private List<Ano> objetos;
-    private Context context;
+    private final List<Ano> objetos;
+    private final Context context;
 
     public AnoAdapter(List<Ano> objetos, Context context) {
         this.objetos = objetos;

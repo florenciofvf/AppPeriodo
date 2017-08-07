@@ -24,6 +24,9 @@ import florencio.com.br.appperiodo.util.Util;
 public class DiaAtualFragment extends Fragment {
     private static final String DIA_PARAM = "dia";
     private DiaAtualFragmentListener listener;
+    private TextView txtManhaCal;
+    private TextView txtTardeCal;
+    private TextView txtNoiteCal;
     private TextView txtCredito;
     private Button btnManhaIni;
     private Button btnManhaFim;
@@ -36,7 +39,7 @@ public class DiaAtualFragment extends Fragment {
     private TextView txtTotal;
     private EditText edtObs;
     private TextView txtObs;
-
+    private TextView txtDia;
     private Dia dia;
 
     @Override
@@ -68,12 +71,16 @@ public class DiaAtualFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dia_atual_layout, null);
 
+        txtManhaCal = (TextView) view.findViewById(R.id.txtManhaCal);
+        txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
+        txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
         txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         txtDebito = (TextView) view.findViewById(R.id.txtDebito);
         txtTotal = (TextView) view.findViewById(R.id.txtTotal);
         edtObs = (EditText) view.findViewById(R.id.edtObs);
         txtObs = (TextView) view.findViewById(R.id.txtObs);
+        txtDia = (TextView) view.findViewById(R.id.txtDia);
 
         Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -107,12 +114,16 @@ public class DiaAtualFragment extends Fragment {
     }
 
     public void atualizar() {
-        edtObs.setText(dia.getObs());
-        txtObs.setText(dia.getObs());
-        txtDebito.setText(dia.getDebito());
-        txtTitulo.setText(criarTitulo(dia));
-        txtTotal.setText(dia.getTotalFmt());
+        txtManhaCal.setText(dia.getManhaCalFmt());
+        txtTardeCal.setText(dia.getTardeCalFmt());
+        txtNoiteCal.setText(dia.getNoiteCalFmt());
         txtCredito.setText(dia.getCredito());
+        txtTotal.setText(dia.getTotalFmt());
+        txtTitulo.setText(criarTitulo(dia));
+        txtDebito.setText(dia.getDebito());
+        txtDia.setText(dia.getNome());
+        txtObs.setText(dia.getObs());
+        edtObs.setText(dia.getObs());
 
         txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
 

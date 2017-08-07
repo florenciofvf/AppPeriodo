@@ -10,4 +10,7 @@
     <dimen name="margem_inferior">10dp</dimen>
     <dimen name="padding_ano">16dp</dimen>
     <dimen name="padding_mes">10dp</dimen>
+    <dimen name="um_dp">1dp</dimen>
+    <dimen name="dois_dp">2dp</dimen>
+    <dimen name="tres_dp">3dp</dimen>
 </resources>
