@@ -23,7 +23,6 @@ import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private static final String MES_PARAM = "mes";
     private DiaFragmentListener listener;
     private Repositorio repositorio;
     private ProgressBar progressBar;
@@ -45,7 +44,7 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     public static DiaFragment newInstance(Mes obj) {
         DiaFragment fragment = new DiaFragment();
         Bundle args = new Bundle();
-        args.putSerializable(MES_PARAM, obj);
+        args.putSerializable(Util.PARAMETRO, obj);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +52,7 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mes = (Mes) getArguments().getSerializable(MES_PARAM);
+        mes = (Mes) getArguments().getSerializable(Util.PARAMETRO);
     }
 
     @Override

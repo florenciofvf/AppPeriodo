@@ -33,12 +33,24 @@ public class Dia extends Entidade {
     private String credito;
     private String totalFmt;
     private boolean valido;
+    private boolean atual;
 
-    @Override
-    public String toString() {
-        return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +
-                ", TARDE_INI=" + tardeIni + ", TARDE_FIM=" + tardeFim +
-                ", NOITE_INI=" + noiteIni + ", NOITE_FIM=" + noiteFim;
+    public void copiar(Dia d) {
+        set_id(d.get_id());
+
+        numero = d.numero;
+        nome = d.nome;
+        obs = d.obs;
+        mes = d.mes;
+
+        manhaIni = d.manhaIni;
+        manhaFim = d.manhaFim;
+
+        tardeIni = d.tardeIni;
+        tardeFim = d.tardeFim;
+
+        noiteIni = d.noiteIni;
+        noiteFim = d.noiteFim;
     }
 
     public Dia(Integer numero, Mes mes, String nome) {
@@ -78,6 +90,10 @@ public class Dia extends Entidade {
         if (total < Util.OITO_HORAS && valido) {
             debito = Util.diferencaFmt(total, Util.OITO_HORAS);
         }
+
+        atual = numero == Util.DIA_ATUAL
+                && mes.getNumero() == Util.MES_ATUAL
+                && mes.getAno().getNumero() == Util.ANO_ATUAL;
     }
 
     public String getTotalFmt() {
@@ -121,13 +137,7 @@ public class Dia extends Entidade {
     }
 
     public void setManhaFim(long manhaFim) {
-        if (manhaIni == 0 || manhaFim == 0) {
-            return;
-        }
-
-        if (manhaIni < manhaFim) {
-            this.manhaFim = manhaFim;
-        }
+        this.manhaFim = manhaFim;
     }
 
     public String getManhaIniFmt() {
@@ -167,13 +177,7 @@ public class Dia extends Entidade {
     }
 
     public void setTardeFim(long tardeFim) {
-        if (tardeIni == 0 || tardeFim == 0) {
-            return;
-        }
-
-        if (tardeIni < tardeFim) {
-            this.tardeFim = tardeFim;
-        }
+        this.tardeFim = tardeFim;
     }
 
     public String getTardeIniFmt() {
@@ -213,13 +217,7 @@ public class Dia extends Entidade {
     }
 
     public void setNoiteFim(long noiteFim) {
-        if (noiteIni == 0 || noiteFim == 0) {
-            return;
-        }
-
-        if (noiteIni < noiteFim) {
-            this.noiteFim = noiteFim;
-        }
+        this.noiteFim = noiteFim;
     }
 
     public String getNoiteIniFmt() {
@@ -290,6 +288,14 @@ public class Dia extends Entidade {
         this.totalFmt = totalFmt;
     }
 
+    public boolean isAtual() {
+        return atual;
+    }
+
+    public void setAtual(boolean atual) {
+        this.atual = atual;
+    }
+
     @Override
     public ContentValues criarContentValues() {
         ContentValues cv = new ContentValues();
@@ -306,5 +312,12 @@ public class Dia extends Entidade {
         cv.put("noite_fim", noiteFim);
 
         return cv;
+    }
+
+    @Override
+    public String toString() {
+        return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +
+                ", TARDE_INI=" + tardeIni + ", TARDE_FIM=" + tardeFim +
+                ", NOITE_INI=" + noiteIni + ", NOITE_FIM=" + noiteFim;
     }
 }

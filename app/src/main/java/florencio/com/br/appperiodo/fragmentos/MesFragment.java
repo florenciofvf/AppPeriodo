@@ -18,9 +18,9 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
+import florencio.com.br.appperiodo.util.Util;
 
 public class MesFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private static final String ANO_PARAM = "ano";
     private MesFragmentListener listener;
     private Repositorio repositorio;
     private ProgressBar progressBar;
@@ -40,7 +40,7 @@ public class MesFragment extends Fragment implements AdapterView.OnItemClickList
     public static MesFragment newInstance(Ano obj) {
         MesFragment fragment = new MesFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ANO_PARAM, obj);
+        args.putSerializable(Util.PARAMETRO, obj);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +48,7 @@ public class MesFragment extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ano = (Ano) getArguments().getSerializable(ANO_PARAM);
+        ano = (Ano) getArguments().getSerializable(Util.PARAMETRO);
     }
 
     @Override

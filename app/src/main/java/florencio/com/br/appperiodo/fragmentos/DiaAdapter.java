@@ -2,6 +2,7 @@ package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,21 +49,27 @@ public class DiaAdapter extends BaseAdapter {
         Dia obj = objetos.get(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.dia_layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_layout, null);
             convertView.setTag(new ViewHolder(convertView));
         }
 
-        final int cor = obj.getNumero() % 2 == 0 ? Color.WHITE : Color.LTGRAY;
+        //final int cor = obj.getNumero() % 2 == 0 ? Color.WHITE : Color.LTGRAY;
 
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.atualizarView(obj);
 
-        //convertView.setBackgroundColor(cor);
+        if(obj.isAtual()) {
+            convertView.setBackgroundColor(Color.LTGRAY);
+        } else {
+            convertView.setBackground(holder.corOriginal);
+        }
 
         return convertView;
     }
 
     private class ViewHolder {
+        Drawable corOriginal;
+
         TextView txtNumero;
         TextView txtNome;
         TextView txtObs;
@@ -84,6 +91,8 @@ public class DiaAdapter extends BaseAdapter {
         TextView txtCredito;
 
         ViewHolder(View view) {
+            corOriginal = view.getBackground();
+
             txtNumero = (TextView) view.findViewById(R.id.txtNumero);
             txtNome = (TextView) view.findViewById(R.id.txtNome);
             txtObs = (TextView) view.findViewById(R.id.txtObs);

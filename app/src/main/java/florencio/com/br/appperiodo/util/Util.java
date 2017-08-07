@@ -8,11 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
+import florencio.com.br.appperiodo.dominio.Mes;
 
 public class Util {
+    public static final String[] NOME_DIAS = {"DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
     public static DateFormat format_HH_mm = new SimpleDateFormat("HH:mm");
     public static final long OITO_HORAS = 1000L * 60L * 60L * 8L;
+    public static final String PARAMETRO = "parametro";
     public static final String MANHA_INI = "MANHA_INI";
     public static final String MANHA_FIM = "MANHA_FIM";
     public static final String TARDE_INI = "TARDE_INI";
@@ -20,6 +24,24 @@ public class Util {
     public static final String NOITE_INI = "NOITE_INI";
     public static final String NOITE_FIM = "NOITE_FIM";
     public static final String ZERO_ZERO = "00:00";
+
+    public static int ANO_ATUAL;
+    public static int MES_ATUAL;
+    public static int DIA_ATUAL;
+    public static Dia diaAtual;
+
+    public static void atualizarData() {
+        Calendar c = Calendar.getInstance();
+        ANO_ATUAL = c.get(Calendar.YEAR);
+        MES_ATUAL = c.get(Calendar.MONTH) + 1;
+        DIA_ATUAL = c.get(Calendar.DATE);
+
+        Ano a = new Ano(ANO_ATUAL);
+        Mes m = new Mes(MES_ATUAL, null, a, null);
+        Dia d = new Dia(DIA_ATUAL, m, null);
+
+        diaAtual = d;
+    }
 
     public static String formatarHora(long milisegundos) {
         if (milisegundos == 0) {

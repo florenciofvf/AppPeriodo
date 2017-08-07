@@ -42,7 +42,7 @@ public class MesAdapter extends BaseAdapter {
         Mes obj = objetos.get(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.mes_layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.mes_item_layout, null);
             convertView.setTag(new ViewHolder(convertView));
         }
 

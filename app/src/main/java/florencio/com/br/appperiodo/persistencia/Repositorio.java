@@ -3,10 +3,9 @@ package florencio.com.br.appperiodo.persistencia;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.MediaController;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import java.util.Map;
 import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
+import florencio.com.br.appperiodo.util.Util;
 
 public class Repositorio {
     private BancoHelper helper;
@@ -130,6 +130,53 @@ public class Repositorio {
         return lista;
     }
 
+    public void sincronizarDia(Dia d) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        int total = 0;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome from Dia d");
+        sb.append(" inner join Mes m on m._id = d.mes_id");
+        sb.append(" inner join Ano a on a._id = m.ano_id");
+        sb.append(" where d.numero=" + d.getNumero());
+        sb.append(" and m.numero=" + d.getMes().getNumero());
+        sb.append(" and a.numero=" + d.getMes().getAno().getNumero());
+
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+
+        int _id_idx = cursor.getColumnIndex("_id");
+        int num_idx = cursor.getColumnIndex("numero");
+        int obs_idx = cursor.getColumnIndex("obs");
+        int nom_idx = cursor.getColumnIndex("nome");
+
+        int m_i_idx = cursor.getColumnIndex("manha_ini");
+        int m_f_idx = cursor.getColumnIndex("manha_fim");
+
+        int t_i_idx = cursor.getColumnIndex("tarde_ini");
+        int t_f_idx = cursor.getColumnIndex("tarde_fim");
+
+        int n_i_idx = cursor.getColumnIndex("noite_ini");
+        int n_f_idx = cursor.getColumnIndex("noite_fim");
+
+        while (cursor.moveToNext()) {
+            Dia dia = new Dia(cursor.getInt(num_idx), d.getMes(), cursor.getString(nom_idx));
+
+            dia.set_id(cursor.getLong(_id_idx));
+            dia.setObs(cursor.getString(obs_idx));
+            dia.setManhaIni(cursor.getLong(m_i_idx));
+            dia.setManhaFim(cursor.getLong(m_f_idx));
+            dia.setTardeIni(cursor.getLong(t_i_idx));
+            dia.setTardeFim(cursor.getLong(t_f_idx));
+            dia.setNoiteIni(cursor.getLong(n_i_idx));
+            dia.setNoiteFim(cursor.getLong(n_f_idx));
+
+            d.copiar(dia);
+        }
+
+        db.close();
+    }
+
     public void salvarDia(Dia dia) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -165,12 +212,20 @@ public class Repositorio {
     public List<Dia> montarDiasDoMes(Mes mes) {
         Map<Integer, Dia> mapa = new LinkedHashMap<>();
 
-        for (int i = 1; i <= mes.getMaximoDias(); i++) {
-            Dia dia = new Dia(i, mes, "SEG");
-            dia.set_id(new Long(i));
-            dia.calcular();
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, mes.getAno().getNumero());
+        c.set(Calendar.MONTH, mes.getNumero() - 1);
+        c.set(Calendar.DATE, 1);
 
+        int indice = c.get(Calendar.DAY_OF_WEEK) - 1;
+
+        for (int i = 1; i <= mes.getMaximoDias(); i++) {
+            String nome = Util.NOME_DIAS[indice % 7];
+            Dia dia = new Dia(i, mes, nome);
+            dia.set_id(new Long(i));
             mapa.put(i, dia);
+            dia.calcular();
+            indice++;
         }
 
         List<Dia> lista = listarDias(mes);
@@ -182,5 +237,4 @@ public class Repositorio {
 
         return new ArrayList<>(mapa.values());
     }
-
 }

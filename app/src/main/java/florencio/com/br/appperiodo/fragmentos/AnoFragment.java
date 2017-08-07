@@ -17,9 +17,9 @@ import java.util.List;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
+import florencio.com.br.appperiodo.util.Util;
 
 public class AnoFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private static final String ANO_PARAM = "ano";
     private AnoFragmentListener listener;
     private Repositorio repositorio;
     private ProgressBar progressBar;
@@ -39,7 +39,7 @@ public class AnoFragment extends Fragment implements AdapterView.OnItemClickList
     public static AnoFragment newInstance(Integer ano) {
         AnoFragment fragment = new AnoFragment();
         Bundle args = new Bundle();
-        args.putInt(ANO_PARAM, ano);
+        args.putInt(Util.PARAMETRO, ano);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +47,7 @@ public class AnoFragment extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ano = getArguments().getInt(ANO_PARAM);
+        ano = getArguments().getInt(Util.PARAMETRO);
     }
 
     @Override

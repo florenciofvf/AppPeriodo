@@ -42,7 +42,7 @@ public class AnoAdapter extends BaseAdapter {
         Ano obj = objetos.get(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.ano_layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.ano_item_layout, null);
             convertView.setTag(new ViewHolder(convertView));
         }
 

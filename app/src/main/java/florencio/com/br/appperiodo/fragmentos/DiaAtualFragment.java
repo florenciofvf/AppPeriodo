@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,32 +18,34 @@ import java.util.Calendar;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
+import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
-public class DiaDialog extends DialogFragment {
+public class DiaAtualFragment extends Fragment {
     private static final String DIA_PARAM = "dia";
-    private DiaDialogListener listener;
+    private DiaAtualFragmentListener listener;
     private Button btnManhaIni;
     private Button btnManhaFim;
     private Button btnTardeIni;
     private Button btnTardeFim;
     private Button btnNoiteIni;
     private Button btnNoiteFim;
+    private TextView txtTitulo;
     private EditText edtObs;
     private Dia dia;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof DiaDialogListener) {
-            listener = (DiaDialogListener) context;
+        if (context instanceof DiaAtualFragmentListener) {
+            listener = (DiaAtualFragmentListener) context;
         } else {
-            throw new RuntimeException(context.toString() + " >>> DiaDialog.onAttach()");
+            throw new RuntimeException(context.toString() + " >>> DiaAtualFragment.onAttach()");
         }
     }
 
-    public static DiaDialog newInstance(Dia obj) {
-        DiaDialog fragment = new DiaDialog();
+    public static DiaAtualFragment newInstance(Dia obj) {
+        DiaAtualFragment fragment = new DiaAtualFragment();
         Bundle args = new Bundle();
         args.putSerializable(DIA_PARAM, obj);
         fragment.setArguments(args);
@@ -54,26 +55,16 @@ public class DiaDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         dia = (Dia) getArguments().getSerializable(DIA_PARAM);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dia_dialog_layout, null);
+        View view = inflater.inflate(R.layout.dia_atual_layout, null);
 
-        TextView txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
-        txtTitulo.setText(criarTitulo(dia));
-
+        txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         edtObs = (EditText) view.findViewById(R.id.edtObs);
-        edtObs.setText(dia.getObs());
-
-        Button btnCancelar = (Button) view.findViewById(R.id.btnCancelar);
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
 
         Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
@@ -81,29 +72,31 @@ public class DiaDialog extends DialogFragment {
             public void onClick(View view) {
                 dia.setObs(edtObs.getText().toString());
                 listener.salvarDia(dia);
-                dismiss();
             }
         });
 
         btnManhaIni = (Button) view.findViewById(R.id.btnManhaIni);
-        btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
-
         btnManhaFim = (Button) view.findViewById(R.id.btnManhaFim);
-        btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
-
         btnTardeIni = (Button) view.findViewById(R.id.btnTardeIni);
-        btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
-
         btnTardeFim = (Button) view.findViewById(R.id.btnTardeFim);
-        btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
-
         btnNoiteIni = (Button) view.findViewById(R.id.btnNoiteIni);
-        btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
-
         btnNoiteFim = (Button) view.findViewById(R.id.btnNoiteFim);
-        btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        txtTitulo.setText(criarTitulo(dia));
+        edtObs.setText(dia.getObs());
+
+        btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
+        btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
+        btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
+        btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
+        btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
+        btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
     }
 
     private class OnClick implements View.OnClickListener {
@@ -123,25 +116,20 @@ public class DiaDialog extends DialogFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
     }
 
-    public interface DiaDialogListener {
+    public interface DiaAtualFragmentListener {
         void salvarDia(Dia dia);
     }
 
-    private String criarTitulo(Dia dia) {
+    public static String criarTitulo(Dia dia) {
         return get(dia.getNumero()) + "/" + get(dia.getMes().getNumero()) + "/" + get(dia.getMes().getAno().getNumero());
     }
 
-    private String get(Integer i) {
+    public static String get(Integer i) {
         return i < 10 ? "0" + i.toString() : i.toString();
     }
 
