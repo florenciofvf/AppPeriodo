@@ -274,6 +274,12 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnDesfazer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_desfazer" />
+
+        <Button
             android:id="@+id/btnSalvar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

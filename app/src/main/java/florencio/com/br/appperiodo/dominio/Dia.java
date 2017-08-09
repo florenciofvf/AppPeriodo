@@ -8,6 +8,8 @@ public class Dia extends Entidade {
     private Integer numero;
     private String nome;
     private String obs;
+    private int valido;
+    private long data;
     private Mes mes;
 
     private long manhaIni;
@@ -30,17 +32,22 @@ public class Dia extends Entidade {
 
     private String totalFmt;
     private String credito;
-    private int valido;
     private String debito;
     private long total;
 
-    private long data;
+    public Dia(Integer numero, Mes mes, String nome) {
+        this.numero = numero;
+        this.nome = nome;
+        this.mes = mes;
+    }
 
     public void copiar(Dia d) {
         _id = d._id;
 
         numero = d.numero;
+        valido = d.valido;
         nome = d.nome;
+        data = d.data;
         obs = d.obs;
         mes = d.mes;
 
@@ -50,53 +57,64 @@ public class Dia extends Entidade {
         tardeFim = d.tardeFim;
         noiteIni = d.noiteIni;
         noiteFim = d.noiteFim;
-
-        data = d.data;
-        valido = d.valido;
     }
 
-    public Dia(Integer numero, Mes mes, String nome) {
-        this.numero = numero;
-        this.nome = nome;
-        this.mes = mes;
+    public void limparHorarios() {
+        manhaIni = 0;
+        manhaFim = 0;
+        tardeIni = 0;
+        tardeFim = 0;
+        noiteIni = 0;
+        noiteFim = 0;
     }
 
     public void processar() {
         total = 0;
 
+        manhaCalFmt = Util.ZERO_ZERO;
+        tardeCalFmt = Util.ZERO_ZERO;
+        noiteCalFmt = Util.ZERO_ZERO;
+        credito = Util.ZERO_ZERO;
+        debito = Util.ZERO_ZERO;
+
         manhaIniFmt = Util.formatarHora(manhaIni);
         manhaFimFmt = Util.formatarHora(manhaFim);
-        manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
-        total += Util.diferenca(manhaIni, manhaFim);
+        if(checado(manhaIni, manhaFim)) {
+            total += Util.diferenca(manhaIni, manhaFim);
+            manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
+        }
 
         tardeIniFmt = Util.formatarHora(tardeIni);
         tardeFimFmt = Util.formatarHora(tardeFim);
-        tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
-        total += Util.diferenca(tardeIni, tardeFim);
+        if(checado(tardeIni, tardeFim)) {
+            total += Util.diferenca(tardeIni, tardeFim);
+            tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
+        }
 
         noiteIniFmt = Util.formatarHora(noiteIni);
         noiteFimFmt = Util.formatarHora(noiteFim);
-        noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
-        total += Util.diferenca(noiteIni, noiteFim);
+        if(checado(noiteIni, noiteFim)) {
+            total += Util.diferenca(noiteIni, noiteFim);
+            noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
+        }
 
         totalFmt = Util.totalFmt(total);
 
-        //valido = total > 0;
-
-        debito = Util.ZERO_ZERO;
-        credito = Util.ZERO_ZERO;
-
-        if (total > Util.OITO_HORAS && valido == 1) {
+        if (total > Util.OITO_HORAS && !ehNovo()) {
             credito = Util.diferencaFmt(Util.OITO_HORAS, total);
         }
 
-        if (total < Util.OITO_HORAS && valido == 1) {
+        if (total < Util.OITO_HORAS && !ehNovo()) {
             debito = Util.diferencaFmt(total, Util.OITO_HORAS);
         }
 
         atual = numero == Util.DIA_ATUAL
                 && mes.getNumero() == Util.MES_ATUAL
                 && mes.getAno().getNumero() == Util.ANO_ATUAL;
+    }
+
+    private boolean checado(long ini, long fim) {
+        return ini != 0 && fim != 0;
     }
 
     public String getTotalFmt() {

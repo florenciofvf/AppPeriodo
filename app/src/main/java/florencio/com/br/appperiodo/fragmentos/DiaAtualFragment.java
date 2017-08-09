@@ -20,11 +20,13 @@ import java.util.Calendar;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
+import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAtualFragment extends Fragment {
     private static final String DIA_PARAM = "dia";
     private DiaAtualFragmentListener listener;
+    private Repositorio repositorio;
     private TextView txtManhaCal;
     private TextView txtTardeCal;
     private TextView txtNoiteCal;
@@ -38,6 +40,7 @@ public class DiaAtualFragment extends Fragment {
     private TextView txtTitulo;
     private TextView txtDebito;
     private CheckBox chkValido;
+    private Button btnDefazer;
     private TextView txtTotal;
     private EditText edtObs;
     private TextView txtObs;
@@ -91,7 +94,20 @@ public class DiaAtualFragment extends Fragment {
             public void onClick(View view) {
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
+                btnDefazer.setEnabled(false);
                 listener.salvarDia(dia);
+            }
+        });
+
+        btnDefazer = (Button) view.findViewById(R.id.btnDesfazer);
+        btnDefazer.setEnabled(false);
+        btnDefazer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dia.limparHorarios();
+                repositorio.sincronizarDia(dia);
+                atualizar();
+                btnDefazer.setEnabled(false);
             }
         });
 
@@ -108,16 +124,24 @@ public class DiaAtualFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI));
+        btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM));
+        btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI));
+        btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM));
+        btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI));
+        btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM));
+        repositorio = new Repositorio(getActivity());
         atualizar();
-        btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
-        btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
-        btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
-        btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
-        btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
-        btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
     }
 
     public void atualizar() {
+        Util.atualizarText(Util.MANHA_INI, dia, btnManhaIni);
+        Util.atualizarText(Util.MANHA_FIM, dia, btnManhaFim);
+        Util.atualizarText(Util.TARDE_INI, dia, btnTardeIni);
+        Util.atualizarText(Util.TARDE_FIM, dia, btnTardeFim);
+        Util.atualizarText(Util.NOITE_INI, dia, btnNoiteIni);
+        Util.atualizarText(Util.NOITE_FIM, dia, btnNoiteFim);
+
         txtManhaCal.setText(dia.getManhaCalFmt());
         txtTardeCal.setText(dia.getTardeCalFmt());
         txtNoiteCal.setText(dia.getNoiteCalFmt());
@@ -134,7 +158,7 @@ public class DiaAtualFragment extends Fragment {
 
         if (dia.isValido()) {
             txtDebito.setTextColor(Util.ZERO_ZERO.equals(dia.getDebito()) ? Color.BLACK : Color.RED);
-            txtCredito.setTextColor(Util.ZERO_ZERO.equals(dia.getCredito()) ? Color.BLACK : 0xFF008800);
+            txtCredito.setTextColor(Util.ZERO_ZERO.equals(dia.getCredito()) ? Color.BLACK : Color.MAGENTA);
         } else {
             txtDebito.setTextColor(Color.BLACK);
             txtCredito.setTextColor(Color.BLACK);
@@ -144,8 +168,7 @@ public class DiaAtualFragment extends Fragment {
     private class OnClick implements View.OnClickListener {
         final String campo;
 
-        public OnClick(String campo, Dia dia, Button button) {
-            Util.atualizarText(campo, dia, button);
+        public OnClick(String campo) {
             this.campo = campo;
         }
 
@@ -189,28 +212,31 @@ public class DiaAtualFragment extends Fragment {
             c.set(Calendar.MINUTE, minute);
 
             long valor = hourOfDay == 0 && minute == 0 ? 0 : c.getTimeInMillis();
+            boolean desfazer = false;
 
             if (Util.MANHA_INI.equals(campo)) {
+                desfazer = valor != dia.getManhaIni();
                 dia.setManhaIni(valor);
-                Util.atualizarText(campo, dia, btnManhaIni);
             } else if (Util.MANHA_FIM.equals(campo)) {
+                desfazer = valor != dia.getManhaFim();
                 dia.setManhaFim(valor);
-                Util.atualizarText(campo, dia, btnManhaFim);
-
             } else if (Util.TARDE_INI.equals(campo)) {
+                desfazer = valor != dia.getTardeIni();
                 dia.setTardeIni(valor);
-                Util.atualizarText(campo, dia, btnTardeIni);
             } else if (Util.TARDE_FIM.equals(campo)) {
+                desfazer = valor != dia.getTardeFim();
                 dia.setTardeFim(valor);
-                Util.atualizarText(campo, dia, btnTardeFim);
-
             } else if (Util.NOITE_INI.equals(campo)) {
+                desfazer = valor != dia.getNoiteIni();
                 dia.setNoiteIni(valor);
-                Util.atualizarText(campo, dia, btnNoiteIni);
             } else if (Util.NOITE_FIM.equals(campo)) {
+                desfazer = valor != dia.getNoiteFim();
                 dia.setNoiteFim(valor);
-                Util.atualizarText(campo, dia, btnNoiteFim);
             }
+
+            btnDefazer.setEnabled(desfazer);
+            dia.processar();
+            atualizar();
         }
 
         private Calendar criarCalendar() {
