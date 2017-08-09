@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -36,6 +37,7 @@ public class DiaAtualFragment extends Fragment {
     private Button btnNoiteFim;
     private TextView txtTitulo;
     private TextView txtDebito;
+    private CheckBox chkValido;
     private TextView txtTotal;
     private EditText edtObs;
     private TextView txtObs;
@@ -77,6 +79,7 @@ public class DiaAtualFragment extends Fragment {
         txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         txtDebito = (TextView) view.findViewById(R.id.txtDebito);
+        chkValido = (CheckBox) view.findViewById(R.id.chkValido);
         txtTotal = (TextView) view.findViewById(R.id.txtTotal);
         edtObs = (EditText) view.findViewById(R.id.edtObs);
         txtObs = (TextView) view.findViewById(R.id.txtObs);
@@ -86,6 +89,7 @@ public class DiaAtualFragment extends Fragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
                 listener.salvarDia(dia);
             }
@@ -118,6 +122,7 @@ public class DiaAtualFragment extends Fragment {
         txtTardeCal.setText(dia.getTardeCalFmt());
         txtNoiteCal.setText(dia.getNoiteCalFmt());
         txtCredito.setText(dia.getCredito());
+        chkValido.setChecked(dia.isValido());
         txtTotal.setText(dia.getTotalFmt());
         txtTitulo.setText(criarTitulo(dia));
         txtDebito.setText(dia.getDebito());

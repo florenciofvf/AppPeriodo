@@ -2,6 +2,8 @@ package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
 
+import florencio.com.br.appperiodo.util.Util;
+
 public class Ano extends Entidade {
     final private Integer numero;
 
@@ -11,6 +13,10 @@ public class Ano extends Entidade {
 
     public Integer getNumero() {
         return numero;
+    }
+
+    public void processar() {
+        atual = numero == Util.ANO_ATUAL;
     }
 
     @Override

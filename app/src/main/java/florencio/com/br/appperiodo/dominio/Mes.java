@@ -2,6 +2,8 @@ package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
 
+import florencio.com.br.appperiodo.util.Util;
+
 public class Mes extends Entidade {
     private final Integer maximoDias;
     private final Integer numero;
@@ -29,6 +31,11 @@ public class Mes extends Entidade {
 
     public Integer getMaximoDias() {
         return maximoDias;
+    }
+
+    public void processar() {
+        atual = numero == Util.MES_ATUAL
+                && getAno().getNumero() == Util.ANO_ATUAL;
     }
 
     @Override

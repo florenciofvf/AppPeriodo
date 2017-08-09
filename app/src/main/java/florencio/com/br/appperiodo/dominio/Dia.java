@@ -30,13 +30,14 @@ public class Dia extends Entidade {
 
     private String totalFmt;
     private String credito;
-    private boolean valido;
+    private int valido;
     private String debito;
-    private boolean atual;
     private long total;
 
+    private long data;
+
     public void copiar(Dia d) {
-        set_id(d.get_id());
+        _id = d._id;
 
         numero = d.numero;
         nome = d.nome;
@@ -49,6 +50,9 @@ public class Dia extends Entidade {
         tardeFim = d.tardeFim;
         noiteIni = d.noiteIni;
         noiteFim = d.noiteFim;
+
+        data = d.data;
+        valido = d.valido;
     }
 
     public Dia(Integer numero, Mes mes, String nome) {
@@ -57,7 +61,7 @@ public class Dia extends Entidade {
         this.mes = mes;
     }
 
-    public void calcular() {
+    public void processar() {
         total = 0;
 
         manhaIniFmt = Util.formatarHora(manhaIni);
@@ -77,15 +81,16 @@ public class Dia extends Entidade {
 
         totalFmt = Util.totalFmt(total);
 
-        valido = total > 0;
+        //valido = total > 0;
+
         debito = Util.ZERO_ZERO;
         credito = Util.ZERO_ZERO;
 
-        if (total > Util.OITO_HORAS && valido) {
+        if (total > Util.OITO_HORAS && valido == 1) {
             credito = Util.diferencaFmt(Util.OITO_HORAS, total);
         }
 
-        if (total < Util.OITO_HORAS && valido) {
+        if (total < Util.OITO_HORAS && valido == 1) {
             debito = Util.diferencaFmt(total, Util.OITO_HORAS);
         }
 
@@ -274,11 +279,15 @@ public class Dia extends Entidade {
         this.total = total;
     }
 
-    public boolean isValido() {
+    public int getValido() {
         return valido;
     }
 
-    public void setValido(boolean valido) {
+    public boolean isValido() {
+        return valido == 1;
+    }
+
+    public void setValido(int valido) {
         this.valido = valido;
     }
 
@@ -294,8 +303,20 @@ public class Dia extends Entidade {
         this.atual = atual;
     }
 
+    public long getData() {
+        return data;
+    }
+
+    public void setData(long data) {
+        this.data = data;
+    }
+
     @Override
     public ContentValues criarContentValues() {
+        if (data == 0) {
+            data = Util.criarData(this);
+        }
+
         ContentValues cv = new ContentValues();
         cv.put("mes_id", mes.get_id());
         cv.put("numero", numero);
@@ -307,6 +328,8 @@ public class Dia extends Entidade {
         cv.put("tarde_fim", tardeFim);
         cv.put("noite_ini", noiteIni);
         cv.put("noite_fim", noiteFim);
+        cv.put("data", data);
+        cv.put("valido", valido);
         return cv;
     }
 

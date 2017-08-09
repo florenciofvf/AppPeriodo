@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -30,6 +31,7 @@ public class DiaDialogFragment extends DialogFragment {
     private Button btnTardeFim;
     private Button btnNoiteIni;
     private Button btnNoiteFim;
+    private CheckBox chkValido;
     private EditText edtObs;
     private Dia dia;
 
@@ -67,6 +69,9 @@ public class DiaDialogFragment extends DialogFragment {
         edtObs = (EditText) view.findViewById(R.id.edtObs);
         edtObs.setText(dia.getObs());
 
+        chkValido = (CheckBox) view.findViewById(R.id.chkValido);
+        chkValido.setChecked(dia.isValido());
+
         Button btnCancelar = (Button) view.findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +84,7 @@ public class DiaDialogFragment extends DialogFragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
                 listener.salvarDia(dia);
                 dismiss();

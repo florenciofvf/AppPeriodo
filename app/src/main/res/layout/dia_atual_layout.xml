@@ -24,6 +24,12 @@
             android:hint="@string/label_observacao" />
     </android.support.design.widget.TextInputLayout>
 
+    <CheckBox
+        android:id="@+id/chkValido"
+        android:text="@string/label_valido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

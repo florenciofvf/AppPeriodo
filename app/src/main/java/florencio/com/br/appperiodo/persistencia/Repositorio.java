@@ -63,7 +63,7 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Ano a = new Ano(cursor.getInt(1));
             a.set_id(cursor.getLong(0));
-
+            a.processar();
             lista.add(a);
         }
 
@@ -81,7 +81,7 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Mes m = new Mes(cursor.getInt(1), cursor.getString(2), ano, cursor.getInt(3));
             m.set_id(cursor.getLong(0));
-
+            m.processar();
             lista.add(m);
         }
 
@@ -94,12 +94,15 @@ public class Repositorio {
         List<Dia> lista = new ArrayList<>();
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome from Dia where mes_id=" + mes.get_id(), null);
+        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome, data, valido from Dia where mes_id=" + mes.get_id(), null);
 
         int _id_idx = cursor.getColumnIndex("_id");
         int num_idx = cursor.getColumnIndex("numero");
         int obs_idx = cursor.getColumnIndex("obs");
         int nom_idx = cursor.getColumnIndex("nome");
+
+        int dat_idx = cursor.getColumnIndex("data");
+        int val_idx = cursor.getColumnIndex("valido");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -122,6 +125,9 @@ public class Repositorio {
             dia.setNoiteIni(cursor.getLong(n_i_idx));
             dia.setNoiteFim(cursor.getLong(n_f_idx));
 
+            dia.setData(cursor.getLong(dat_idx));
+            dia.setValido(cursor.getInt(val_idx));
+
             lista.add(dia);
         }
 
@@ -136,7 +142,7 @@ public class Repositorio {
         int total = 0;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id from Dia d");
+        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido from Dia d");
         sb.append(" inner join Mes m on m._id = d.mes_id");
         sb.append(" inner join Ano a on a._id = m.ano_id");
         sb.append(" where d.numero=" + d.getNumero());
@@ -150,6 +156,9 @@ public class Repositorio {
         int obs_idx = cursor.getColumnIndex("obs");
         int nom_idx = cursor.getColumnIndex("nome");
         int mes_idx = cursor.getColumnIndex("mes_id");
+
+        int dat_idx = cursor.getColumnIndex("data");
+        int val_idx = cursor.getColumnIndex("valido");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -174,16 +183,22 @@ public class Repositorio {
 
             d.getMes().set_id(cursor.getLong(mes_idx));
 
+            dia.setData(cursor.getLong(dat_idx));
+            dia.setValido(cursor.getInt(val_idx));
+
             d.copiar(dia);
         }
 
+        d.processar();
         db.close();
     }
 
     public void salvarDia(Dia dia) {
-        SQLiteDatabase db = helper.getReadableDatabase();
+        if (dia.getMes().ehNovo()) {
+            setIdMes(dia.getMes());
+        }
 
-        int total = 0;
+        SQLiteDatabase db = helper.getReadableDatabase();
 
         StringBuilder sb = new StringBuilder();
         sb.append("select count(d._id) from Dia d");
@@ -194,6 +209,9 @@ public class Repositorio {
         sb.append(" and a.numero=" + dia.getMes().getAno().getNumero());
 
         Cursor cursor = db.rawQuery(sb.toString(), null);
+
+        int total = 0;
+
         while (cursor.moveToNext()) {
             total = cursor.getInt(0);
         }
@@ -207,6 +225,25 @@ public class Repositorio {
             dia.set_id(_id);
         } else {
             db.update("Dia", dia.criarContentValues(), "_id=" + dia.get_id(), null);
+        }
+
+        dia.processar();
+        db.close();
+    }
+
+    private void setIdMes(Mes mes) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("select m._id from Mes m");
+        sb.append(" inner join Ano a on a._id = m.ano_id");
+        sb.append(" and m.numero=" + mes.getNumero());
+        sb.append(" and a.numero=" + mes.getAno().getNumero());
+
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+
+        while (cursor.moveToNext()) {
+            mes.set_id(cursor.getLong(0));
         }
 
         db.close();
@@ -227,7 +264,6 @@ public class Repositorio {
             Dia dia = new Dia(i, mes, nome);
             dia.set_id(new Long(i));
             mapa.put(i, dia);
-            dia.calcular();
             indice++;
         }
 
@@ -235,9 +271,14 @@ public class Repositorio {
 
         for (Dia dia : lista) {
             mapa.put(dia.getNumero(), dia);
-            dia.calcular();
         }
 
-        return new ArrayList<>(mapa.values());
+        lista = new ArrayList<>(mapa.values());
+
+        for (Dia d : lista) {
+            d.processar();
+        }
+
+        return lista;
     }
 }

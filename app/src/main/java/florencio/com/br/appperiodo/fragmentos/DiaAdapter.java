@@ -58,9 +58,24 @@ public class DiaAdapter extends BaseAdapter {
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.atualizarView(obj);
 
-        if(obj.isAtual()) {
+        boolean config = false;
+
+        if ("SAB".equals(obj.getNome())) {
             convertView.setBackgroundColor(Color.LTGRAY);
-        } else {
+            config = true;
+        }
+
+        if ("DOM".equals(obj.getNome())) {
+            convertView.setBackgroundColor(Color.GRAY);
+            config = true;
+        }
+
+        if (obj.isAtual()) {
+            convertView.setBackgroundColor(Util.COR_ATUAL);
+            config = true;
+        }
+
+        if(!config) {
             convertView.setBackground(holder.corOriginal);
         }
 
@@ -139,7 +154,7 @@ public class DiaAdapter extends BaseAdapter {
 
             if (obj.isValido()) {
                 txtDebito.setTextColor(Util.ZERO_ZERO.equals(obj.getDebito()) ? Color.BLACK : Color.RED);
-                txtCredito.setTextColor(Util.ZERO_ZERO.equals(obj.getCredito()) ? Color.BLACK : 0xFF008800);
+                txtCredito.setTextColor(Util.ZERO_ZERO.equals(obj.getCredito()) ? Color.BLACK : Color.MAGENTA);
             } else {
                 txtDebito.setTextColor(Color.BLACK);
                 txtCredito.setTextColor(Color.BLACK);
