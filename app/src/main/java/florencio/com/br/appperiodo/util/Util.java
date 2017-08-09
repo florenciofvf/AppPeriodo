@@ -94,7 +94,8 @@ public class Util {
     }
 
     public static long diferenca(long inicio, long termino) {
-        return inicio == 0 || termino == 0 ? 0 : termino - inicio;
+        //return inicio == 0 || termino == 0 ? 0 : termino - inicio;
+        return termino - inicio;
     }
 
     public static String diferencaFmt(long inicio, long termino) {
