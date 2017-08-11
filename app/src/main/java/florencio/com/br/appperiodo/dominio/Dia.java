@@ -1,6 +1,7 @@
 package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import florencio.com.br.appperiodo.util.Util;
 

@@ -1,5 +1,6 @@
 package florencio.com.br.appperiodo.util;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -165,16 +166,26 @@ public class Util {
     public static void atualizarText(String campo, Dia dia, Button button) {
         if (Util.MANHA_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getManhaIni()));
+            button.setBackgroundColor(getCor(dia.getManhaIni()));
         } else if (Util.MANHA_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getManhaFim()));
+            button.setBackgroundColor(getCor(dia.getManhaFim()));
         } else if (Util.TARDE_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getTardeIni()));
+            button.setBackgroundColor(getCor(dia.getTardeIni()));
         } else if (Util.TARDE_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getTardeFim()));
+            button.setBackgroundColor(getCor(dia.getTardeFim()));
         } else if (Util.NOITE_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getNoiteIni()));
+            button.setBackgroundColor(getCor(dia.getNoiteIni()));
         } else if (Util.NOITE_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getNoiteFim()));
+            button.setBackgroundColor(getCor(dia.getNoiteFim()));
         }
+    }
+
+    private static int getCor(long l) {
+        return l != 0 ? 0xFF88EE88 : 0;
     }
 }

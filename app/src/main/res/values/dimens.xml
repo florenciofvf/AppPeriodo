@@ -6,11 +6,12 @@
     <dimen name="esp_direito">10dp</dimen>
     <dimen name="esp_direito_2">7dp</dimen>
     <dimen name="fonte_item_dia">11sp</dimen>
-    <dimen name="margem_superior">10dp</dimen>
-    <dimen name="margem_inferior">10dp</dimen>
-    <dimen name="padding_ano">16dp</dimen>
+    <dimen name="margem_superior">7dp</dimen>
+    <dimen name="margem_inferior">7dp</dimen>
+    <dimen name="padding_ano">10dp</dimen>
     <dimen name="padding_mes">10dp</dimen>
     <dimen name="um_dp">1dp</dimen>
     <dimen name="dois_dp">2dp</dimen>
     <dimen name="tres_dp">3dp</dimen>
+    <dimen name="margem_button">7dp</dimen>
 </resources>

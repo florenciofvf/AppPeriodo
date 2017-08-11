@@ -26,9 +26,9 @@
 
     <CheckBox
         android:id="@+id/chkValido"
-        android:text="@string/label_valido"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/label_valido" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +57,8 @@
             <Button
                 android:id="@+id/btnManhaIni"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +68,8 @@
             <Button
                 android:id="@+id/btnManhaFim"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:id="@+id/txtManhaCal"
@@ -104,7 +106,8 @@
             <Button
                 android:id="@+id/btnTardeIni"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -114,7 +117,8 @@
             <Button
                 android:id="@+id/btnTardeFim"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:id="@+id/txtTardeCal"
@@ -151,7 +155,8 @@
             <Button
                 android:id="@+id/btnNoiteIni"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,7 +166,8 @@
             <Button
                 android:id="@+id/btnNoiteFim"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem_button" />
 
             <TextView
                 android:id="@+id/txtNoiteCal"

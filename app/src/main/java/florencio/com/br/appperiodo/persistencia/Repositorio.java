@@ -262,7 +262,6 @@ public class Repositorio {
         for (int i = 1; i <= mes.getMaximoDias(); i++) {
             String nome = Util.NOME_DIAS[indice % 7];
             Dia dia = new Dia(i, mes, nome);
-            dia.set_id(new Long(i));
             mapa.put(i, dia);
             indice++;
         }

@@ -41,7 +41,7 @@ public class DiaAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         Dia obj = objetos.get(position);
-        return obj.get_id();
+        return obj.ehNovo() ? position : obj.get_id();
     }
 
     @Override
@@ -52,8 +52,6 @@ public class DiaAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_layout, null);
             convertView.setTag(new ViewHolder(convertView));
         }
-
-        //final int cor = obj.getNumero() % 2 == 0 ? Color.WHITE : Color.LTGRAY;
 
         ViewHolder holder = (ViewHolder) convertView.getTag();
         holder.atualizarView(obj);
