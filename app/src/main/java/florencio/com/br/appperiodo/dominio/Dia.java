@@ -351,6 +351,10 @@ public class Dia extends Entidade {
         return cv;
     }
 
+    public String gerarConteudoEmail() {
+        return getNumero() + ":" + getManhaIniFmt() + "/" + getManhaFimFmt() + " - " + getTardeIniFmt() + "/" + getTardeFimFmt() + "|" + getObs(); // + "   -   " + getNoiteIniFmt() + " / " + getNoiteFimFmt();
+    }
+
     @Override
     public String toString() {
         return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +

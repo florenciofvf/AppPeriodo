@@ -58,7 +58,7 @@
                 android:id="@+id/btnManhaIni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,13 +69,13 @@
                 android:id="@+id/btnManhaFim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:id="@+id/txtManhaCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo" />
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -107,7 +107,7 @@
                 android:id="@+id/btnTardeIni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,13 +118,13 @@
                 android:id="@+id/btnTardeFim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:id="@+id/txtTardeCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo" />
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -156,7 +156,7 @@
                 android:id="@+id/btnNoiteIni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,13 +167,13 @@
                 android:id="@+id/btnNoiteFim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margem_button" />
+                android:layout_margin="@dimen/sete_dp" />
 
             <TextView
                 android:id="@+id/txtNoiteCal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo" />
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -200,7 +200,7 @@
                 android:id="@+id/txtDia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo_3" />
+                android:layout_marginLeft="@dimen/tres_dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -216,7 +216,7 @@
                 android:id="@+id/txtTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo_3" />
+                android:layout_marginLeft="@dimen/tres_dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,7 +232,7 @@
                 android:id="@+id/txtDebito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo_3" />
+                android:layout_marginLeft="@dimen/tres_dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -248,7 +248,7 @@
                 android:id="@+id/txtCredito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo_3" />
+                android:layout_marginLeft="@dimen/tres_dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -264,7 +264,7 @@
                 android:id="@+id/txtObs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/esp_esquerdo_3" />
+                android:layout_marginLeft="@dimen/tres_dp" />
         </LinearLayout>
     </LinearLayout>
 

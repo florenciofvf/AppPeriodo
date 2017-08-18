@@ -1,15 +1,22 @@
 package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.ActionMode;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,13 +29,13 @@ import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
-public class DiaFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class DiaFragment extends Fragment implements ExpandableListView.OnChildClickListener {
     private DiaFragmentListener listener;
+    private ExpandableListView listView;
     private Repositorio repositorio;
     private ProgressBar progressBar;
     private TextView txtRodape;
     private DiaAdapter adapter;
-    private ListView listView;
     private Mes mes;
 
     @Override
@@ -53,15 +60,32 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mes = (Mes) getArguments().getSerializable(Util.PARAMETRO);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_layout, null);
+        View view = inflater.inflate(R.layout.dia_fragment_layout, null);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        listView = (ListView) view.findViewById(R.id.listView);
-        listView.setOnItemClickListener(this);
+        listView = (ExpandableListView) view.findViewById(R.id.listView);
+        listView.setOnChildClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_contexto_dia, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.itemEmail) {
+            //String conteudo = adapter.gerarConteudoEmail();
+            //enviarEmail(conteudo);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -82,11 +106,15 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Dia obj = (Dia) listView.getAdapter().getItem(position);
+    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+        Dia obj = (Dia) adapter.getObjeto(groupPosition);
+
         if (obj != null) {
             listener.clickDia(obj);
+            return true;
         }
+
+        return false;
     }
 
     public interface DiaFragmentListener {
@@ -105,6 +133,7 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
         protected void onPostExecute(List<Dia> objetos) {
             adapter = new DiaAdapter(objetos, getActivity());
             listView.setAdapter(adapter);
+            listView.setIndicatorBounds(listView.getWidth()-60, listView.getWidth());
             progressBar.setVisibility(View.GONE);
 
             int total = 0;
@@ -125,5 +154,17 @@ public class DiaFragment extends Fragment implements AdapterView.OnItemClickList
         }
 
         txtRodape.setText("TOTAL DE HORAS: " + Util.totalFmt(total));
+    }
+
+    public void enviarEmail(String conteudo) {
+        Intent it = new Intent(Intent.ACTION_SENDTO);
+        it.setData(Uri.parse("mailto:"));
+        it.putExtra(Intent.EXTRA_TEXT, conteudo);
+        it.putExtra(Intent.EXTRA_SUBJECT, "Pontos");
+        it.putExtra(Intent.EXTRA_EMAIL, new String[]{"florenciovieira@gmail.com"});
+        it.putExtra(Intent.EXTRA_CC, new String[]{"florenciovieira@gmail.com"});
+        if (it.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(it);
+        }
     }
 }

@@ -1,7 +1,7 @@
 package florencio.com.br.appperiodo.util;
 
-import android.graphics.Color;
-import android.view.View;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.Button;
 
 import java.text.DateFormat;
@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
@@ -25,7 +26,8 @@ public class Util {
     public static final String NOITE_INI = "NOITE_INI";
     public static final String NOITE_FIM = "NOITE_FIM";
     public static final String ZERO_ZERO = "00:00";
-    public static final int COR_ATUAL = 0xFF88EE88;
+    public static final int ZERO = 0;
+    public static final int UM = 1;
 
     public static int ANO_ATUAL;
     public static int MES_ATUAL;
@@ -119,6 +121,10 @@ public class Util {
         return valor < 10 ? "0" + valor : "" + valor;
     }
 
+    public static String get00(String s) {
+        return s.length() == 1 ? "0" + s : s;
+    }
+
     public static long getMinutos(long milisegundos) {
         return milisegundos / 1000 / 60;
     }
@@ -187,5 +193,31 @@ public class Util {
 
     private static int getCor(long l) {
         return l != 0 ? 0xFF88EE88 : 0;
+    }
+
+    public static boolean isVazio(CharSequence cs) {
+        return cs == null || cs.length() == 0;
+    }
+
+    public static Drawable getBackground(Dia dia, Context context) {
+        Drawable resp = null;
+
+        if (dia != null) {
+            if (dia.isAtual()) {
+                return context.getDrawable(R.drawable.bg_atual);
+            }
+
+            if ("SAB".equals(dia.getNome())) {
+                return context.getDrawable(R.drawable.bg_sabado);
+            }
+
+            if ("DOM".equals(dia.getNome())) {
+                return context.getDrawable(R.drawable.bg_domingo);
+            }
+
+            return context.getDrawable(R.drawable.bg_padrao);
+        }
+
+        return resp;
     }
 }

@@ -55,7 +55,7 @@ public class AnoAdapter extends BaseAdapter {
         boolean config = false;
 
         if (obj.isAtual()) {
-            convertView.setBackgroundColor(Util.COR_ATUAL);
+            convertView.setBackground(context.getDrawable(R.drawable.bg_atual));
             config = true;
         }
 

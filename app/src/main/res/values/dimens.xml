@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="esp_esquerdo">10dp</dimen>
-    <dimen name="esp_esquerdo_2">7dp</dimen>
-    <dimen name="esp_esquerdo_3">3dp</dimen>
-    <dimen name="esp_direito">10dp</dimen>
-    <dimen name="esp_direito_2">7dp</dimen>
-    <dimen name="fonte_item_dia">11sp</dimen>
-    <dimen name="margem_superior">7dp</dimen>
-    <dimen name="margem_inferior">7dp</dimen>
-    <dimen name="padding_ano">10dp</dimen>
-    <dimen name="padding_mes">10dp</dimen>
-    <dimen name="um_dp">1dp</dimen>
+    <dimen name="quarenta_dp">40dp</dimen>
+    <dimen name="trinta_dp">30dp</dimen>
+    <dimen name="quinze_dp">15dp</dimen>
+    <dimen name="vinte_dp">20dp</dimen>
+    <dimen name="quatro_dp">4dp</dimen>
+    <dimen name="onze_sp">11sp</dimen>
+    <dimen name="cinco_dp">5dp</dimen>
+    <dimen name="doze_dp">12dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
     <dimen name="dois_dp">2dp</dimen>
     <dimen name="tres_dp">3dp</dimen>
-    <dimen name="margem_button">7dp</dimen>
+    <dimen name="seis_dp">6dp</dimen>
+    <dimen name="sete_dp">7dp</dimen>
+    <dimen name="oito_dp">8dp</dimen>
+    <dimen name="nove_dp">9dp</dimen>
+    <dimen name="dez_dp">10dp</dimen>
+    <dimen name="um_dp">1dp</dimen>
 </resources>

@@ -3,4 +3,18 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="preto">#777777</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="cinza_claro">#DDDDDD</color>
+    <color name="atual">#FF88EE88</color>
+    <color name="sabado">#FFCCCCCC</color>
+    <color name="domingo">#FF888888</color>
+
+    <color name="cor1">#AAAAAAAA</color>
+    <color name="cor2">#BBBBBBBB</color>
+    <color name="cor3">#CCCCCCCC</color>
+    <color name="cor4">#DDDDDDDD</color>
+    <color name="cor5">#EEEEEEEE</color>
+    <color name="cor6">#FFFFFFFF</color>
+    <color name="cor7">#99999999</color>
 </resources>

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -145,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (fragment instanceof DiaAtualFragment) {
             ((DiaAtualFragment)fragment).atualizar();
         }
+
+        Toast.makeText(this, getString(R.string.label_registro_salvo), Toast.LENGTH_SHORT).show();
     }
 
     @Override

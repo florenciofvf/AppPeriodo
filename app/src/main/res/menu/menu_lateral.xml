@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/itemAno" android:title="@string/label_anos" android:icon="@android:drawable/btn_star" />
-    <item android:id="@+id/itemHoje" android:title="@string/label_hoje" android:icon="@android:drawable/btn_star" />
+    <item android:title="@string/label_bater_ponto">
+        <menu>
+            <item
+                android:id="@+id/itemHoje"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/label_hoje" />
+        </menu>
+    </item>
+
+    <item android:title="@string/label_pontos">
+        <menu>
+            <item
+                android:id="@+id/itemAno"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/label_anos" />
+        </menu>
+    </item>
+
+    <item android:title="@string/label_relatorios">
+        <menu>
+            <item
+                android:id="@+id/itemPeriodo"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/label_periodo" />
+        </menu>
+    </item>
+
+    <item android:title="@string/label_configuracoes">
+        <menu>
+            <item
+                android:id="@+id/itemPref"
+                android:icon="@android:drawable/btn_star"
+                android:title="@string/label_preferencias" />
+        </menu>
+    </item>
 
 </menu>
