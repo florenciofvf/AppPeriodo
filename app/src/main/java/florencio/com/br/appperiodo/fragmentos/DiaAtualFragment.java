@@ -31,12 +31,12 @@ public class DiaAtualFragment extends Fragment {
     private TextView txtTardeCal;
     private TextView txtNoiteCal;
     private TextView txtCredito;
-    private Button btnManhaIni;
-    private Button btnManhaFim;
-    private Button btnTardeIni;
-    private Button btnTardeFim;
-    private Button btnNoiteIni;
-    private Button btnNoiteFim;
+    private TextView btnManhaIni;
+    private TextView btnManhaFim;
+    private TextView btnTardeIni;
+    private TextView btnTardeFim;
+    private TextView btnNoiteIni;
+    private TextView btnNoiteFim;
     private TextView txtTitulo;
     private TextView txtDebito;
     private CheckBox chkValido;
@@ -106,17 +106,17 @@ public class DiaAtualFragment extends Fragment {
             public void onClick(View v) {
                 dia.limparHorarios();
                 repositorio.sincronizarDia(dia);
-                atualizar();
+                atualizar(getActivity());
                 btnDefazer.setEnabled(false);
             }
         });
 
-        btnManhaIni = (Button) view.findViewById(R.id.btnManhaIni);
-        btnManhaFim = (Button) view.findViewById(R.id.btnManhaFim);
-        btnTardeIni = (Button) view.findViewById(R.id.btnTardeIni);
-        btnTardeFim = (Button) view.findViewById(R.id.btnTardeFim);
-        btnNoiteIni = (Button) view.findViewById(R.id.btnNoiteIni);
-        btnNoiteFim = (Button) view.findViewById(R.id.btnNoiteFim);
+        btnManhaIni = (TextView) view.findViewById(R.id.btnManhaIni);
+        btnManhaFim = (TextView) view.findViewById(R.id.btnManhaFim);
+        btnTardeIni = (TextView) view.findViewById(R.id.btnTardeIni);
+        btnTardeFim = (TextView) view.findViewById(R.id.btnTardeFim);
+        btnNoiteIni = (TextView) view.findViewById(R.id.btnNoiteIni);
+        btnNoiteFim = (TextView) view.findViewById(R.id.btnNoiteFim);
 
         return view;
     }
@@ -131,16 +131,16 @@ public class DiaAtualFragment extends Fragment {
         btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI));
         btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM));
         repositorio = new Repositorio(getActivity());
-        atualizar();
+        atualizar(getActivity());
     }
 
-    public void atualizar() {
-        Util.atualizarText(Util.MANHA_INI, dia, btnManhaIni);
-        Util.atualizarText(Util.MANHA_FIM, dia, btnManhaFim);
-        Util.atualizarText(Util.TARDE_INI, dia, btnTardeIni);
-        Util.atualizarText(Util.TARDE_FIM, dia, btnTardeFim);
-        Util.atualizarText(Util.NOITE_INI, dia, btnNoiteIni);
-        Util.atualizarText(Util.NOITE_FIM, dia, btnNoiteFim);
+    public void atualizar(Context context) {
+        Util.atualizarText(Util.MANHA_INI, dia, btnManhaIni, context);
+        Util.atualizarText(Util.MANHA_FIM, dia, btnManhaFim, context);
+        Util.atualizarText(Util.TARDE_INI, dia, btnTardeIni, context);
+        Util.atualizarText(Util.TARDE_FIM, dia, btnTardeFim, context);
+        Util.atualizarText(Util.NOITE_INI, dia, btnNoiteIni, context);
+        Util.atualizarText(Util.NOITE_FIM, dia, btnNoiteFim, context);
 
         txtManhaCal.setText(dia.getManhaCalFmt());
         txtTardeCal.setText(dia.getTardeCalFmt());
@@ -236,7 +236,7 @@ public class DiaAtualFragment extends Fragment {
 
             btnDefazer.setEnabled(desfazer);
             dia.processar();
-            atualizar();
+            atualizar(getActivity());
         }
 
         private Calendar criarCalendar() {

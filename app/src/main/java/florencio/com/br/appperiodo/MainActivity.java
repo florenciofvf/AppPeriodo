@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment instanceof DiaFragment) {
             ((DiaFragment)fragment).atualizar();
         } else if (fragment instanceof DiaAtualFragment) {
-            ((DiaAtualFragment)fragment).atualizar();
+            ((DiaAtualFragment)fragment).atualizar(this);
         }
 
         Toast.makeText(this, getString(R.string.label_registro_salvo), Toast.LENGTH_SHORT).show();

@@ -1,47 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <TextView
-        android:id="@+id/txtTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textAppearance="?android:textAppearanceLarge" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edtObs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_observacao" />
-    </android.support.design.widget.TextInputLayout>
-
-    <CheckBox
-        android:id="@+id/chkValido"
-        android:text="@string/label_valido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/label_manha"
-            android:textAppearance="?android:textAppearanceMedium" />
+            android:textAppearance="?android:textAppearanceLarge" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtObs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_observacao" />
+        </android.support.design.widget.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/chkValido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_valido" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/label_manha"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_entrada" />
+
+                <TextView
+                    android:id="@+id/btnManhaIni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_saida" />
+
+                <TextView
+                    android:id="@+id/btnManhaFim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/label_tarde"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_entrada" />
+
+                <TextView
+                    android:id="@+id/btnTardeIni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_saida" />
+
+                <TextView
+                    android:id="@+id/btnTardeFim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/label_noite"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_entrada" />
+
+                <TextView
+                    android:id="@+id/btnNoiteIni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_saida" />
+
+                <TextView
+                    android:id="@+id/btnNoiteFim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/quinze_dp"
+                    android:elevation="@dimen/doze_dp"
+                    android:padding="@dimen/vinte_dp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,127 +180,19 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
+                android:id="@+id/btnCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
+                android:text="@string/label_cancelar" />
 
             <Button
-                android:id="@+id/btnManhaIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
+                android:id="@+id/btnSalvar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
-
-            <Button
-                android:id="@+id/btnManhaFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:text="@string/label_salvar" />
         </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/label_tarde"
-            android:textAppearance="?android:textAppearanceMedium" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
-
-            <Button
-                android:id="@+id/btnTardeIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
-
-            <Button
-                android:id="@+id/btnTardeFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/label_noite"
-            android:textAppearance="?android:textAppearanceMedium" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
-
-            <Button
-                android:id="@+id/btnNoiteIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
-
-            <Button
-                android:id="@+id/btnNoiteFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_cancelar" />
-
-        <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_salvar" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

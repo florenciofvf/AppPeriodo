@@ -4,10 +4,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="label_click_para_atualizar">Click para atualizar</string>
     <string name="label_registro_salvo">Registro salvo.</string>
     <string name="label_cancelar">Cancelar</string>
     <string name="label_salvar">Salvar</string>
-    <string name="label_observacao">Observação</string>
+    <string name="label_observacao">Observação:</string>
     <string name="label_barra">/</string>
     <string name="label_obs">Obs:</string>
     <string name="label_igual">=</string>

@@ -3,6 +3,7 @@ package florencio.com.br.appperiodo.util;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -169,30 +170,30 @@ public class Util {
         return 0;
     }
 
-    public static void atualizarText(String campo, Dia dia, Button button) {
+    public static void atualizarText(String campo, Dia dia, TextView button, Context context) {
         if (Util.MANHA_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getManhaIni()));
-            button.setBackgroundColor(getCor(dia.getManhaIni()));
+            button.setBackground(getBackground(dia.getManhaIni(), context));
         } else if (Util.MANHA_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getManhaFim()));
-            button.setBackgroundColor(getCor(dia.getManhaFim()));
+            button.setBackground(getBackground(dia.getManhaFim(), context));
         } else if (Util.TARDE_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getTardeIni()));
-            button.setBackgroundColor(getCor(dia.getTardeIni()));
+            button.setBackground(getBackground(dia.getTardeIni(), context));
         } else if (Util.TARDE_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getTardeFim()));
-            button.setBackgroundColor(getCor(dia.getTardeFim()));
+            button.setBackground(getBackground(dia.getTardeFim(), context));
         } else if (Util.NOITE_INI.equals(campo)) {
             button.setText(Util.formatarHora(dia.getNoiteIni()));
-            button.setBackgroundColor(getCor(dia.getNoiteIni()));
+            button.setBackground(getBackground(dia.getNoiteIni(), context));
         } else if (Util.NOITE_FIM.equals(campo)) {
             button.setText(Util.formatarHora(dia.getNoiteFim()));
-            button.setBackgroundColor(getCor(dia.getNoiteFim()));
+            button.setBackground(getBackground(dia.getNoiteFim(), context));
         }
     }
 
-    private static int getCor(long l) {
-        return l != 0 ? 0xFF88EE88 : 0;
+    private static Drawable getBackground(long l, Context context) {
+        return l != 0 ? context.getDrawable(R.drawable.bg_atual_360) : context.getDrawable(R.drawable.bg_padrao_360);
     }
 
     public static boolean isVazio(CharSequence cs) {

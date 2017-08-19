@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="cinquenta_dp">50dp</dimen>
     <dimen name="quarenta_dp">40dp</dimen>
     <dimen name="trinta_dp">30dp</dimen>
     <dimen name="quinze_dp">15dp</dimen>

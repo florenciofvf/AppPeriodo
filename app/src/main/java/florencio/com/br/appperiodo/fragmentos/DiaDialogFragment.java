@@ -25,12 +25,12 @@ import florencio.com.br.appperiodo.util.Util;
 public class DiaDialogFragment extends DialogFragment {
     private static final String DIA_PARAM = "dia";
     private DiaDialogListener listener;
-    private Button btnManhaIni;
-    private Button btnManhaFim;
-    private Button btnTardeIni;
-    private Button btnTardeFim;
-    private Button btnNoiteIni;
-    private Button btnNoiteFim;
+    private TextView btnManhaIni;
+    private TextView btnManhaFim;
+    private TextView btnTardeIni;
+    private TextView btnTardeFim;
+    private TextView btnNoiteIni;
+    private TextView btnNoiteFim;
     private CheckBox chkValido;
     private EditText edtObs;
     private Dia dia;
@@ -91,22 +91,22 @@ public class DiaDialogFragment extends DialogFragment {
             }
         });
 
-        btnManhaIni = (Button) view.findViewById(R.id.btnManhaIni);
+        btnManhaIni = (TextView) view.findViewById(R.id.btnManhaIni);
         btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
 
-        btnManhaFim = (Button) view.findViewById(R.id.btnManhaFim);
+        btnManhaFim = (TextView) view.findViewById(R.id.btnManhaFim);
         btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
 
-        btnTardeIni = (Button) view.findViewById(R.id.btnTardeIni);
+        btnTardeIni = (TextView) view.findViewById(R.id.btnTardeIni);
         btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
 
-        btnTardeFim = (Button) view.findViewById(R.id.btnTardeFim);
+        btnTardeFim = (TextView) view.findViewById(R.id.btnTardeFim);
         btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
 
-        btnNoiteIni = (Button) view.findViewById(R.id.btnNoiteIni);
+        btnNoiteIni = (TextView) view.findViewById(R.id.btnNoiteIni);
         btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
 
-        btnNoiteFim = (Button) view.findViewById(R.id.btnNoiteFim);
+        btnNoiteFim = (TextView) view.findViewById(R.id.btnNoiteFim);
         btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
 
         return view;
@@ -115,8 +115,8 @@ public class DiaDialogFragment extends DialogFragment {
     private class OnClick implements View.OnClickListener {
         final String campo;
 
-        public OnClick(String campo, Dia dia, Button button) {
-            Util.atualizarText(campo, dia, button);
+        public OnClick(String campo, Dia dia, TextView button) {
+            Util.atualizarText(campo, dia, button, getActivity());
             this.campo = campo;
         }
 
@@ -163,24 +163,24 @@ public class DiaDialogFragment extends DialogFragment {
 
             if (Util.MANHA_INI.equals(campo)) {
                 dia.setManhaIni(valor);
-                Util.atualizarText(campo, dia, btnManhaIni);
+                Util.atualizarText(campo, dia, btnManhaIni, getActivity());
             } else if (Util.MANHA_FIM.equals(campo)) {
                 dia.setManhaFim(valor);
-                Util.atualizarText(campo, dia, btnManhaFim);
+                Util.atualizarText(campo, dia, btnManhaFim, getActivity());
 
             } else if (Util.TARDE_INI.equals(campo)) {
                 dia.setTardeIni(valor);
-                Util.atualizarText(campo, dia, btnTardeIni);
+                Util.atualizarText(campo, dia, btnTardeIni, getActivity());
             } else if (Util.TARDE_FIM.equals(campo)) {
                 dia.setTardeFim(valor);
-                Util.atualizarText(campo, dia, btnTardeFim);
+                Util.atualizarText(campo, dia, btnTardeFim, getActivity());
 
             } else if (Util.NOITE_INI.equals(campo)) {
                 dia.setNoiteIni(valor);
-                Util.atualizarText(campo, dia, btnNoiteIni);
+                Util.atualizarText(campo, dia, btnNoiteIni, getActivity());
             } else if (Util.NOITE_FIM.equals(campo)) {
                 dia.setNoiteFim(valor);
-                Util.atualizarText(campo, dia, btnNoiteFim);
+                Util.atualizarText(campo, dia, btnNoiteFim, getActivity());
             }
         }
 

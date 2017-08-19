@@ -131,16 +131,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             convertView.setTag(new ViewHolderDetalhe(convertView));
         }
 
-        AtomicInteger integer = new AtomicInteger(0);
         ViewHolderDetalhe holder = (ViewHolderDetalhe) convertView.getTag();
-        holder.atualizarView(obj, integer);
-        convertView.setBackground(Util.getBackground(obj, context));
-
-        if(integer.intValue() > 0) {
-            convertView.setPadding(40, 0, 0, 0);
-        } else {
-            convertView.setPadding(40, 40, 0, 40);
-        }
+        holder.atualizarView(obj);
 
         return convertView;
     }
@@ -153,8 +145,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         LinearLayout lltDebit;
         LinearLayout lltCredi;
         LinearLayout lltObser;
+        LinearLayout lltClick;
 
-        //TextView lblObs;
         TextView txtObs;
 
         TextView txtManhaIni;
@@ -169,11 +161,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         TextView txtNoiteFim;
         TextView txtNoiteCal;
 
-        //TextView lblTotal;
         TextView txtTotal;
-        //TextView lblDebito;
         TextView txtDebito;
-        //TextView lblCredito;
         TextView txtCredito;
 
         ViewHolderDetalhe(View view) {
@@ -184,8 +173,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             lltDebit = (LinearLayout) view.findViewById(R.id.lltDebito);
             lltCredi = (LinearLayout) view.findViewById(R.id.lltCredito);
             lltObser = (LinearLayout) view.findViewById(R.id.lltObs);
+            lltClick = (LinearLayout) view.findViewById(R.id.lltClick);
 
-            //lblObs = (TextView) view.findViewById(R.id.lblObs);
             txtObs = (TextView) view.findViewById(R.id.txtObs);
 
             txtManhaIni = (TextView) view.findViewById(R.id.txtManhaIni);
@@ -200,15 +189,12 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             txtNoiteFim = (TextView) view.findViewById(R.id.txtNoiteFim);
             txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
 
-            //lblTotal = (TextView) view.findViewById(R.id.lblTotal);
             txtTotal = (TextView) view.findViewById(R.id.txtTotal);
-            //lblDebito = (TextView) view.findViewById(R.id.lblDebito);
             txtDebito = (TextView) view.findViewById(R.id.txtDebito);
-            //lblCredito = (TextView) view.findViewById(R.id.lblCredito);
             txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         }
 
-        void atualizarView(Dia obj, AtomicInteger integer) {
+        void atualizarView(Dia obj) {
             txtObs.setText(obj.getObs());
 
             txtManhaIni.setText(obj.getManhaIniFmt());
@@ -237,6 +223,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
                 txtCredito.setTextColor(Color.BLACK);
             }
 
+            AtomicInteger integer = new AtomicInteger(0);
+
             visivel(txtManhaIni, txtManhaFim, txtManhaCal, lltManha, integer);
             visivel(txtTardeIni, txtTardeFim, txtTardeCal, lltTarde, integer);
             visivel(txtNoiteIni, txtNoiteFim, txtNoiteCal, lltNoite, integer);
@@ -244,6 +232,8 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             visivel(txtDebito, lltDebit, integer);
             visivel(txtCredito, lltCredi, integer);
             visivelObs(txtObs, lltObser, integer);
+
+            lltClick.setVisibility(integer.intValue() > 0 ? View.GONE : View.VISIBLE);
         }
     }
 
