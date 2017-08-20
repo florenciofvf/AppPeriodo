@@ -10,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -32,6 +33,53 @@ public class DiaAdapter extends BaseExpandableListAdapter {
 
     public Dia getObjeto(int posicao) {
         return objetos.get(posicao);
+    }
+
+    public String gerarConteudoExportacao() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Dia obj : objetos) {
+            sb.append(obj.gerarConteudoEmail());
+        }
+
+        return sb.toString();
+    }
+
+    public void importarConteudo(List<String> lista) {
+        Iterator<String> iterator = lista.iterator();
+        while (iterator.hasNext()) {
+            String linha = iterator.next();
+            modificarDia(linha);
+            iterator.remove();
+        }
+    }
+
+    private void modificarDia(String s) {
+        for (Dia obj : objetos) {
+            String[] strings = s.split(" ");
+            Integer numero = getNumero(strings);
+            String nome = getNome(strings);
+
+            if (obj.getNumero().equals(numero) && obj.getNome().equals(nome)) {
+                obj.importar(strings);
+            }
+        }
+    }
+
+    private Integer getNumero(String[] strings) {
+        try {
+            return Integer.valueOf(strings[0]);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String getNome(String[] strings) {
+        try {
+            return strings[1];
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -241,22 +289,22 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         int total = 0;
 
         view1.setVisibility(Util.ZERO_ZERO.equals(view1.getText()) ? View.GONE : View.VISIBLE);
-        if(view1.getVisibility() == View.GONE) {
+        if (view1.getVisibility() == View.GONE) {
             total++;
         }
 
         view2.setVisibility(Util.ZERO_ZERO.equals(view2.getText()) ? View.GONE : View.VISIBLE);
-        if(view2.getVisibility() == View.GONE) {
+        if (view2.getVisibility() == View.GONE) {
             total++;
         }
 
         view3.setVisibility(Util.ZERO_ZERO.equals(view3.getText()) ? View.GONE : View.VISIBLE);
-        if(view3.getVisibility() == View.GONE) {
+        if (view3.getVisibility() == View.GONE) {
             total++;
         }
 
         llt.setVisibility(total == 3 ? View.GONE : View.VISIBLE);
-        if(llt.getVisibility() == View.VISIBLE) {
+        if (llt.getVisibility() == View.VISIBLE) {
             integer.incrementAndGet();
         }
     }
@@ -265,7 +313,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         int visibilidade = Util.ZERO_ZERO.equals(view.getText()) ? View.GONE : View.VISIBLE;
         view.setVisibility(visibilidade);
         llt.setVisibility(visibilidade);
-        if(llt.getVisibility() == View.VISIBLE) {
+        if (llt.getVisibility() == View.VISIBLE) {
             integer.incrementAndGet();
         }
     }
@@ -279,7 +327,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         int visibilidade = Util.isVazio(view.getText()) ? View.GONE : View.VISIBLE;
         view.setVisibility(visibilidade);
         llt.setVisibility(visibilidade);
-        if(llt.getVisibility() == View.VISIBLE) {
+        if (llt.getVisibility() == View.VISIBLE) {
             integer.incrementAndGet();
         }
     }

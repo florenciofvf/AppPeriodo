@@ -2,7 +2,6 @@ package florencio.com.br.appperiodo.util;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -27,6 +26,13 @@ public class Util {
     public static final String NOITE_INI = "NOITE_INI";
     public static final String NOITE_FIM = "NOITE_FIM";
     public static final String ZERO_ZERO = "00:00";
+    public static final String M_I = "M_I";
+    public static final String M_F = "M_F";
+    public static final String T_I = "T_I";
+    public static final String T_F = "T_F";
+    public static final String N_I = "N_I";
+    public static final String N_F = "N_F";
+    public static final String OBS = "OBS";
     public static final int ZERO = 0;
     public static final int UM = 1;
 
@@ -115,10 +121,10 @@ public class Util {
 
         long hor = getHoras(milisegundos);
 
-        return get(hor) + ":" + get(min);
+        return get00(hor) + ":" + get00(min);
     }
 
-    private static String get(long valor) {
+    private static String get00(long valor) {
         return valor < 10 ? "0" + valor : "" + valor;
     }
 
@@ -220,5 +226,12 @@ public class Util {
         }
 
         return resp;
+    }
+
+    public static long parseHora(String string) {
+        String[] strings = string.split(":");
+        long horas = 1000L * 60L * 60L * Long.parseLong(strings[0]);
+        long minutos = 1000L * 60L * Long.parseLong(strings[1]);
+        return horas + minutos;
     }
 }

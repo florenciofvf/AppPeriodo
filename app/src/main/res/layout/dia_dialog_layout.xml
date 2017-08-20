@@ -27,11 +27,25 @@
                 android:hint="@string/label_observacao" />
         </android.support.design.widget.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/chkValido"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_valido" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkValido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_valido" />
+
+            <CheckBox
+                android:id="@+id/chkEspecial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_especial" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/itemEmail"
+        android:id="@+id/itemExportar"
         android:icon="@android:drawable/ic_menu_share"
-        android:title="@string/label_email" />
+        android:title="@string/label_exportar_email" />
+
+    <item
+        android:id="@+id/itemImportar"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/label_importar" />
 
 </menu>

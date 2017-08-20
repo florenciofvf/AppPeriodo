@@ -31,6 +31,7 @@ public class DiaDialogFragment extends DialogFragment {
     private TextView btnTardeFim;
     private TextView btnNoiteIni;
     private TextView btnNoiteFim;
+    private CheckBox chkEspecial;
     private CheckBox chkValido;
     private EditText edtObs;
     private Dia dia;
@@ -69,6 +70,9 @@ public class DiaDialogFragment extends DialogFragment {
         edtObs = (EditText) view.findViewById(R.id.edtObs);
         edtObs.setText(dia.getObs());
 
+        chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
+        chkEspecial.setChecked(dia.isEspecial());
+
         chkValido = (CheckBox) view.findViewById(R.id.chkValido);
         chkValido.setChecked(dia.isValido());
 
@@ -84,6 +88,7 @@ public class DiaDialogFragment extends DialogFragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setEspecial(chkEspecial.isChecked() ? 1 : 0);
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
                 listener.salvarDia(dia);

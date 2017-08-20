@@ -43,7 +43,7 @@ public class Repositorio {
             db.insert("Mes", null, new Mes(4, "ABRIL", ano, 30).criarContentValues());
             db.insert("Mes", null, new Mes(5, "MAIO", ano, 31).criarContentValues());
             db.insert("Mes", null, new Mes(6, "JUNHO", ano, 30).criarContentValues());
-            db.insert("Mes", null, new Mes(7, "JULHO", ano, 30).criarContentValues());
+            db.insert("Mes", null, new Mes(7, "JULHO", ano, 31).criarContentValues());
             db.insert("Mes", null, new Mes(8, "AGOSTO", ano, 31).criarContentValues());
             db.insert("Mes", null, new Mes(9, "SETEMBRO", ano, 30).criarContentValues());
             db.insert("Mes", null, new Mes(10, "OUTUBRO", ano, 31).criarContentValues());
@@ -94,7 +94,7 @@ public class Repositorio {
         List<Dia> lista = new ArrayList<>();
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome, data, valido from Dia where mes_id=" + mes.get_id(), null);
+        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome, data, valido, especial from Dia where mes_id=" + mes.get_id(), null);
 
         int _id_idx = cursor.getColumnIndex("_id");
         int num_idx = cursor.getColumnIndex("numero");
@@ -103,6 +103,7 @@ public class Repositorio {
 
         int dat_idx = cursor.getColumnIndex("data");
         int val_idx = cursor.getColumnIndex("valido");
+        int esp_idx = cursor.getColumnIndex("especial");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -127,6 +128,7 @@ public class Repositorio {
 
             dia.setData(cursor.getLong(dat_idx));
             dia.setValido(cursor.getInt(val_idx));
+            dia.setEspecial(cursor.getInt(esp_idx));
 
             lista.add(dia);
         }
@@ -142,7 +144,7 @@ public class Repositorio {
         int total = 0;
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido from Dia d");
+        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial from Dia d");
         sb.append(" inner join Mes m on m._id = d.mes_id");
         sb.append(" inner join Ano a on a._id = m.ano_id");
         sb.append(" where d.numero=" + d.getNumero());
@@ -159,6 +161,7 @@ public class Repositorio {
 
         int dat_idx = cursor.getColumnIndex("data");
         int val_idx = cursor.getColumnIndex("valido");
+        int esp_idx = cursor.getColumnIndex("especial");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -185,6 +188,7 @@ public class Repositorio {
 
             dia.setData(cursor.getLong(dat_idx));
             dia.setValido(cursor.getInt(val_idx));
+            dia.setEspecial(cursor.getInt(esp_idx));
 
             d.copiar(dia);
         }

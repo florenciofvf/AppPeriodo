@@ -1,11 +1,13 @@
 package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import florencio.com.br.appperiodo.util.Util;
 
 public class Dia extends Entidade {
     private Integer numero;
+    private int especial;
     private String nome;
     private String obs;
     private int valido;
@@ -44,6 +46,7 @@ public class Dia extends Entidade {
     public void copiar(Dia d) {
         _id = d._id;
 
+        especial = d.especial;
         numero = d.numero;
         valido = d.valido;
         nome = d.nome;
@@ -57,6 +60,43 @@ public class Dia extends Entidade {
         tardeFim = d.tardeFim;
         noiteIni = d.noiteIni;
         noiteFim = d.noiteFim;
+    }
+
+    public void importar(String[] strings) {
+        try {
+            for (int i = 2; i < strings.length; i++) {
+                String s = strings[i];
+                String[] strings1 = s.split("=");
+
+                if (Util.M_I.equals(strings1[0])) {
+                    manhaIni = Util.parseHora(strings1[1]);
+                } else if (Util.M_F.equals(strings1[0])) {
+                    manhaFim = Util.parseHora(strings1[1]);
+                } else if (Util.T_I.equals(strings1[0])) {
+                    tardeIni = Util.parseHora(strings1[1]);
+                } else if (Util.T_F.equals(strings1[0])) {
+                    tardeFim = Util.parseHora(strings1[1]);
+                } else if (Util.N_I.equals(strings1[0])) {
+                    noiteIni = Util.parseHora(strings1[1]);
+                } else if (Util.N_F.equals(strings1[0])) {
+                    noiteFim = Util.parseHora(strings1[1]);
+                } else if (Util.OBS.equals(strings1[0])) {
+                    obs = resto(i, strings);
+                }
+            }
+        } catch (Exception e) {
+            Log.i("ERRO", e.getMessage());
+        }
+    }
+
+    private String resto(int indice, String[] strings) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : strings) {
+            sb.append(s + " ");
+        }
+
+        return sb.toString().substring(0, Util.OBS.length() + 1);
     }
 
     public void limparHorarios() {
@@ -79,21 +119,21 @@ public class Dia extends Entidade {
 
         manhaIniFmt = Util.formatarHora(manhaIni);
         manhaFimFmt = Util.formatarHora(manhaFim);
-        if(checado(manhaIni, manhaFim)) {
+        if (checado(manhaIni, manhaFim)) {
             total += Util.diferenca(manhaIni, manhaFim);
             manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
         }
 
         tardeIniFmt = Util.formatarHora(tardeIni);
         tardeFimFmt = Util.formatarHora(tardeFim);
-        if(checado(tardeIni, tardeFim)) {
+        if (checado(tardeIni, tardeFim)) {
             total += Util.diferenca(tardeIni, tardeFim);
             tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
         }
 
         noiteIniFmt = Util.formatarHora(noiteIni);
         noiteFimFmt = Util.formatarHora(noiteFim);
-        if(checado(noiteIni, noiteFim)) {
+        if (checado(noiteIni, noiteFim)) {
             total += Util.diferenca(noiteIni, noiteFim);
             noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
         }
@@ -301,12 +341,24 @@ public class Dia extends Entidade {
         return valido;
     }
 
+    public int getEspecial() {
+        return especial;
+    }
+
     public boolean isValido() {
         return valido == 1;
     }
 
+    public boolean isEspecial() {
+        return especial == 1;
+    }
+
     public void setValido(int valido) {
         this.valido = valido;
+    }
+
+    public void setEspecial(int especial) {
+        this.especial = especial;
     }
 
     public void setTotalFmt(String totalFmt) {
@@ -346,13 +398,41 @@ public class Dia extends Entidade {
         cv.put("tarde_fim", tardeFim);
         cv.put("noite_ini", noiteIni);
         cv.put("noite_fim", noiteFim);
-        cv.put("data", data);
+        cv.put("especial", especial);
         cv.put("valido", valido);
+        cv.put("data", data);
         return cv;
     }
 
     public String gerarConteudoEmail() {
-        return getNumero() + ":" + getManhaIniFmt() + "/" + getManhaFimFmt() + " - " + getTardeIniFmt() + "/" + getTardeFimFmt() + "|" + getObs(); // + "   -   " + getNoiteIniFmt() + " / " + getNoiteFimFmt();
+        if (!ehNovo()) {
+            return Util.get00(getNumero().toString()) + " " + getNome() + " " +
+                    auxHora(Util.M_I, getManhaIniFmt()) +
+                    auxHora(Util.M_F, getManhaFimFmt()) +
+                    auxHora(Util.T_I, getTardeIniFmt()) +
+                    auxHora(Util.T_F, getTardeFimFmt()) +
+                    auxHora(Util.N_I, getNoiteIniFmt()) +
+                    auxHora(Util.N_F, getNoiteFimFmt()) +
+                    auxDesc(Util.OBS, getObs()) + "\n";
+        }
+
+        return "";
+    }
+
+    private String auxHora(String prefixo, String string) {
+        if (string == null || Util.ZERO_ZERO.equals(string)) {
+            return "";
+        }
+
+        return prefixo + "=" + string + " ";
+    }
+
+    private String auxDesc(String prefixo, String string) {
+        if (string == null || string.length() == 0) {
+            return "";
+        }
+
+        return prefixo + "=" + string + " ";
     }
 
     @Override

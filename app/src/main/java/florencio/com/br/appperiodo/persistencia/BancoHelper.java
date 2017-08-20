@@ -47,6 +47,7 @@ public class BancoHelper extends SQLiteOpenHelper {
         sb.append("     noite_fim integer not null,");
         sb.append("          data integer not null,");
         sb.append("        valido integer not null,");
+        sb.append("      especial integer not null,");
         sb.append("   foreign key(mes_id) references Mes(_id)");
         sb.append(")");
         db.execSQL(sb.toString());

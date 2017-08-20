@@ -37,6 +37,7 @@ public class DiaAtualFragment extends Fragment {
     private TextView btnTardeFim;
     private TextView btnNoiteIni;
     private TextView btnNoiteFim;
+    private CheckBox chkEspecial;
     private TextView txtTitulo;
     private TextView txtDebito;
     private CheckBox chkValido;
@@ -79,6 +80,7 @@ public class DiaAtualFragment extends Fragment {
         txtManhaCal = (TextView) view.findViewById(R.id.txtManhaCal);
         txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
         txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
+        chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
         txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         txtDebito = (TextView) view.findViewById(R.id.txtDebito);
@@ -92,6 +94,7 @@ public class DiaAtualFragment extends Fragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setEspecial(chkEspecial.isChecked() ? 1 : 0);
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
                 btnDefazer.setEnabled(false);
@@ -145,6 +148,7 @@ public class DiaAtualFragment extends Fragment {
         txtManhaCal.setText(dia.getManhaCalFmt());
         txtTardeCal.setText(dia.getTardeCalFmt());
         txtNoiteCal.setText(dia.getNoiteCalFmt());
+        chkEspecial.setChecked(dia.isEspecial());
         txtCredito.setText(dia.getCredito());
         chkValido.setChecked(dia.isValido());
         txtTotal.setText(dia.getTotalFmt());

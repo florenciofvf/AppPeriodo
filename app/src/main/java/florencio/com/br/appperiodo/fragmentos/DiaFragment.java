@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.ActionMode;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,12 +15,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import florencio.com.br.appperiodo.R;
@@ -80,9 +83,12 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.itemEmail) {
-            //String conteudo = adapter.gerarConteudoEmail();
-            //enviarEmail(conteudo);
+        if (item.getItemId() == R.id.itemExportar) {
+            String conteudo = adapter.gerarConteudoExportacao();
+            enviarEmail(conteudo);
+        } else if (item.getItemId() == R.id.itemExportar) {
+            String url = "";
+            new TarefaImportar().execute(url);
         }
 
         return super.onOptionsItemSelected(item);
@@ -94,7 +100,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         repositorio = new Repositorio(getActivity());
         txtRodape = new TextView(getActivity());
         txtRodape.setGravity(Gravity.RIGHT);
-        txtRodape.setPadding(8,8,8,8);
+        txtRodape.setPadding(8, 8, 8, 8);
         listView.addFooterView(txtRodape);
         new Tarefa().execute(mes);
     }
@@ -133,7 +139,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         protected void onPostExecute(List<Dia> objetos) {
             adapter = new DiaAdapter(objetos, getActivity());
             listView.setAdapter(adapter);
-            listView.setIndicatorBounds(listView.getWidth()-60, listView.getWidth());
+            listView.setIndicatorBounds(listView.getWidth() - 60, listView.getWidth());
             progressBar.setVisibility(View.GONE);
 
             int total = 0;
@@ -165,6 +171,52 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         it.putExtra(Intent.EXTRA_CC, new String[]{"florenciovieira@gmail.com"});
         if (it.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(it);
+        }
+    }
+
+    private class TarefaImportar extends AsyncTask<String, Void, List<String>> {
+
+        @Override
+        protected List<String> doInBackground(String... params) {
+            List<String> resposta = new ArrayList<>();
+            String s = params[0];
+
+            try {
+                URL url = new URL(s);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+                conn.setDoOutput(false);
+
+                conn.connect();
+
+                int resp = conn.getResponseCode();
+
+                if (resp == HttpURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String linha = br.readLine();
+
+                    while (linha != null) {
+                        if (linha.length() > 0) {
+                            resposta.add(linha);
+                        }
+                        linha = br.readLine();
+                    }
+
+                    br.close();
+                }
+
+            } catch (Exception e) {
+                Log.i("ERRO", e.getMessage());
+            }
+
+            return resposta;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> lista) {
+            adapter.importarConteudo(lista);
         }
     }
 }
