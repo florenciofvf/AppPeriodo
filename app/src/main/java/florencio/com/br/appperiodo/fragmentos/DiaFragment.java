@@ -2,9 +2,11 @@ package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -86,8 +88,14 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         if (item.getItemId() == R.id.itemExportar) {
             String conteudo = adapter.gerarConteudoExportacao();
             enviarEmail(conteudo);
+
+        } else if (item.getItemId() == R.id.itemExportarDados) {
+            String conteudo = adapter.gerarConteudoExportacaoDados();
+            enviarEmail(conteudo);
+
         } else if (item.getItemId() == R.id.itemImportar) {
-            String url = "https://raw.githubusercontent.com/florenciofvf/AppPeriodo/master/app/src/main/res/raw/temp.txt";
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String url = preferences.getString(getString(R.string.url_importacao), getString(R.string.url_importacao_default));
             new TarefaImportar().execute(url);
         }
 
@@ -159,11 +167,13 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 
     public void enviarEmail(String conteudo) {
         Intent it = new Intent(Intent.ACTION_SENDTO);
+
         it.setData(Uri.parse("mailto:"));
         it.putExtra(Intent.EXTRA_TEXT, conteudo);
         it.putExtra(Intent.EXTRA_SUBJECT, "Pontos");
         it.putExtra(Intent.EXTRA_EMAIL, new String[]{"florenciovieira@gmail.com"});
         it.putExtra(Intent.EXTRA_CC, new String[]{"florenciovieira@gmail.com"});
+
         if (it.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(it);
         }

@@ -92,11 +92,11 @@ public class Dia extends Entidade {
     private String resto(int indice, String[] strings) {
         StringBuilder sb = new StringBuilder();
 
-        for (String s : strings) {
-            sb.append(s + " ");
+        for (int i = indice; i < strings.length; i++) {
+            sb.append(strings[i] + " ");
         }
 
-        return sb.toString().substring(0, Util.OBS.length() + 1);
+        return sb.toString().substring(Util.OBS.length() + 1);
     }
 
     public void limparHorarios() {
@@ -419,12 +419,27 @@ public class Dia extends Entidade {
         return "";
     }
 
+    public String gerarConteudoDados() {
+        if (!ehNovo()) {
+            return Util.get00(getNumero().toString()) + " " + getNome() + " " +
+                    auxHora("", getManhaIniFmt()) +
+                    auxHora("", getManhaFimFmt()) +
+                    auxHora("", getTardeIniFmt()) +
+                    auxHora("", getTardeFimFmt()) +
+                    auxHora("", getNoiteIniFmt()) +
+                    auxHora("", getNoiteFimFmt()) +
+                    auxDesc("", getObs()) + "\n";
+        }
+
+        return "";
+    }
+
     private String auxHora(String prefixo, String string) {
         if (string == null || Util.ZERO_ZERO.equals(string)) {
             return "";
         }
 
-        return prefixo + "=" + string + " ";
+        return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
     }
 
     private String auxDesc(String prefixo, String string) {
@@ -432,7 +447,7 @@ public class Dia extends Entidade {
             return "";
         }
 
-        return prefixo + "=" + string + " ";
+        return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
     }
 
     @Override

@@ -1,5 +1,6 @@
 package florencio.com.br.appperiodo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import florencio.com.br.appperiodo.fragmentos.DiaAtualFragment;
 import florencio.com.br.appperiodo.fragmentos.DiaDialogFragment;
 import florencio.com.br.appperiodo.fragmentos.DiaFragment;
 import florencio.com.br.appperiodo.fragmentos.MesFragment;
+import florencio.com.br.appperiodo.fragmentos.PreferenciaFragment;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
 import florencio.com.br.appperiodo.util.Util;
 
@@ -79,21 +81,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
 
         if (item.getItemId() == R.id.itemAno) {
+            FragmentManager manager = getSupportFragmentManager();
+            Fragment f = manager.findFragmentByTag("FRAGMENTO");
+            FragmentTransaction transaction = manager.beginTransaction();
+
             AnoFragment fragment = AnoFragment.newInstance(getAnoAtual());
             transaction.replace(R.id.container, fragment, "FRAGMENTO");
+
+            if(f != null) {
+                transaction.addToBackStack(null);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            }
+            transaction.commit();
+
         } else if (item.getItemId() == R.id.itemHoje) {
+            FragmentManager manager = getSupportFragmentManager();
+            Fragment f = manager.findFragmentByTag("FRAGMENTO");
+            FragmentTransaction transaction = manager.beginTransaction();
+
             repositorio.sincronizarDia(Util.diaAtual);
             DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
             transaction.replace(R.id.container, fragment, "FRAGMENTO");
+
+            if(f != null) {
+                transaction.addToBackStack(null);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            }
+            transaction.commit();
+
+        } else if (item.getItemId() == R.id.itemPref) {
+            startActivity(new Intent(this, PreferenciaActivity.class));
         }
 
         drawerLayout.closeDrawers();
-        transaction.addToBackStack(null);
-        transaction.commit();
+
         return true;
     }
 
@@ -107,11 +130,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         titulo(ano, null, null);
 
         FragmentManager manager = getSupportFragmentManager();
+        Fragment f = manager.findFragmentByTag("FRAGMENTO");
         FragmentTransaction transaction = manager.beginTransaction();
-
         MesFragment fragment = MesFragment.newInstance(ano);
         transaction.replace(R.id.container, fragment, "FRAGMENTO");
-        transaction.addToBackStack(null);
+
+        if(f != null) {
+            transaction.addToBackStack(null);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        }
+
         transaction.commit();
     }
 
@@ -120,11 +148,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         titulo(null, mes, null);
 
         FragmentManager manager = getSupportFragmentManager();
+        Fragment f = manager.findFragmentByTag("FRAGMENTO");
         FragmentTransaction transaction = manager.beginTransaction();
-
         DiaFragment fragment = DiaFragment.newInstance(mes);
         transaction.replace(R.id.container, fragment, "FRAGMENTO");
-        transaction.addToBackStack(null);
+
+        if(f != null) {
+            transaction.addToBackStack(null);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        }
+
         transaction.commit();
     }
 

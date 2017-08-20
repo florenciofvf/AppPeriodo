@@ -45,6 +45,16 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         return sb.toString();
     }
 
+    public String gerarConteudoExportacaoDados() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Dia obj : objetos) {
+            sb.append(obj.gerarConteudoDados());
+        }
+
+        return sb.toString();
+    }
+
     public void importarConteudo(List<String> lista) {
         Iterator<String> iterator = lista.iterator();
         while (iterator.hasNext()) {

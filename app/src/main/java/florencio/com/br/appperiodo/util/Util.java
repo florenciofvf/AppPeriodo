@@ -221,6 +221,10 @@ public class Util {
         Drawable resp = null;
 
         if (dia != null) {
+            if (dia.isEspecial()) {
+                return context.getDrawable(R.drawable.bg_especial);
+            }
+
             if (dia.isAtual()) {
                 return context.getDrawable(R.drawable.bg_atual);
             }

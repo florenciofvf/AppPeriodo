@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="@string/comprimento_horario_default"
+        android:inputType="text"
+        android:key="comprimento_horario"
+        android:singleLine="true"
+        android:summary="@string/comprimento_horario_default"
+        android:title="@string/label_comprimento_horario_diario" />
+
+    <EditTextPreference
+        android:defaultValue="@string/tolerancia_saida_default"
+        android:inputType="text"
+        android:key="@string/tolerancia_saida"
+        android:singleLine="true"
+        android:summary="@string/tolerancia_saida_default"
+        android:title="@string/label_tolerancia_para_saida" />
+
+    <EditTextPreference
+        android:defaultValue="@string/excesso_hora_extra_default"
+        android:inputType="text"
+        android:key="@string/excesso_hora_extra"
+        android:singleLine="true"
+        android:summary="@string/excesso_hora_extra_default"
+        android:title="@string/label_excesso_para_extra" />
+
+    <EditTextPreference
+        android:defaultValue="@string/url_importacao_default"
+        android:inputType="text"
+        android:key="@string/url_importacao"
+        android:summary="@string/url_importacao_default"
+        android:title="@string/label_url_importacao" />
+
+</PreferenceScreen>

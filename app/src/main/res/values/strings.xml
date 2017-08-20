@@ -1,20 +1,30 @@
 <resources>
-    <string name="app_name">Períodos</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="url_importacao_default">https://raw.githubusercontent.com/florenciofvf/AppPeriodo/master/app/src/main/res/raw/temp.txt</string>
+    <string name="label_comprimento_horario_diario">Comprimento de horário diário</string>
+    <string name="label_tolerancia_para_saida">Tolerância para saída</string>
+    <string name="label_excesso_para_extra">Excesso para hora extra</string>
     <string name="label_click_para_atualizar">Click para atualizar</string>
-    <string name="label_exportar_email">Exportar por e-mail</string>
+    <string name="comprimento_horario">comprimento_horario</string>
+    <string name="label_url_importacao">URL de importação</string>
+    <string name="excesso_hora_extra">excesso_hora_extra</string>
     <string name="label_registro_salvo">Registro salvo.</string>
+    <string name="label_exportar_dados">Exportar dados</string>
+    <string name="comprimento_horario_default">08:00</string>
     <string name="label_configuracoes">Configurações</string>
+    <string name="tolerancia_saida">tolerancia_saida</string>
+    <string name="excesso_hora_extra_default">00:00</string>
     <string name="label_preferencias">Preferências</string>
+    <string name="tolerancia_saida_default">00:10</string>
+    <string name="url_importacao">url_importacao</string>
     <string name="label_bater_ponto">Bater Ponto</string>
     <string name="label_observacao">Observação:</string>
     <string name="label_relatorios">Relatórios</string>
     <string name="label_cancelar">Cancelar</string>
     <string name="label_especial">Especial</string>
     <string name="label_desfazer">Desfazer</string>
+    <string name="label_exportar">Exportar</string>
+    <string name="label_importar">Importar</string>
     <string name="label_credito">Crédito:</string>
     <string name="label_entrada">Entrada</string>
     <string name="label_periodo">Período</string>
@@ -24,6 +34,7 @@
     <string name="label_pontos">Pontos</string>
     <string name="label_total">Total:</string>
     <string name="label_email">E-mail</string>
+    <string name="app_name">Períodos</string>
     <string name="label_manha">Manhã</string>
     <string name="label_tarde">Tarde</string>
     <string name="label_noite">Noite</string>
@@ -34,5 +45,5 @@
     <string name="label_dia">Dia:</string>
     <string name="label_barra">/</string>
     <string name="label_igual">=</string>
-    <string name="label_importar">Importar</string>
+
 </resources>
