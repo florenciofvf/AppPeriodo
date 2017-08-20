@@ -62,6 +62,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
 
             if (obj.getNumero().equals(numero) && obj.getNome().equals(nome)) {
                 obj.importar(strings);
+                obj.processar();
             }
         }
     }

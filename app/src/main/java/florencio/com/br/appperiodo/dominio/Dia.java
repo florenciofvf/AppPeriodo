@@ -85,7 +85,7 @@ public class Dia extends Entidade {
                 }
             }
         } catch (Exception e) {
-            Log.i("ERRO", e.getMessage());
+            Log.i("ERRO>>>", e.getMessage());
         }
     }
 

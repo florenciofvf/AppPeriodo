@@ -160,7 +160,7 @@ public class DiaDialogFragment extends DialogFragment {
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Calendar c = criarCalendar();
+            Calendar c = Util.criarCalendarZero();
             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
             c.set(Calendar.MINUTE, minute);
 
@@ -187,17 +187,6 @@ public class DiaDialogFragment extends DialogFragment {
                 dia.setNoiteFim(valor);
                 Util.atualizarText(campo, dia, btnNoiteFim, getActivity());
             }
-        }
-
-        private Calendar criarCalendar() {
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.DAY_OF_MONTH, 0);
-            c.set(Calendar.MILLISECOND, 0);
-            c.set(Calendar.SECOND, 0);
-            c.set(Calendar.MONTH, 0);
-            c.set(Calendar.DATE, 0);
-            c.set(Calendar.YEAR, 0);
-            return c;
         }
     }
 }

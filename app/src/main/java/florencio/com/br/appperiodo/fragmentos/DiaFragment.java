@@ -86,8 +86,8 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         if (item.getItemId() == R.id.itemExportar) {
             String conteudo = adapter.gerarConteudoExportacao();
             enviarEmail(conteudo);
-        } else if (item.getItemId() == R.id.itemExportar) {
-            String url = "";
+        } else if (item.getItemId() == R.id.itemImportar) {
+            String url = "https://raw.githubusercontent.com/florenciofvf/AppPeriodo/master/app/src/main/res/raw/temp.txt";
             new TarefaImportar().execute(url);
         }
 
@@ -142,12 +142,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
             listView.setIndicatorBounds(listView.getWidth() - 60, listView.getWidth());
             progressBar.setVisibility(View.GONE);
 
-            int total = 0;
-            for (Dia d : objetos) {
-                total += d.getTotal();
-            }
-
-            txtRodape.setText("TOTAL DE HORAS: " + Util.totalFmt(total));
+            atualizar();
         }
     }
 
@@ -208,7 +203,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
                 }
 
             } catch (Exception e) {
-                Log.i("ERRO", e.getMessage());
+                Log.i("ERRO>>>", e.getMessage());
             }
 
             return resposta;
@@ -217,6 +212,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         @Override
         protected void onPostExecute(List<String> lista) {
             adapter.importarConteudo(lista);
+            atualizar();
         }
     }
 }

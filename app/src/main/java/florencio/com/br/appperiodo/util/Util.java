@@ -72,6 +72,17 @@ public class Util {
         return c.getTimeInMillis();
     }
 
+    public static Calendar criarCalendarZero() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.DAY_OF_MONTH, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MONTH, 0);
+        c.set(Calendar.DATE, 0);
+        c.set(Calendar.YEAR, 0);
+        return c;
+    }
+
     public static String formatarHora(long milisegundos) {
         if (milisegundos == 0) {
             return ZERO_ZERO;
@@ -230,8 +241,14 @@ public class Util {
 
     public static long parseHora(String string) {
         String[] strings = string.split(":");
-        long horas = 1000L * 60L * 60L * Long.parseLong(strings[0]);
-        long minutos = 1000L * 60L * Long.parseLong(strings[1]);
-        return horas + minutos;
+
+        int horas = Integer.parseInt(strings[0]);
+        int minutos = Integer.parseInt(strings[1]);
+
+        Calendar c = criarCalendarZero();
+        c.set(Calendar.HOUR_OF_DAY, horas);
+        c.set(Calendar.MINUTE, minutos);
+
+        return c.getTimeInMillis();
     }
 }
