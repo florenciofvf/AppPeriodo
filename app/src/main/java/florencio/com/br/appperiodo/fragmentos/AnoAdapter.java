@@ -1,7 +1,6 @@
 package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
-import florencio.com.br.appperiodo.util.Util;
 
 public class AnoAdapter extends BaseAdapter {
     private final List<Ano> objetos;

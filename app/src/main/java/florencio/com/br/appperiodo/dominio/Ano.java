@@ -15,7 +15,7 @@ public class Ano extends Entidade {
         return numero;
     }
 
-    public void processar() {
+    public void processar(long toleranciaSaida, long excessoExtra) {
         atual = numero == Util.ANO_ATUAL;
     }
 

@@ -5,8 +5,8 @@ import android.content.ContentValues;
 import java.io.Serializable;
 
 public abstract class Entidade implements Serializable {
-    protected boolean atual;
-    protected Long _id;
+    boolean atual;
+    Long _id;
 
     public final Long get_id() {
         return _id;
@@ -20,15 +20,11 @@ public abstract class Entidade implements Serializable {
         return atual;
     }
 
-    public void setAtual(boolean atual) {
-        this.atual = atual;
-    }
-
     public boolean ehNovo() {
         return _id == null || _id.intValue() == 0;
     }
 
-    public abstract void processar();
+    public abstract void processar(long toleranciaSaida, long excessoExtra);
 
     public abstract ContentValues criarContentValues();
 }

@@ -21,6 +21,7 @@ import java.util.Calendar;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
+import florencio.com.br.appperiodo.util.Lei;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAtualFragment extends Fragment {
@@ -38,6 +39,7 @@ public class DiaAtualFragment extends Fragment {
     private TextView btnNoiteIni;
     private TextView btnNoiteFim;
     private CheckBox chkEspecial;
+    private TextView txtTotalLei;
     private TextView txtTitulo;
     private TextView txtDebito;
     private CheckBox chkValido;
@@ -81,6 +83,7 @@ public class DiaAtualFragment extends Fragment {
         txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
         txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
         chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
+        txtTotalLei = (TextView) view.findViewById(R.id.txtTotalLei);
         txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
         txtDebito = (TextView) view.findViewById(R.id.txtDebito);
@@ -107,8 +110,9 @@ public class DiaAtualFragment extends Fragment {
         btnDefazer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Lei lei = Util.getLei(getActivity());
                 dia.limparHorarios();
-                repositorio.sincronizarDia(dia);
+                repositorio.sincronizarDia(dia, lei.getToleranciaSaida(), lei.getExcessoExtra());
                 atualizar(getActivity());
                 btnDefazer.setEnabled(false);
             }
@@ -148,6 +152,7 @@ public class DiaAtualFragment extends Fragment {
         txtManhaCal.setText(dia.getManhaCalFmt());
         txtTardeCal.setText(dia.getTardeCalFmt());
         txtNoiteCal.setText(dia.getNoiteCalFmt());
+        txtTotalLei.setText(dia.getTotalLeiFmt());
         chkEspecial.setChecked(dia.isEspecial());
         txtCredito.setText(dia.getCredito());
         chkValido.setChecked(dia.isValido());
@@ -158,6 +163,7 @@ public class DiaAtualFragment extends Fragment {
         txtObs.setText(dia.getObs());
         edtObs.setText(dia.getObs());
 
+        txtTotalLei.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
         txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
 
         if (dia.isValido()) {
@@ -172,7 +178,7 @@ public class DiaAtualFragment extends Fragment {
     private class OnClick implements View.OnClickListener {
         final String campo;
 
-        public OnClick(String campo) {
+        OnClick(String campo) {
             this.campo = campo;
         }
 
@@ -237,9 +243,9 @@ public class DiaAtualFragment extends Fragment {
                 desfazer = valor != dia.getNoiteFim();
                 dia.setNoiteFim(valor);
             }
-
+            Lei lei = Util.getLei(getActivity());
             btnDefazer.setEnabled(desfazer);
-            dia.processar();
+            dia.processar(lei.getToleranciaSaida(), lei.getExcessoExtra());
             atualizar(getActivity());
         }
 

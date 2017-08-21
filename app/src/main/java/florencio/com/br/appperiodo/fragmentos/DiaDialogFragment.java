@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -120,7 +119,7 @@ public class DiaDialogFragment extends DialogFragment {
     private class OnClick implements View.OnClickListener {
         final String campo;
 
-        public OnClick(String campo, Dia dia, TextView button) {
+        OnClick(String campo, Dia dia, TextView button) {
             Util.atualizarText(campo, dia, button, getActivity());
             this.campo = campo;
         }
@@ -154,7 +153,7 @@ public class DiaDialogFragment extends DialogFragment {
     private class AtualizaHora implements TimePickerDialog.OnTimeSetListener {
         final String campo;
 
-        public AtualizaHora(String campo) {
+        AtualizaHora(String campo) {
             this.campo = campo;
         }
 

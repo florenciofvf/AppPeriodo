@@ -26,6 +26,7 @@ import florencio.com.br.appperiodo.fragmentos.DiaFragment;
 import florencio.com.br.appperiodo.fragmentos.MesFragment;
 import florencio.com.br.appperiodo.fragmentos.PreferenciaFragment;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
+import florencio.com.br.appperiodo.util.Lei;
 import florencio.com.br.appperiodo.util.Util;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Util.atualizarData();
         repositorio = new Repositorio(this);
-        repositorio.sincronizarDia(Util.diaAtual);
+        Lei lei = Util.getLei(this);
+        repositorio.sincronizarDia(Util.diaAtual, lei.getToleranciaSaida(), lei.getExcessoExtra());
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Fragment f = manager.findFragmentByTag("FRAGMENTO");
             FragmentTransaction transaction = manager.beginTransaction();
 
-            repositorio.sincronizarDia(Util.diaAtual);
+            Lei lei = Util.getLei(this);
+            repositorio.sincronizarDia(Util.diaAtual, lei.getToleranciaSaida(), lei.getExcessoExtra());
             DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
             transaction.replace(R.id.container, fragment, "FRAGMENTO");
 
@@ -169,7 +172,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void salvarDia(Dia dia) {
-        repositorio.salvarDia(dia);
+        Lei lei = Util.getLei(this);
+        repositorio.salvarDia(dia, lei.getToleranciaSaida(), lei.getExcessoExtra());
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentByTag("FRAGMENTO");

@@ -12,7 +12,6 @@ import java.util.List;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Mes;
-import florencio.com.br.appperiodo.util.Util;
 
 public class MesAdapter extends BaseAdapter {
     private final List<Mes> objetos;

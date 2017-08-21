@@ -32,9 +32,11 @@ public class Dia extends Entidade {
     private String noiteFimFmt;
     private String noiteCalFmt;
 
+    private String totalLeiFmt;
     private String totalFmt;
     private String credito;
     private String debito;
+    private long totalLei;
     private long total;
 
     public Dia(Integer numero, Mes mes, String nome) {
@@ -93,7 +95,7 @@ public class Dia extends Entidade {
         StringBuilder sb = new StringBuilder();
 
         for (int i = indice; i < strings.length; i++) {
-            sb.append(strings[i] + " ");
+            sb.append(strings[i]).append(" ");
         }
 
         return sb.toString().substring(Util.OBS.length() + 1);
@@ -108,7 +110,8 @@ public class Dia extends Entidade {
         noiteFim = 0;
     }
 
-    public void processar() {
+    public void processar(long toleranciaSaida, long excessoExtra) {
+        totalLei = 0;
         total = 0;
 
         manhaCalFmt = Util.ZERO_ZERO;
@@ -140,11 +143,21 @@ public class Dia extends Entidade {
 
         totalFmt = Util.totalFmt(total);
 
-        if (total > Util.OITO_HORAS && !ehNovo()) {
-            credito = Util.diferencaFmt(Util.OITO_HORAS, total);
+        if(total < Util.OITO_HORAS - toleranciaSaida) {
+            totalLei = total;
+        } else if(total > Util.OITO_HORAS + excessoExtra) {
+            totalLei = total;
+        } else {
+            totalLei = Util.OITO_HORAS;
         }
 
-        if (total < Util.OITO_HORAS && !ehNovo()) {
+        totalLeiFmt = Util.totalFmt(totalLei);
+
+        if (totalLei > Util.OITO_HORAS + excessoExtra && !ehNovo()) {
+            credito = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
+        }
+
+        if (totalLei < Util.OITO_HORAS - toleranciaSaida && !ehNovo()) {
             debito = Util.diferencaFmt(total, Util.OITO_HORAS);
         }
 
@@ -161,12 +174,12 @@ public class Dia extends Entidade {
         return totalFmt;
     }
 
-    public Integer getNumero() {
-        return numero;
+    public String getTotalLeiFmt() {
+        return totalLeiFmt;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public Integer getNumero() {
+        return numero;
     }
 
     public String getObs() {
@@ -179,10 +192,6 @@ public class Dia extends Entidade {
 
     public Mes getMes() {
         return mes;
-    }
-
-    public void setMes(Mes mes) {
-        this.mes = mes;
     }
 
     public long getManhaIni() {
@@ -205,24 +214,12 @@ public class Dia extends Entidade {
         return manhaIniFmt;
     }
 
-    public void setManhaIniFmt(String manhaIniFmt) {
-        this.manhaIniFmt = manhaIniFmt;
-    }
-
     public String getManhaFimFmt() {
         return manhaFimFmt;
     }
 
-    public void setManhaFimFmt(String manhaFimFmt) {
-        this.manhaFimFmt = manhaFimFmt;
-    }
-
     public String getManhaCalFmt() {
         return manhaCalFmt;
-    }
-
-    public void setManhaCalFmt(String manhaCalFmt) {
-        this.manhaCalFmt = manhaCalFmt;
     }
 
     public long getTardeIni() {
@@ -245,24 +242,12 @@ public class Dia extends Entidade {
         return tardeIniFmt;
     }
 
-    public void setTardeIniFmt(String tardeIniFmt) {
-        this.tardeIniFmt = tardeIniFmt;
-    }
-
     public String getTardeFimFmt() {
         return tardeFimFmt;
     }
 
-    public void setTardeFimFmt(String tardeFimFmt) {
-        this.tardeFimFmt = tardeFimFmt;
-    }
-
     public String getTardeCalFmt() {
         return tardeCalFmt;
-    }
-
-    public void setTardeCalFmt(String tardeCalFmt) {
-        this.tardeCalFmt = tardeCalFmt;
     }
 
     public long getNoiteIni() {
@@ -285,64 +270,32 @@ public class Dia extends Entidade {
         return noiteIniFmt;
     }
 
-    public void setNoiteIniFmt(String noiteIniFmt) {
-        this.noiteIniFmt = noiteIniFmt;
-    }
-
     public String getNoiteFimFmt() {
         return noiteFimFmt;
-    }
-
-    public void setNoiteFimFmt(String noiteFimFmt) {
-        this.noiteFimFmt = noiteFimFmt;
     }
 
     public String getNoiteCalFmt() {
         return noiteCalFmt;
     }
 
-    public void setNoiteCalFmt(String noiteCalFmt) {
-        this.noiteCalFmt = noiteCalFmt;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDebito() {
         return debito;
     }
 
-    public void setDebito(String debito) {
-        this.debito = debito;
-    }
-
     public String getCredito() {
         return credito;
-    }
-
-    public void setCredito(String credito) {
-        this.credito = credito;
     }
 
     public long getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
-        this.total = total;
-    }
-
-    public int getValido() {
-        return valido;
-    }
-
-    public int getEspecial() {
-        return especial;
+    public long getTotalLei() {
+        return totalLei;
     }
 
     public boolean isValido() {
@@ -361,16 +314,8 @@ public class Dia extends Entidade {
         this.especial = especial;
     }
 
-    public void setTotalFmt(String totalFmt) {
-        this.totalFmt = totalFmt;
-    }
-
     public boolean isAtual() {
         return atual;
-    }
-
-    public void setAtual(boolean atual) {
-        this.atual = atual;
     }
 
     public long getData() {

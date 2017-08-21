@@ -20,6 +20,7 @@
     <string name="label_bater_ponto">Bater Ponto</string>
     <string name="label_observacao">Observação:</string>
     <string name="label_relatorios">Relatórios</string>
+    <string name="label_total_lei">Total LEI:</string>
     <string name="label_cancelar">Cancelar</string>
     <string name="label_especial">Especial</string>
     <string name="label_desfazer">Desfazer</string>

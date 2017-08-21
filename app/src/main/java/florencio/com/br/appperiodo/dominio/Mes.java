@@ -33,7 +33,7 @@ public class Mes extends Entidade {
         return maximoDias;
     }
 
-    public void processar() {
+    public void processar(long toleranciaSaida, long excessoExtra) {
         atual = numero == Util.MES_ATUAL
                 && getAno().getNumero() == Util.ANO_ATUAL;
     }

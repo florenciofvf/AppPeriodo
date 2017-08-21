@@ -30,6 +30,7 @@ public class Repositorio {
         cursor.moveToNext();
         total = cursor.getInt(0);
 
+        cursor.close();
         db.close();
 
         if (total == 0) {
@@ -63,10 +64,11 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Ano a = new Ano(cursor.getInt(1));
             a.set_id(cursor.getLong(0));
-            a.processar();
+            a.processar(0, 0);
             lista.add(a);
         }
 
+        cursor.close();
         db.close();
 
         return lista;
@@ -81,16 +83,17 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Mes m = new Mes(cursor.getInt(1), cursor.getString(2), ano, cursor.getInt(3));
             m.set_id(cursor.getLong(0));
-            m.processar();
+            m.processar(0, 0);
             lista.add(m);
         }
 
+        cursor.close();
         db.close();
 
         return lista;
     }
 
-    public List<Dia> listarDias(Mes mes) {
+    private List<Dia> listarDias(Mes mes) {
         List<Dia> lista = new ArrayList<>();
 
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -133,15 +136,14 @@ public class Repositorio {
             lista.add(dia);
         }
 
+        cursor.close();
         db.close();
 
         return lista;
     }
 
-    public void sincronizarDia(Dia d) {
+    public void sincronizarDia(Dia d, long toleranciaSaida, long excessoExtra) {
         SQLiteDatabase db = helper.getReadableDatabase();
-
-        int total = 0;
 
         StringBuilder sb = new StringBuilder();
         sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial from Dia d");
@@ -193,11 +195,12 @@ public class Repositorio {
             d.copiar(dia);
         }
 
-        d.processar();
+        d.processar(toleranciaSaida, excessoExtra);
+        cursor.close();
         db.close();
     }
 
-    public void salvarDia(Dia dia) {
+    public void salvarDia(Dia dia, long toleranciaSaida, long excessoExtra) {
         if (dia.getMes().ehNovo()) {
             setIdMes(dia.getMes());
         }
@@ -220,6 +223,7 @@ public class Repositorio {
             total = cursor.getInt(0);
         }
 
+        cursor.close();
         db.close();
 
         db = helper.getWritableDatabase();
@@ -231,7 +235,7 @@ public class Repositorio {
             db.update("Dia", dia.criarContentValues(), "_id=" + dia.get_id(), null);
         }
 
-        dia.processar();
+        dia.processar(toleranciaSaida, excessoExtra);
         db.close();
     }
 
@@ -250,10 +254,11 @@ public class Repositorio {
             mes.set_id(cursor.getLong(0));
         }
 
+        cursor.close();
         db.close();
     }
 
-    public List<Dia> montarDiasDoMes(Mes mes) {
+    public List<Dia> montarDiasDoMes(Mes mes, long toleranciaSaida, long excessoExtra) {
         Map<Integer, Dia> mapa = new LinkedHashMap<>();
 
         Calendar c = Calendar.getInstance();
@@ -279,7 +284,7 @@ public class Repositorio {
         lista = new ArrayList<>(mapa.values());
 
         for (Dia d : lista) {
-            d.processar();
+            d.processar(toleranciaSaida, excessoExtra);
         }
 
         return lista;

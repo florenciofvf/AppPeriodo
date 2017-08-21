@@ -1,7 +1,9 @@
 package florencio.com.br.appperiodo.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -254,5 +256,21 @@ public class Util {
         c.set(Calendar.MINUTE, minutos);
 
         return c.getTimeInMillis();
+    }
+
+    public static long parseHora2(String string) {
+        String[] strings = string.split(":");
+
+        long horas = 1000L * 60L * 60L * Long.parseLong(strings[0]);
+        long minutos = 1000L * 60L * Long.parseLong(strings[1]);
+
+        return horas + minutos;
+    }
+
+    public static Lei getLei(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String stringTolerancia = preferences.getString(context.getString(R.string.tolerancia_saida), context.getString(R.string.tolerancia_saida_default));
+        String stringExcesso = preferences.getString(context.getString(R.string.excesso_hora_extra), context.getString(R.string.excesso_hora_extra_default));
+        return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
     }
 }

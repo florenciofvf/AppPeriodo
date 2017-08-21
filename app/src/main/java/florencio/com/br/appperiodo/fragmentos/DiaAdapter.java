@@ -2,7 +2,6 @@ package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,16 +54,16 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         return sb.toString();
     }
 
-    public void importarConteudo(List<String> lista) {
+    public void importarConteudo(List<String> lista, long toleranciaSaida, long excessoExtra) {
         Iterator<String> iterator = lista.iterator();
         while (iterator.hasNext()) {
             String linha = iterator.next();
-            modificarDia(linha);
+            modificarDia(linha, toleranciaSaida, excessoExtra);
             iterator.remove();
         }
     }
 
-    private void modificarDia(String s) {
+    private void modificarDia(String s, long toleranciaSaida, long excessoExtra) {
         for (Dia obj : objetos) {
             String[] strings = s.split(" ");
             Integer numero = getNumero(strings);
@@ -72,7 +71,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
 
             if (obj.getNumero().equals(numero) && obj.getNome().equals(nome)) {
                 obj.importar(strings);
-                obj.processar();
+                obj.processar(toleranciaSaida, excessoExtra);
             }
         }
     }
@@ -197,6 +196,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
     }
 
     private class ViewHolderDetalhe {
+        LinearLayout lltTotalLei;
         LinearLayout lltManha;
         LinearLayout lltTarde;
         LinearLayout lltNoite;
@@ -223,16 +223,18 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         TextView txtTotal;
         TextView txtDebito;
         TextView txtCredito;
+        TextView txtTotalLei;
 
         ViewHolderDetalhe(View view) {
+            lltTotalLei = (LinearLayout) view.findViewById(R.id.lltTotalLei);
+            lltCredi = (LinearLayout) view.findViewById(R.id.lltCredito);
+            lltDebit = (LinearLayout) view.findViewById(R.id.lltDebito);
             lltManha = (LinearLayout) view.findViewById(R.id.lltManha);
             lltTarde = (LinearLayout) view.findViewById(R.id.lltTarde);
             lltNoite = (LinearLayout) view.findViewById(R.id.lltNoite);
             lltTotal = (LinearLayout) view.findViewById(R.id.lltTotal);
-            lltDebit = (LinearLayout) view.findViewById(R.id.lltDebito);
-            lltCredi = (LinearLayout) view.findViewById(R.id.lltCredito);
-            lltObser = (LinearLayout) view.findViewById(R.id.lltObs);
             lltClick = (LinearLayout) view.findViewById(R.id.lltClick);
+            lltObser = (LinearLayout) view.findViewById(R.id.lltObs);
 
             txtObs = (TextView) view.findViewById(R.id.txtObs);
 
@@ -251,6 +253,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             txtTotal = (TextView) view.findViewById(R.id.txtTotal);
             txtDebito = (TextView) view.findViewById(R.id.txtDebito);
             txtCredito = (TextView) view.findViewById(R.id.txtCredito);
+            txtTotalLei = (TextView) view.findViewById(R.id.txtTotalLei);
         }
 
         void atualizarView(Dia obj) {
@@ -271,7 +274,9 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             txtTotal.setText(obj.getTotalFmt());
             txtDebito.setText(obj.getDebito());
             txtCredito.setText(obj.getCredito());
+            txtTotalLei.setText(obj.getTotalLeiFmt());
 
+            txtTotalLei.setTextColor(obj.isValido() ? Color.BLUE : Color.BLACK);
             txtTotal.setTextColor(obj.isValido() ? Color.BLUE : Color.BLACK);
 
             if (obj.isValido()) {
@@ -288,9 +293,10 @@ public class DiaAdapter extends BaseExpandableListAdapter {
             visivel(txtTardeIni, txtTardeFim, txtTardeCal, lltTarde, integer);
             visivel(txtNoiteIni, txtNoiteFim, txtNoiteCal, lltNoite, integer);
             visivel(txtTotal, lltTotal, integer);
+            visivelObs(txtObs, lltObser, integer);
             visivel(txtDebito, lltDebit, integer);
             visivel(txtCredito, lltCredi, integer);
-            visivelObs(txtObs, lltObser, integer);
+            visivel(txtTotalLei, lltTotalLei, integer);
 
             lltClick.setVisibility(integer.intValue() > 0 ? View.GONE : View.VISIBLE);
         }
