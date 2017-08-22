@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+        Util.atualizarComprimentoHorario(this);
         Util.atualizarData();
         repositorio = new Repositorio(this);
         Lei lei = Util.getLei(this);

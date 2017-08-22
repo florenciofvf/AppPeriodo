@@ -19,7 +19,7 @@ import florencio.com.br.appperiodo.dominio.Mes;
 public class Util {
     public static final String[] NOME_DIAS = {"DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
     public static DateFormat format_HH_mm = new SimpleDateFormat("HH:mm");
-    public static final long OITO_HORAS = 1000L * 60L * 60L * 8L;
+    public static long OITO_HORAS = 1000L * 60L * 60L * 8L;
     public static final String PARAMETRO = "parametro";
     public static final String MANHA_INI = "MANHA_INI";
     public static final String MANHA_FIM = "MANHA_FIM";
@@ -272,5 +272,11 @@ public class Util {
         String stringTolerancia = preferences.getString(context.getString(R.string.tolerancia_saida), context.getString(R.string.tolerancia_saida_default));
         String stringExcesso = preferences.getString(context.getString(R.string.excesso_hora_extra), context.getString(R.string.excesso_hora_extra_default));
         return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
+    }
+
+    public static void atualizarComprimentoHorario(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String string = preferences.getString(context.getString(R.string.comprimento_horario), context.getString(R.string.comprimento_horario_default));
+        OITO_HORAS = parseHora2(string);
     }
 }

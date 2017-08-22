@@ -1,8 +1,11 @@
 package florencio.com.br.appperiodo.fragmentos;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +21,7 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import florencio.com.br.appperiodo.MainActivity;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
@@ -105,6 +109,14 @@ public class DiaAtualFragment extends Fragment {
             }
         });
 
+        Button btnLembrete = (Button) view.findViewById(R.id.btnLembrete);
+        btnLembrete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                criarLembrete();
+            }
+        });
+
         btnDefazer = (Button) view.findViewById(R.id.btnDesfazer);
         btnDefazer.setEnabled(false);
         btnDefazer.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +138,31 @@ public class DiaAtualFragment extends Fragment {
         btnNoiteFim = (TextView) view.findViewById(R.id.btnNoiteFim);
 
         return view;
+    }
+
+    private void criarLembrete() {
+        TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Intent it = new Intent(getActivity(), MainActivity.class);
+
+                PendingIntent pi = PendingIntent.getActivity(getActivity(), 0, it, 0);
+
+                AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                c.set(Calendar.MINUTE, minute);
+                c.set(Calendar.SECOND, 0);
+
+                manager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+            }
+        };
+
+        Calendar c = Calendar.getInstance();
+        TimePickerDialog dialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,
+                listener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
+        dialog.show();
     }
 
     @Override
@@ -217,7 +254,7 @@ public class DiaAtualFragment extends Fragment {
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Calendar c = criarCalendar();
+            Calendar c = Util.criarCalendarZero();
             c.set(Calendar.HOUR_OF_DAY, hourOfDay);
             c.set(Calendar.MINUTE, minute);
 
@@ -247,17 +284,6 @@ public class DiaAtualFragment extends Fragment {
             btnDefazer.setEnabled(desfazer);
             dia.processar(lei.getToleranciaSaida(), lei.getExcessoExtra());
             atualizar(getActivity());
-        }
-
-        private Calendar criarCalendar() {
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.DAY_OF_MONTH, 0);
-            c.set(Calendar.MILLISECOND, 0);
-            c.set(Calendar.SECOND, 0);
-            c.set(Calendar.MONTH, 0);
-            c.set(Calendar.DATE, 0);
-            c.set(Calendar.YEAR, 0);
-            return c;
         }
     }
 }

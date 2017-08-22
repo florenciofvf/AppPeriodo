@@ -46,5 +46,6 @@
     <string name="label_dia">Dia:</string>
     <string name="label_barra">/</string>
     <string name="label_igual">=</string>
+    <string name="label_me_lembre">Me Lembre</string>
 
 </resources>

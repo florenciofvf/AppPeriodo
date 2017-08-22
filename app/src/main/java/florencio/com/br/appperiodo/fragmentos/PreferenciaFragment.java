@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
 import florencio.com.br.appperiodo.R;
+import florencio.com.br.appperiodo.util.Util;
 
 public class PreferenciaFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
@@ -37,6 +38,11 @@ public class PreferenciaFragment extends PreferenceFragment implements Preferenc
     @Override
     public boolean onPreferenceChange(Preference pref, Object newValue) {
         pref.setSummary(newValue.toString());
+
+        if (pref.getKey().equals(getString(R.string.comprimento_horario))) {
+            Util.OITO_HORAS = Util.parseHora2(newValue.toString());
+        }
+
         return true;
     }
 
