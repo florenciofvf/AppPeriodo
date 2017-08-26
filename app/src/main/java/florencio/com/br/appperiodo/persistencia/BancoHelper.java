@@ -4,11 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class BancoHelper extends SQLiteOpenHelper {
+class BancoHelper extends SQLiteOpenHelper {
     private static final String NOME = "PERIODOS";
     private static final int VERSAO = 1;
 
-    public BancoHelper(Context context) {
+    BancoHelper(Context context) {
         super(context, NOME, null, VERSAO);
     }
 

@@ -1,7 +1,5 @@
 package florencio.com.br.appperiodo.dominio;
 
-import android.content.ContentValues;
-
 import java.io.Serializable;
 
 public abstract class Entidade implements Serializable {
@@ -23,8 +21,4 @@ public abstract class Entidade implements Serializable {
     public boolean ehNovo() {
         return _id == null || _id.intValue() == 0;
     }
-
-    public abstract void processar(long toleranciaSaida, long excessoExtra);
-
-    public abstract ContentValues criarContentValues();
 }

@@ -17,24 +17,24 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.util.Util;
 
-public class DiaAdapter extends BaseExpandableListAdapter {
+class DiaAdapter extends BaseExpandableListAdapter {
     private final List<Dia> objetos;
     private final Context context;
 
-    public DiaAdapter(List<Dia> objetos, Context context) {
+    DiaAdapter(List<Dia> objetos, Context context) {
         this.objetos = objetos;
         this.context = context;
     }
 
-    public List<Dia> getObjetos() {
+    List<Dia> getObjetos() {
         return objetos;
     }
 
-    public Dia getObjeto(int posicao) {
+    Dia getObjeto(int posicao) {
         return objetos.get(posicao);
     }
 
-    public String gerarConteudoExportacao() {
+    String gerarConteudoExportacao() {
         StringBuilder sb = new StringBuilder();
 
         for (Dia obj : objetos) {
@@ -44,7 +44,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         return sb.toString();
     }
 
-    public String gerarConteudoExportacaoDados() {
+    String gerarConteudoExportacaoDados() {
         StringBuilder sb = new StringBuilder();
 
         for (Dia obj : objetos) {
@@ -54,7 +54,7 @@ public class DiaAdapter extends BaseExpandableListAdapter {
         return sb.toString();
     }
 
-    public void importarConteudo(List<String> lista, long toleranciaSaida, long excessoExtra) {
+    void importarConteudo(List<String> lista, long toleranciaSaida, long excessoExtra) {
         Iterator<String> iterator = lista.iterator();
         while (iterator.hasNext()) {
             String linha = iterator.next();
@@ -150,12 +150,12 @@ public class DiaAdapter extends BaseExpandableListAdapter {
     }
 
     private class ViewHolderGrupo {
-        TextView txtManhaIni;
-        TextView txtManhaFim;
-        TextView txtTardeIni;
-        TextView txtTardeFim;
-        TextView txtNumero;
-        TextView txtNome;
+        final TextView txtManhaIni;
+        final TextView txtManhaFim;
+        final TextView txtTardeIni;
+        final TextView txtTardeFim;
+        final TextView txtNumero;
+        final TextView txtNome;
 
         ViewHolderGrupo(View view) {
             txtManhaIni = (TextView) view.findViewById(R.id.txtManhaIni);
@@ -196,34 +196,34 @@ public class DiaAdapter extends BaseExpandableListAdapter {
     }
 
     private class ViewHolderDetalhe {
-        LinearLayout lltTotalLei;
-        LinearLayout lltManha;
-        LinearLayout lltTarde;
-        LinearLayout lltNoite;
-        LinearLayout lltTotal;
-        LinearLayout lltDebit;
-        LinearLayout lltCredi;
-        LinearLayout lltObser;
-        LinearLayout lltClick;
+        final LinearLayout lltTotalLei;
+        final LinearLayout lltManha;
+        final LinearLayout lltTarde;
+        final LinearLayout lltNoite;
+        final LinearLayout lltTotal;
+        final LinearLayout lltDebit;
+        final LinearLayout lltCredi;
+        final LinearLayout lltObser;
+        final LinearLayout lltClick;
 
-        TextView txtObs;
+        final TextView txtObs;
 
-        TextView txtManhaIni;
-        TextView txtManhaFim;
-        TextView txtManhaCal;
+        final TextView txtManhaIni;
+        final TextView txtManhaFim;
+        final TextView txtManhaCal;
 
-        TextView txtTardeIni;
-        TextView txtTardeFim;
-        TextView txtTardeCal;
+        final TextView txtTardeIni;
+        final TextView txtTardeFim;
+        final TextView txtTardeCal;
 
-        TextView txtNoiteIni;
-        TextView txtNoiteFim;
-        TextView txtNoiteCal;
+        final TextView txtNoiteIni;
+        final TextView txtNoiteFim;
+        final TextView txtNoiteCal;
 
-        TextView txtTotal;
-        TextView txtDebito;
-        TextView txtCredito;
-        TextView txtTotalLei;
+        final TextView txtTotal;
+        final TextView txtDebito;
+        final TextView txtCredito;
+        final TextView txtTotalLei;
 
         ViewHolderDetalhe(View view) {
             lltTotalLei = (LinearLayout) view.findViewById(R.id.lltTotalLei);

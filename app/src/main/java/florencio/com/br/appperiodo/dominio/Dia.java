@@ -318,15 +318,10 @@ public class Dia extends Entidade {
         return atual;
     }
 
-    public long getData() {
-        return data;
-    }
-
     public void setData(long data) {
         this.data = data;
     }
 
-    @Override
     public ContentValues criarContentValues() {
         if (data == 0) {
             data = Util.criarData(this);

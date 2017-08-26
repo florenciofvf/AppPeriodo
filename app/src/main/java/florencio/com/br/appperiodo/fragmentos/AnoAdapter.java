@@ -13,11 +13,11 @@ import java.util.List;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 
-public class AnoAdapter extends BaseAdapter {
+class AnoAdapter extends BaseAdapter {
     private final List<Ano> objetos;
     private final Context context;
 
-    public AnoAdapter(List<Ano> objetos, Context context) {
+    AnoAdapter(List<Ano> objetos, Context context) {
         this.objetos = objetos;
         this.context = context;
     }
@@ -65,8 +65,8 @@ public class AnoAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        Drawable corOriginal;
-        TextView txtNumero;
+        final Drawable corOriginal;
+        final TextView txtNumero;
 
         ViewHolder(View view) {
             corOriginal = view.getBackground();
@@ -75,7 +75,7 @@ public class AnoAdapter extends BaseAdapter {
         }
 
         void atualizarView(Ano obj) {
-            txtNumero.setText(obj.getNumero().toString());
+            txtNumero.setText(String.valueOf(obj.getNumero()));
         }
     }
 }

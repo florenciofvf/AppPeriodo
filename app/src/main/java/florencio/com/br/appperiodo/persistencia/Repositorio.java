@@ -16,7 +16,7 @@ import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.util.Util;
 
 public class Repositorio {
-    private BancoHelper helper;
+    private final BancoHelper helper;
 
     public Repositorio(Context context) {
         helper = new BancoHelper(context);
@@ -64,7 +64,7 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Ano a = new Ano(cursor.getInt(1));
             a.set_id(cursor.getLong(0));
-            a.processar(0, 0);
+            a.processar();
             lista.add(a);
         }
 
@@ -83,7 +83,7 @@ public class Repositorio {
         while (cursor.moveToNext()) {
             Mes m = new Mes(cursor.getInt(1), cursor.getString(2), ano, cursor.getInt(3));
             m.set_id(cursor.getLong(0));
-            m.processar(0, 0);
+            m.processar();
             lista.add(m);
         }
 
@@ -145,15 +145,15 @@ public class Repositorio {
     public void sincronizarDia(Dia d, long toleranciaSaida, long excessoExtra) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial from Dia d");
-        sb.append(" inner join Mes m on m._id = d.mes_id");
-        sb.append(" inner join Ano a on a._id = m.ano_id");
-        sb.append(" where d.numero=" + d.getNumero());
-        sb.append(" and m.numero=" + d.getMes().getNumero());
-        sb.append(" and a.numero=" + d.getMes().getAno().getNumero());
+        String sb = "";
+        sb = sb.concat("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial from Dia d")
+        .concat(" inner join Mes m on m._id = d.mes_id")
+        .concat(" inner join Ano a on a._id = m.ano_id")
+        .concat(" where d.numero=").concat(String.valueOf(d.getNumero()))
+        .concat(" and m.numero=").concat(String.valueOf(d.getMes().getNumero()))
+        .concat(" and a.numero=").concat(String.valueOf(d.getMes().getAno().getNumero()));
 
-        Cursor cursor = db.rawQuery(sb.toString(), null);
+        Cursor cursor = db.rawQuery(sb, null);
 
         int _id_idx = cursor.getColumnIndex("_id");
         int num_idx = cursor.getColumnIndex("numero");
@@ -207,15 +207,15 @@ public class Repositorio {
 
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("select count(d._id) from Dia d");
-        sb.append(" inner join Mes m on m._id = d.mes_id");
-        sb.append(" inner join Ano a on a._id = m.ano_id");
-        sb.append(" where d.numero=" + dia.getNumero());
-        sb.append(" and m.numero=" + dia.getMes().getNumero());
-        sb.append(" and a.numero=" + dia.getMes().getAno().getNumero());
+        String sb = "";
+        sb = sb.concat("select count(d._id) from Dia d")
+        .concat(" inner join Mes m on m._id = d.mes_id")
+        .concat(" inner join Ano a on a._id = m.ano_id")
+        .concat(" where d.numero=").concat(String.valueOf(dia.getNumero()))
+        .concat(" and m.numero=").concat(String.valueOf(dia.getMes().getNumero()))
+        .concat(" and a.numero=").concat(String.valueOf(dia.getMes().getAno().getNumero()));
 
-        Cursor cursor = db.rawQuery(sb.toString(), null);
+        Cursor cursor = db.rawQuery(sb, null);
 
         int total = 0;
 
@@ -242,13 +242,13 @@ public class Repositorio {
     private void setIdMes(Mes mes) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("select m._id from Mes m");
-        sb.append(" inner join Ano a on a._id = m.ano_id");
-        sb.append(" and m.numero=" + mes.getNumero());
-        sb.append(" and a.numero=" + mes.getAno().getNumero());
+        String sb = "";
+        sb = sb.concat("select m._id from Mes m")
+        .concat(" inner join Ano a on a._id = m.ano_id")
+        .concat(" and m.numero=").concat(String.valueOf(mes.getNumero()))
+        .concat(" and a.numero=").concat(String.valueOf(mes.getAno().getNumero()));
 
-        Cursor cursor = db.rawQuery(sb.toString(), null);
+        Cursor cursor = db.rawQuery(sb, null);
 
         while (cursor.moveToNext()) {
             mes.set_id(cursor.getLong(0));

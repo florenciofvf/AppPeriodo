@@ -13,11 +13,11 @@ import java.util.List;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Mes;
 
-public class MesAdapter extends BaseAdapter {
+class MesAdapter extends BaseAdapter {
     private final List<Mes> objetos;
     private final Context context;
 
-    public MesAdapter(List<Mes> objetos, Context context) {
+    MesAdapter(List<Mes> objetos, Context context) {
         this.objetos = objetos;
         this.context = context;
     }
@@ -65,8 +65,8 @@ public class MesAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        Drawable corOriginal;
-        TextView txtNome;
+        final Drawable corOriginal;
+        final TextView txtNome;
 
         ViewHolder(View view) {
             corOriginal = view.getBackground();

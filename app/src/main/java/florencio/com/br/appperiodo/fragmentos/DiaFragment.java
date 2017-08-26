@@ -2,11 +2,9 @@ package florencio.com.br.appperiodo.fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -95,8 +93,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
             enviarEmail(conteudo);
 
         } else if (item.getItemId() == R.id.itemImportar) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String url = preferences.getString(getString(R.string.url_importacao), getString(R.string.url_importacao_default));
+            String url = Util.getStringPref(getActivity(), R.string.url_importacao, R.string.url_importacao_default);
             new TarefaImportar().execute(url);
         }
 
@@ -122,7 +119,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        Dia obj = (Dia) adapter.getObjeto(groupPosition);
+        Dia obj = adapter.getObjeto(groupPosition);
 
         if (obj != null) {
             listener.clickDia(obj);
@@ -170,7 +167,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         txtRodape.setText("TOTAL: " + Util.totalFmt(total) + " TOTAL LEI: " + Util.totalFmt(totalLei));
     }
 
-    public void enviarEmail(String conteudo) {
+    private void enviarEmail(String conteudo) {
         Intent it = new Intent(Intent.ACTION_SENDTO);
 
         it.setData(Uri.parse("mailto:"));

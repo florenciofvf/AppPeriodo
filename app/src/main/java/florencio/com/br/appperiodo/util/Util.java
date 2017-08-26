@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
@@ -18,7 +19,7 @@ import florencio.com.br.appperiodo.dominio.Mes;
 
 public class Util {
     public static final String[] NOME_DIAS = {"DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
-    public static DateFormat format_HH_mm = new SimpleDateFormat("HH:mm");
+    private static final DateFormat format_HH_mm = new SimpleDateFormat("HH:mm", Locale.getDefault());
     public static long OITO_HORAS = 1000L * 60L * 60L * 8L;
     public static final String PARAMETRO = "parametro";
     public static final String MANHA_INI = "MANHA_INI";
@@ -28,6 +29,7 @@ public class Util {
     public static final String NOITE_INI = "NOITE_INI";
     public static final String NOITE_FIM = "NOITE_FIM";
     public static final String ZERO_ZERO = "00:00";
+    public static final String VIBRAR = "VIBRAR";
     public static final String M_I = "M_I";
     public static final String M_F = "M_F";
     public static final String T_I = "T_I";
@@ -35,7 +37,6 @@ public class Util {
     public static final String N_I = "N_I";
     public static final String N_F = "N_F";
     public static final String OBS = "OBS";
-    public static final int ZERO = 0;
     public static final int UM = 1;
 
     public static int ANO_ATUAL;
@@ -54,9 +55,7 @@ public class Util {
 
         Ano a = new Ano(ANO_ATUAL);
         Mes m = new Mes(MES_ATUAL, null, a, null);
-        Dia d = new Dia(DIA_ATUAL, m, nome);
-
-        diaAtual = d;
+        diaAtual = new Dia(DIA_ATUAL, m, nome);
     }
 
     public static long criarData(Dia dia) {
@@ -93,7 +92,7 @@ public class Util {
         return format_HH_mm.format(new Date(milisegundos));
     }
 
-    public static Integer getHora(long milisegundos) {
+    private static Integer getHora(long milisegundos) {
         if (milisegundos == 0) {
             return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         }
@@ -104,7 +103,7 @@ public class Util {
         return c.get(Calendar.HOUR_OF_DAY);
     }
 
-    public static Integer getMinuto(long milisegundos) {
+    private static Integer getMinuto(long milisegundos) {
         if (milisegundos == 0) {
             return Calendar.getInstance().get(Calendar.MINUTE);
         }
@@ -145,11 +144,11 @@ public class Util {
         return s.length() == 1 ? "0" + s : s;
     }
 
-    public static long getMinutos(long milisegundos) {
+    private static long getMinutos(long milisegundos) {
         return milisegundos / 1000 / 60;
     }
 
-    public static long getHoras(long milisegundos) {
+    private static long getHoras(long milisegundos) {
         return milisegundos / 1000 / 60 / 60;
     }
 
@@ -220,8 +219,6 @@ public class Util {
     }
 
     public static Drawable getBackground(Dia dia, Context context) {
-        Drawable resp = null;
-
         if (dia != null) {
             if (dia.isEspecial()) {
                 return context.getDrawable(R.drawable.bg_especial);
@@ -242,7 +239,7 @@ public class Util {
             return context.getDrawable(R.drawable.bg_padrao);
         }
 
-        return resp;
+        return null;
     }
 
     public static long parseHora(String string) {
@@ -268,15 +265,33 @@ public class Util {
     }
 
     public static Lei getLei(Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String stringTolerancia = preferences.getString(context.getString(R.string.tolerancia_saida), context.getString(R.string.tolerancia_saida_default));
-        String stringExcesso = preferences.getString(context.getString(R.string.excesso_hora_extra), context.getString(R.string.excesso_hora_extra_default));
+        String stringTolerancia = getStringPref(context, R.string.tolerancia_saida, R.string.tolerancia_saida_default);
+        String stringExcesso = getStringPref(context, R.string.excesso_hora_extra, R.string.excesso_hora_extra_default);
         return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
     }
 
     public static void atualizarComprimentoHorario(Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String string = preferences.getString(context.getString(R.string.comprimento_horario), context.getString(R.string.comprimento_horario_default));
+        String string = getStringPref(context, R.string.comprimento_horario, R.string.comprimento_horario_default);
         OITO_HORAS = parseHora2(string);
+    }
+
+    public static String getStringPref(Context context, String chave, String padrao) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(chave, padrao);
+    }
+
+    public static String getStringPref(Context context, int chave, int padrao) {
+        return getStringPref(context, context.getString(chave), context.getString(padrao));
+    }
+
+    public static long[] getArrayLong(String vibrar) {
+        String[] strings = vibrar.split(",");
+        long[] array = new long[strings.length];
+
+        for(int i=0; i<strings.length; i++) {
+            array[i] = Long.parseLong(strings[i]);
+        }
+
+        return array;
     }
 }

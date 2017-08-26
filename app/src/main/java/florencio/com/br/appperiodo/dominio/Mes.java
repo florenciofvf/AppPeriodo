@@ -33,12 +33,11 @@ public class Mes extends Entidade {
         return maximoDias;
     }
 
-    public void processar(long toleranciaSaida, long excessoExtra) {
+    public void processar() {
         atual = numero == Util.MES_ATUAL
                 && getAno().getNumero() == Util.ANO_ATUAL;
     }
 
-    @Override
     public ContentValues criarContentValues() {
         ContentValues cv = new ContentValues();
         cv.put("maximo_dias", maximoDias);

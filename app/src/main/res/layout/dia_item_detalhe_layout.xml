@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@color/branco"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/vinte_dp">
+    android:paddingLeft="@dimen/vinte_dp"
+    android:paddingRight="@dimen/vinte_dp">
 
     <LinearLayout
         android:id="@+id/lltManha"

@@ -1,11 +1,9 @@
 package florencio.com.br.appperiodo.fragmentos;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
 import florencio.com.br.appperiodo.R;
@@ -47,8 +45,7 @@ public class PreferenciaFragment extends PreferenceFragment implements Preferenc
     }
 
     private void atualizar(Preference pref) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Object newValue = preferences.getString(pref.getKey(), pref.getSummary().toString());
+        String newValue = Util.getStringPref(getActivity(), pref.getKey(), pref.getSummary().toString());
         onPreferenceChange(pref, newValue);
     }
 }

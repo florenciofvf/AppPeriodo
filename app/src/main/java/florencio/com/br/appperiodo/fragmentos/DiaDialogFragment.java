@@ -1,11 +1,9 @@
 package florencio.com.br.appperiodo.fragmentos;
 
-import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,8 +124,7 @@ public class DiaDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            TimePickerDialog dialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,
-                    new AtualizaHora(campo), Util.getHora(campo, dia), Util.getMinuto(campo, dia), true);
+            TimePickerDialog dialog = new TimePickerDialog(getActivity(), new AtualizaHora(campo), Util.getHora(campo, dia), Util.getMinuto(campo, dia), true);
             dialog.show();
         }
     }
@@ -142,11 +139,11 @@ public class DiaDialogFragment extends DialogFragment {
         void salvarDia(Dia dia);
     }
 
-    public static String criarTitulo(Dia dia) {
+    private static String criarTitulo(Dia dia) {
         return get(dia.getNumero()) + "/" + get(dia.getMes().getNumero()) + "/" + get(dia.getMes().getAno().getNumero());
     }
 
-    public static String get(Integer i) {
+    private static String get(Integer i) {
         return i < 10 ? "0" + i.toString() : i.toString();
     }
 

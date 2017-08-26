@@ -15,11 +15,10 @@ public class Ano extends Entidade {
         return numero;
     }
 
-    public void processar(long toleranciaSaida, long excessoExtra) {
+    public void processar() {
         atual = numero == Util.ANO_ATUAL;
     }
 
-    @Override
     public ContentValues criarContentValues() {
         ContentValues cv = new ContentValues();
         cv.put("numero", numero);

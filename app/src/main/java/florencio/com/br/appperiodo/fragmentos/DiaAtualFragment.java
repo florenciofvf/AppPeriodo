@@ -1,7 +1,6 @@
 package florencio.com.br.appperiodo.fragmentos;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -18,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -145,6 +145,7 @@ public class DiaAtualFragment extends Fragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Intent it = new Intent(getActivity(), MainActivity.class);
+                it.putExtra(Util.VIBRAR, "100,500,200,500,300,500,400,500,500,500");
 
                 PendingIntent pi = PendingIntent.getActivity(getActivity(), 0, it, 0);
 
@@ -156,11 +157,13 @@ public class DiaAtualFragment extends Fragment {
                 c.set(Calendar.SECOND, 0);
 
                 manager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+
+                Toast.makeText(getActivity(), R.string.label_agendado, Toast.LENGTH_SHORT).show();
             }
         };
 
         Calendar c = Calendar.getInstance();
-        TimePickerDialog dialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,
+        TimePickerDialog dialog = new TimePickerDialog(getActivity(),
                 listener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
         dialog.show();
     }
@@ -221,7 +224,7 @@ public class DiaAtualFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            TimePickerDialog dialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT,
+            TimePickerDialog dialog = new TimePickerDialog(getActivity(),
                     new AtualizaHora(campo), Util.getHora(campo, dia), Util.getMinuto(campo, dia), true);
             dialog.show();
         }
@@ -237,18 +240,18 @@ public class DiaAtualFragment extends Fragment {
         void salvarDia(Dia dia);
     }
 
-    public static String criarTitulo(Dia dia) {
+    private static String criarTitulo(Dia dia) {
         return get(dia.getNumero()) + "/" + get(dia.getMes().getNumero()) + "/" + get(dia.getMes().getAno().getNumero());
     }
 
-    public static String get(Integer i) {
+    private static String get(Integer i) {
         return i < 10 ? "0" + i.toString() : i.toString();
     }
 
     private class AtualizaHora implements TimePickerDialog.OnTimeSetListener {
         final String campo;
 
-        public AtualizaHora(String campo) {
+        AtualizaHora(String campo) {
             this.campo = campo;
         }
 
