@@ -97,7 +97,7 @@ public class Repositorio {
         List<Dia> lista = new ArrayList<>();
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome, data, valido, especial from Dia where mes_id=" + mes.get_id(), null);
+        Cursor cursor = db.rawQuery("select _id, numero, obs, manha_ini, manha_fim, tarde_ini, tarde_fim, noite_ini, noite_fim, nome, data, valido, especial, sincronizado from Dia where mes_id=" + mes.get_id(), null);
 
         int _id_idx = cursor.getColumnIndex("_id");
         int num_idx = cursor.getColumnIndex("numero");
@@ -107,6 +107,7 @@ public class Repositorio {
         int dat_idx = cursor.getColumnIndex("data");
         int val_idx = cursor.getColumnIndex("valido");
         int esp_idx = cursor.getColumnIndex("especial");
+        int sin_idx = cursor.getColumnIndex("sincronizado");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -132,6 +133,7 @@ public class Repositorio {
             dia.setData(cursor.getLong(dat_idx));
             dia.setValido(cursor.getInt(val_idx));
             dia.setEspecial(cursor.getInt(esp_idx));
+            dia.setSincronizado(cursor.getInt(sin_idx));
 
             lista.add(dia);
         }
@@ -146,7 +148,7 @@ public class Repositorio {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         String sb = "";
-        sb = sb.concat("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial from Dia d")
+        sb = sb.concat("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial, d.sincronizado from Dia d")
         .concat(" inner join Mes m on m._id = d.mes_id")
         .concat(" inner join Ano a on a._id = m.ano_id")
         .concat(" where d.numero=").concat(String.valueOf(d.getNumero()))
@@ -164,6 +166,7 @@ public class Repositorio {
         int dat_idx = cursor.getColumnIndex("data");
         int val_idx = cursor.getColumnIndex("valido");
         int esp_idx = cursor.getColumnIndex("especial");
+        int sin_idx = cursor.getColumnIndex("sincronizado");
 
         int m_i_idx = cursor.getColumnIndex("manha_ini");
         int m_f_idx = cursor.getColumnIndex("manha_fim");
@@ -191,6 +194,7 @@ public class Repositorio {
             dia.setData(cursor.getLong(dat_idx));
             dia.setValido(cursor.getInt(val_idx));
             dia.setEspecial(cursor.getInt(esp_idx));
+            dia.setSincronizado(cursor.getInt(sin_idx));
 
             d.copiar(dia);
         }

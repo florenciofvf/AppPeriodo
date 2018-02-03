@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 class BancoHelper extends SQLiteOpenHelper {
     private static final String NOME = "PERIODOS";
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 2;
 
     BancoHelper(Context context) {
         super(context, NOME, null, VERSAO);
@@ -48,6 +48,7 @@ class BancoHelper extends SQLiteOpenHelper {
         sb.append("          data integer not null,");
         sb.append("        valido integer not null,");
         sb.append("      especial integer not null,");
+        sb.append("  sincronizado integer,");
         sb.append("   foreign key(mes_id) references Mes(_id)");
         sb.append(")");
         db.execSQL(sb.toString());
@@ -55,7 +56,9 @@ class BancoHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        StringBuilder sb = new StringBuilder();
+        sb.append("alter table Dia add column sincronizado integer");
+        db.execSQL(sb.toString());
     }
 
     @Override

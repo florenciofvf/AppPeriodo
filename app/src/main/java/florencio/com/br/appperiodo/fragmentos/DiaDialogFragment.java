@@ -22,6 +22,7 @@ import florencio.com.br.appperiodo.util.Util;
 public class DiaDialogFragment extends DialogFragment {
     private static final String DIA_PARAM = "dia";
     private DiaDialogListener listener;
+    private CheckBox chkSincronizado;
     private TextView btnManhaIni;
     private TextView btnManhaFim;
     private TextView btnTardeIni;
@@ -67,6 +68,9 @@ public class DiaDialogFragment extends DialogFragment {
         edtObs = (EditText) view.findViewById(R.id.edtObs);
         edtObs.setText(dia.getObs());
 
+        chkSincronizado = (CheckBox) view.findViewById(R.id.chkSincronizado);
+        chkSincronizado.setChecked(dia.isSincronizado());
+
         chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
         chkEspecial.setChecked(dia.isEspecial());
 
@@ -85,6 +89,7 @@ public class DiaDialogFragment extends DialogFragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setSincronizado(chkSincronizado.isChecked() ? 1 : 0);
                 dia.setEspecial(chkEspecial.isChecked() ? 1 : 0);
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());

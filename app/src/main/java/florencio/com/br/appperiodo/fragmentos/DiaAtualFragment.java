@@ -31,6 +31,7 @@ import florencio.com.br.appperiodo.util.Util;
 public class DiaAtualFragment extends Fragment {
     private static final String DIA_PARAM = "dia";
     private DiaAtualFragmentListener listener;
+    private CheckBox chkSincronizado;
     private Repositorio repositorio;
     private TextView txtManhaCal;
     private TextView txtTardeCal;
@@ -87,6 +88,7 @@ public class DiaAtualFragment extends Fragment {
         txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
         txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
         chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
+        chkSincronizado = (CheckBox) view.findViewById(R.id.chkSincronizado);
         txtTotalLei = (TextView) view.findViewById(R.id.txtTotalLei);
         txtCredito = (TextView) view.findViewById(R.id.txtCredito);
         txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
@@ -101,6 +103,7 @@ public class DiaAtualFragment extends Fragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dia.setSincronizado(chkSincronizado.isChecked() ? 1 : 0);
                 dia.setEspecial(chkEspecial.isChecked() ? 1 : 0);
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
                 dia.setObs(edtObs.getText().toString());
@@ -194,6 +197,7 @@ public class DiaAtualFragment extends Fragment {
         txtNoiteCal.setText(dia.getNoiteCalFmt());
         txtTotalLei.setText(dia.getTotalLeiFmt());
         chkEspecial.setChecked(dia.isEspecial());
+        chkSincronizado.setChecked(dia.isSincronizado());
         txtCredito.setText(dia.getCredito());
         chkValido.setChecked(dia.isValido());
         txtTotal.setText(dia.getTotalFmt());

@@ -164,7 +164,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
             total += d.getTotal();
         }
 
-        txtRodape.setText("TOTAL: " + Util.totalFmt(total) + " TOTAL LEI: " + Util.totalFmt(totalLei));
+        txtRodape.setText("TOTAL: " + Util.totalFmt(total) + " CONTABIL: " + Util.totalFmt(totalLei));
     }
 
     private void enviarEmail(String conteudo) {
