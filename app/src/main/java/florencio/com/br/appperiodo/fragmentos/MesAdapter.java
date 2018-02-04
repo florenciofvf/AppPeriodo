@@ -71,7 +71,7 @@ class MesAdapter extends BaseAdapter {
         ViewHolder(View view) {
             corOriginal = view.getBackground();
 
-            txtNome = (TextView) view.findViewById(R.id.txtNome);
+            txtNome = view.findViewById(R.id.txtNome);
         }
 
         void atualizarView(Mes obj) {

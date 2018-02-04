@@ -1,5 +1,6 @@
 package florencio.com.br.appperiodo.fragmentos;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,8 +54,8 @@ public class AnoFragment extends Fragment implements AdapterView.OnItemClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, null);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        listView = (ListView) view.findViewById(R.id.listView);
+        progressBar = view.findViewById(R.id.progressBar);
+        listView = view.findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         return view;
     }
@@ -82,6 +83,7 @@ public class AnoFragment extends Fragment implements AdapterView.OnItemClickList
         void exibirMeses(Ano ano);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class Tarefa extends AsyncTask<Integer, Void, List<Ano>> {
 
         @Override

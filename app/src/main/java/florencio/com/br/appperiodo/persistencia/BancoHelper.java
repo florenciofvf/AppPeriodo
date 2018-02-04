@@ -56,9 +56,7 @@ class BancoHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("alter table Dia add column sincronizado integer");
-        db.execSQL(sb.toString());
+        db.execSQL("alter table Dia add column sincronizado integer");
     }
 
     @Override

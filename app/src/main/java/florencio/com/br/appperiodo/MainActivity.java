@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String vibrar = it.getStringExtra(Util.VIBRAR);
             if (!Util.isVazio(vibrar)) {
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (vibrator.hasVibrator()) {
+                if (vibrator != null && vibrator.hasVibrator()) {
                     vibrator.vibrate(Util.getArrayLong(vibrar), -1);
                 }
             }
@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Lei lei = Util.getLei(this);
         repositorio.sincronizarDia(Util.diaAtual, lei.getToleranciaSaida(), lei.getExcessoExtra());
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         drawerToggle.syncState();
 

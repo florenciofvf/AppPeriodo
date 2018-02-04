@@ -71,7 +71,7 @@ class AnoAdapter extends BaseAdapter {
         ViewHolder(View view) {
             corOriginal = view.getBackground();
 
-            txtNumero = (TextView) view.findViewById(R.id.txtNumero);
+            txtNumero = view.findViewById(R.id.txtNumero);
         }
 
         void atualizarView(Ano obj) {

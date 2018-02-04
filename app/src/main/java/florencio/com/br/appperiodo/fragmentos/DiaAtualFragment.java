@@ -50,7 +50,7 @@ public class DiaAtualFragment extends Fragment {
     private CheckBox chkValido;
     private Button btnDefazer;
     private TextView txtTotal;
-    private EditText edtObs;
+    //private EditText edtObs;
     private TextView txtObs;
     private TextView txtDia;
     private Dia dia;
@@ -84,35 +84,35 @@ public class DiaAtualFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dia_atual_layout, null);
 
-        txtManhaCal = (TextView) view.findViewById(R.id.txtManhaCal);
-        txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
-        txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
-        chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
-        chkSincronizado = (CheckBox) view.findViewById(R.id.chkSincronizado);
-        txtTotalLei = (TextView) view.findViewById(R.id.txtTotalLei);
-        txtCredito = (TextView) view.findViewById(R.id.txtCredito);
-        txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
-        txtDebito = (TextView) view.findViewById(R.id.txtDebito);
-        chkValido = (CheckBox) view.findViewById(R.id.chkValido);
-        txtTotal = (TextView) view.findViewById(R.id.txtTotal);
-        edtObs = (EditText) view.findViewById(R.id.edtObs);
-        txtObs = (TextView) view.findViewById(R.id.txtObs);
-        txtDia = (TextView) view.findViewById(R.id.txtDia);
+        txtManhaCal = view.findViewById(R.id.txtManhaCal);
+        txtTardeCal = view.findViewById(R.id.txtTardeCal);
+        txtNoiteCal = view.findViewById(R.id.txtNoiteCal);
+        chkEspecial = view.findViewById(R.id.chkEspecial);
+        chkSincronizado = view.findViewById(R.id.chkSincronizado);
+        txtTotalLei = view.findViewById(R.id.txtTotalLei);
+        txtCredito = view.findViewById(R.id.txtCredito);
+        txtTitulo = view.findViewById(R.id.txtTitulo);
+        txtDebito = view.findViewById(R.id.txtDebito);
+        chkValido = view.findViewById(R.id.chkValido);
+        txtTotal = view.findViewById(R.id.txtTotal);
+        //edtObs = view.findViewById(R.id.edtObs);
+        txtObs = view.findViewById(R.id.txtObs);
+        txtDia = view.findViewById(R.id.txtDia);
 
-        Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
+        Button btnSalvar = view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dia.setSincronizado(chkSincronizado.isChecked() ? 1 : 0);
                 dia.setEspecial(chkEspecial.isChecked() ? 1 : 0);
                 dia.setValido(chkValido.isChecked() ? 1 : 0);
-                dia.setObs(edtObs.getText().toString());
+                //dia.setObs(edtObs.getText().toString());
                 btnDefazer.setEnabled(false);
                 listener.salvarDia(dia);
             }
         });
 
-        Button btnLembrete = (Button) view.findViewById(R.id.btnLembrete);
+        Button btnLembrete = view.findViewById(R.id.btnLembrete);
         btnLembrete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +120,7 @@ public class DiaAtualFragment extends Fragment {
             }
         });
 
-        btnDefazer = (Button) view.findViewById(R.id.btnDesfazer);
+        btnDefazer = view.findViewById(R.id.btnDesfazer);
         btnDefazer.setEnabled(false);
         btnDefazer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,12 +133,12 @@ public class DiaAtualFragment extends Fragment {
             }
         });
 
-        btnManhaIni = (TextView) view.findViewById(R.id.btnManhaIni);
-        btnManhaFim = (TextView) view.findViewById(R.id.btnManhaFim);
-        btnTardeIni = (TextView) view.findViewById(R.id.btnTardeIni);
-        btnTardeFim = (TextView) view.findViewById(R.id.btnTardeFim);
-        btnNoiteIni = (TextView) view.findViewById(R.id.btnNoiteIni);
-        btnNoiteFim = (TextView) view.findViewById(R.id.btnNoiteFim);
+        btnManhaIni = view.findViewById(R.id.btnManhaIni);
+        btnManhaFim = view.findViewById(R.id.btnManhaFim);
+        btnTardeIni = view.findViewById(R.id.btnTardeIni);
+        btnTardeFim = view.findViewById(R.id.btnTardeFim);
+        btnNoiteIni = view.findViewById(R.id.btnNoiteIni);
+        btnNoiteFim = view.findViewById(R.id.btnNoiteFim);
 
         return view;
     }
@@ -159,7 +159,9 @@ public class DiaAtualFragment extends Fragment {
                 c.set(Calendar.MINUTE, minute);
                 c.set(Calendar.SECOND, 0);
 
-                manager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+                if(manager != null) {
+                    manager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+                }
 
                 Toast.makeText(getActivity(), R.string.label_agendado, Toast.LENGTH_SHORT).show();
             }
@@ -205,7 +207,7 @@ public class DiaAtualFragment extends Fragment {
         txtDebito.setText(dia.getDebito());
         txtDia.setText(dia.getNome());
         txtObs.setText(dia.getObs());
-        edtObs.setText(dia.getObs());
+        //edtObs.setText(dia.getObs());
 
         txtTotalLei.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
         txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);

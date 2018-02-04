@@ -1,5 +1,6 @@
 package florencio.com.br.appperiodo.fragmentos;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -70,8 +71,8 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dia_fragment_layout, null);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        listView = (ExpandableListView) view.findViewById(R.id.listView);
+        progressBar = view.findViewById(R.id.progressBar);
+        listView = view.findViewById(R.id.listView);
         listView.setOnChildClickListener(this);
         return view;
     }
@@ -133,6 +134,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         void clickDia(Dia dia);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class Tarefa extends AsyncTask<Mes, Void, List<Dia>> {
 
         @Override
@@ -164,7 +166,10 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
             total += d.getTotal();
         }
 
-        txtRodape.setText("TOTAL: " + Util.totalFmt(total) + " CONTABIL: " + Util.totalFmt(totalLei));
+        String sb = "TOTAL: " + Util.totalFmt(total) +
+                " CONTABIL: " +
+                Util.totalFmt(totalLei);
+        txtRodape.setText(sb);
     }
 
     private void enviarEmail(String conteudo) {
@@ -181,6 +186,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class TarefaImportar extends AsyncTask<String, Void, List<String>> {
 
         @Override

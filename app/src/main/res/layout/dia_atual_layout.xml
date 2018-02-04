@@ -9,24 +9,20 @@
         android:orientation="vertical">
 
         <TextView
+            android:elevation="@dimen/cinco_dp"
+            android:background="@drawable/bg_atual"
             android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="@dimen/um_dp"
+            android:layout_marginBottom="@dimen/dez_dp"
             android:textAppearance="?android:textAppearanceLarge" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtObs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_observacao" />
-        </android.support.design.widget.TextInputLayout>
-
         <LinearLayout
+            android:layout_marginBottom="@dimen/dez_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -52,170 +48,135 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginBottom="@dimen/dez_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/label_manha"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:text="@string/label_entrada" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/btnManhaIni"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_entrada" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_saida" />
 
-                <TextView
-                    android:id="@+id/btnManhaIni"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
+            <TextView
+                android:id="@+id/btnManhaFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_saida" />
-
-                <TextView
-                    android:id="@+id/btnManhaFim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
-
-                <TextView
-                    android:id="@+id/txtManhaCal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dez_dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtManhaCal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginBottom="@dimen/dez_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/label_tarde"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:text="@string/label_entrada" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/btnTardeIni"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_entrada" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_saida" />
 
-                <TextView
-                    android:id="@+id/btnTardeIni"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
+            <TextView
+                android:id="@+id/btnTardeFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_saida" />
-
-                <TextView
-                    android:id="@+id/btnTardeFim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
-
-                <TextView
-                    android:id="@+id/txtTardeCal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dez_dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtTardeCal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginBottom="@dimen/dez_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/label_noite"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:text="@string/label_entrada" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/btnNoiteIni"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_entrada" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_saida" />
 
-                <TextView
-                    android:id="@+id/btnNoiteIni"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
+            <TextView
+                android:id="@+id/btnNoiteFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/quinze_dp"
+                android:elevation="@dimen/doze_dp"
+                android:padding="@dimen/vinte_dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_saida" />
-
-                <TextView
-                    android:id="@+id/btnNoiteFim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/quinze_dp"
-                    android:elevation="@dimen/doze_dp"
-                    android:padding="@dimen/vinte_dp" />
-
-                <TextView
-                    android:id="@+id/txtNoiteCal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dez_dp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtNoiteCal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dez_dp" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dois_dp"
-            android:background="@color/colorPrimary" />
-
         <LinearLayout
+            android:layout_marginBottom="@dimen/dez_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -317,12 +278,10 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dois_dp"
-            android:background="@color/colorPrimary" />
-
         <LinearLayout
+            android:layout_marginBottom="@dimen/sete_dp"
+            android:background="@drawable/bg_padrao"
+            android:elevation="@dimen/cinco_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

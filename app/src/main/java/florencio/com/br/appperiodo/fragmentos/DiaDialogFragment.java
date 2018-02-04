@@ -62,22 +62,22 @@ public class DiaDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dia_dialog_layout, null);
 
-        TextView txtTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+        TextView txtTitulo = view.findViewById(R.id.txtTitulo);
         txtTitulo.setText(criarTitulo(dia));
 
-        edtObs = (EditText) view.findViewById(R.id.edtObs);
+        edtObs = view.findViewById(R.id.edtObs);
         edtObs.setText(dia.getObs());
 
-        chkSincronizado = (CheckBox) view.findViewById(R.id.chkSincronizado);
+        chkSincronizado = view.findViewById(R.id.chkSincronizado);
         chkSincronizado.setChecked(dia.isSincronizado());
 
-        chkEspecial = (CheckBox) view.findViewById(R.id.chkEspecial);
+        chkEspecial = view.findViewById(R.id.chkEspecial);
         chkEspecial.setChecked(dia.isEspecial());
 
-        chkValido = (CheckBox) view.findViewById(R.id.chkValido);
+        chkValido = view.findViewById(R.id.chkValido);
         chkValido.setChecked(dia.isValido());
 
-        Button btnCancelar = (Button) view.findViewById(R.id.btnCancelar);
+        Button btnCancelar = view.findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +85,7 @@ public class DiaDialogFragment extends DialogFragment {
             }
         });
 
-        Button btnSalvar = (Button) view.findViewById(R.id.btnSalvar);
+        Button btnSalvar = view.findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,22 +98,22 @@ public class DiaDialogFragment extends DialogFragment {
             }
         });
 
-        btnManhaIni = (TextView) view.findViewById(R.id.btnManhaIni);
+        btnManhaIni = view.findViewById(R.id.btnManhaIni);
         btnManhaIni.setOnClickListener(new OnClick(Util.MANHA_INI, dia, btnManhaIni));
 
-        btnManhaFim = (TextView) view.findViewById(R.id.btnManhaFim);
+        btnManhaFim = view.findViewById(R.id.btnManhaFim);
         btnManhaFim.setOnClickListener(new OnClick(Util.MANHA_FIM, dia, btnManhaFim));
 
-        btnTardeIni = (TextView) view.findViewById(R.id.btnTardeIni);
+        btnTardeIni = view.findViewById(R.id.btnTardeIni);
         btnTardeIni.setOnClickListener(new OnClick(Util.TARDE_INI, dia, btnTardeIni));
 
-        btnTardeFim = (TextView) view.findViewById(R.id.btnTardeFim);
+        btnTardeFim = view.findViewById(R.id.btnTardeFim);
         btnTardeFim.setOnClickListener(new OnClick(Util.TARDE_FIM, dia, btnTardeFim));
 
-        btnNoiteIni = (TextView) view.findViewById(R.id.btnNoiteIni);
+        btnNoiteIni = view.findViewById(R.id.btnNoiteIni);
         btnNoiteIni.setOnClickListener(new OnClick(Util.NOITE_INI, dia, btnNoiteIni));
 
-        btnNoiteFim = (TextView) view.findViewById(R.id.btnNoiteFim);
+        btnNoiteFim = view.findViewById(R.id.btnNoiteFim);
         btnNoiteFim.setOnClickListener(new OnClick(Util.NOITE_FIM, dia, btnNoiteFim));
 
         return view;

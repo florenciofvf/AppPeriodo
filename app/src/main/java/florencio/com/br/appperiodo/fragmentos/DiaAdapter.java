@@ -159,13 +159,13 @@ class DiaAdapter extends BaseExpandableListAdapter {
         final TextView txtSinc;
 
         ViewHolderGrupo(View view) {
-            txtManhaIni = (TextView) view.findViewById(R.id.txtManhaIni);
-            txtManhaFim = (TextView) view.findViewById(R.id.txtManhaFim);
-            txtTardeIni = (TextView) view.findViewById(R.id.txtTardeIni);
-            txtTardeFim = (TextView) view.findViewById(R.id.txtTardeFim);
-            txtNumero = (TextView) view.findViewById(R.id.txtNumero);
-            txtNome = (TextView) view.findViewById(R.id.txtNome);
-            txtSinc = (TextView) view.findViewById(R.id.txtSinc);
+            txtManhaIni = view.findViewById(R.id.txtManhaIni);
+            txtManhaFim = view.findViewById(R.id.txtManhaFim);
+            txtTardeIni = view.findViewById(R.id.txtTardeIni);
+            txtTardeFim = view.findViewById(R.id.txtTardeFim);
+            txtNumero = view.findViewById(R.id.txtNumero);
+            txtNome = view.findViewById(R.id.txtNome);
+            txtSinc = view.findViewById(R.id.txtSinc);
         }
 
         void atualizarView(Dia obj) {
@@ -229,34 +229,34 @@ class DiaAdapter extends BaseExpandableListAdapter {
         final TextView txtTotalLei;
 
         ViewHolderDetalhe(View view) {
-            lltTotalLei = (LinearLayout) view.findViewById(R.id.lltTotalLei);
-            lltCredi = (LinearLayout) view.findViewById(R.id.lltCredito);
-            lltDebit = (LinearLayout) view.findViewById(R.id.lltDebito);
-            lltManha = (LinearLayout) view.findViewById(R.id.lltManha);
-            lltTarde = (LinearLayout) view.findViewById(R.id.lltTarde);
-            lltNoite = (LinearLayout) view.findViewById(R.id.lltNoite);
-            lltTotal = (LinearLayout) view.findViewById(R.id.lltTotal);
-            lltClick = (LinearLayout) view.findViewById(R.id.lltClick);
-            lltObser = (LinearLayout) view.findViewById(R.id.lltObs);
+            lltTotalLei = view.findViewById(R.id.lltTotalLei);
+            lltCredi = view.findViewById(R.id.lltCredito);
+            lltDebit = view.findViewById(R.id.lltDebito);
+            lltManha = view.findViewById(R.id.lltManha);
+            lltTarde = view.findViewById(R.id.lltTarde);
+            lltNoite = view.findViewById(R.id.lltNoite);
+            lltTotal = view.findViewById(R.id.lltTotal);
+            lltClick = view.findViewById(R.id.lltClick);
+            lltObser = view.findViewById(R.id.lltObs);
 
-            txtObs = (TextView) view.findViewById(R.id.txtObs);
+            txtObs = view.findViewById(R.id.txtObs);
 
-            txtManhaIni = (TextView) view.findViewById(R.id.txtManhaIni);
-            txtManhaFim = (TextView) view.findViewById(R.id.txtManhaFim);
-            txtManhaCal = (TextView) view.findViewById(R.id.txtManhaCal);
+            txtManhaIni = view.findViewById(R.id.txtManhaIni);
+            txtManhaFim = view.findViewById(R.id.txtManhaFim);
+            txtManhaCal = view.findViewById(R.id.txtManhaCal);
 
-            txtTardeIni = (TextView) view.findViewById(R.id.txtTardeIni);
-            txtTardeFim = (TextView) view.findViewById(R.id.txtTardeFim);
-            txtTardeCal = (TextView) view.findViewById(R.id.txtTardeCal);
+            txtTardeIni = view.findViewById(R.id.txtTardeIni);
+            txtTardeFim = view.findViewById(R.id.txtTardeFim);
+            txtTardeCal = view.findViewById(R.id.txtTardeCal);
 
-            txtNoiteIni = (TextView) view.findViewById(R.id.txtNoiteIni);
-            txtNoiteFim = (TextView) view.findViewById(R.id.txtNoiteFim);
-            txtNoiteCal = (TextView) view.findViewById(R.id.txtNoiteCal);
+            txtNoiteIni = view.findViewById(R.id.txtNoiteIni);
+            txtNoiteFim = view.findViewById(R.id.txtNoiteFim);
+            txtNoiteCal = view.findViewById(R.id.txtNoiteCal);
 
-            txtTotal = (TextView) view.findViewById(R.id.txtTotal);
-            txtDebito = (TextView) view.findViewById(R.id.txtDebito);
-            txtCredito = (TextView) view.findViewById(R.id.txtCredito);
-            txtTotalLei = (TextView) view.findViewById(R.id.txtTotalLei);
+            txtTotal = view.findViewById(R.id.txtTotal);
+            txtDebito = view.findViewById(R.id.txtDebito);
+            txtCredito = view.findViewById(R.id.txtCredito);
+            txtTotalLei = view.findViewById(R.id.txtTotalLei);
         }
 
         void atualizarView(Dia obj) {
