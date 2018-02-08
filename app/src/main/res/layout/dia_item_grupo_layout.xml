@@ -28,8 +28,14 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/sete_dp"
         android:gravity="center"
+        android:layout_gravity="center"
+        android:maxHeight="@dimen/sete_dp"
         android:maxWidth="@dimen/sete_dp"
-        android:minWidth="@dimen/sete_dp" />
+        android:elevation="@dimen/dez_dp"
+        android:paddingLeft="@dimen/sete_dp"
+        android:paddingRight="@dimen/sete_dp"
+        android:minWidth="@dimen/sete_dp"
+        android:minHeight="@dimen/sete_dp"/>
 
     <TextView
         android:id="@+id/txtManhaIni"

@@ -16,7 +16,7 @@
     <string name="excesso_hora_extra_default">00:00</string>
     <string name="label_preferencias">Preferências</string>
     <string name="label_sincronizado">Sincronizado</string>
-    <string name="label_total_lei">Contabilizado:</string>
+    <string name="label_total_lei">VAL:</string>
     <string name="tolerancia_saida_default">00:10</string>
     <string name="url_importacao">url_importacao</string>
     <string name="label_bater_ponto">Bater Ponto</string>
@@ -29,14 +29,14 @@
     <string name="label_desfazer">Desfazer</string>
     <string name="label_exportar">Exportar</string>
     <string name="label_importar">Importar</string>
-    <string name="label_credito">Crédito:</string>
+    <string name="label_credito">CRE:</string>
     <string name="label_entrada">Entrada</string>
     <string name="label_periodo">Período</string>
-    <string name="label_debito">Débito:</string>
+    <string name="label_debito">DEB:</string>
     <string name="label_salvar">Salvar</string>
     <string name="label_valido">Válido</string>
     <string name="label_pontos">Pontos</string>
-    <string name="label_total">Total:</string>
+    <string name="label_total">TOT:</string>
     <string name="app_name">Períodos</string>
     <string name="label_manha">Manhã</string>
     <string name="label_tarde">Tarde</string>
@@ -44,7 +44,7 @@
     <string name="label_saida">Saída</string>
     <string name="label_anos">Anos</string>
     <string name="label_hoje">Hoje</string>
-    <string name="label_obs">Obs:</string>
-    <string name="label_dia">Dia:</string>
+    <string name="label_obs">OBS:</string>
+    <string name="label_dia">HOJ:</string>
 
 </resources>

@@ -210,7 +210,7 @@ public class Util {
         }
     }
 
-    private static Drawable getBackground(long l, Context context) {
+    public static Drawable getBackground(long l, Context context) {
         return l != 0 ? context.getDrawable(R.drawable.bg_atual_360) : context.getDrawable(R.drawable.bg_padrao_360);
     }
 
