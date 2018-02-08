@@ -175,7 +175,8 @@ class DiaAdapter extends BaseExpandableListAdapter {
             txtTardeIni.setText(obj.getTardeIniFmt());
             txtTardeFim.setText(obj.getTardeFimFmt());
             txtNome.setText(obj.getNome());
-            txtSinc.setBackground(obj.isSincronizado()? Util.getBackground(1, context) : null);
+            txtSinc.setBackground(obj.isSincronizado() ? Util.getBackground(1, context) : null);
+            txtSinc.setVisibility(obj.isSincronizado() ? View.VISIBLE : View.GONE);
             visivel(txtManhaIni);
             visivel(txtManhaFim);
             visivel(txtTardeIni);

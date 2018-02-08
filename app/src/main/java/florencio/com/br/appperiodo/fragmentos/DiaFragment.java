@@ -167,7 +167,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         }
 
         String sb = "TOTAL: " + Util.totalFmt(total) +
-                " CONTABIL: " +
+                " VÁLIDO: " +
                 Util.totalFmt(totalLei);
         txtRodape.setText(sb);
     }
