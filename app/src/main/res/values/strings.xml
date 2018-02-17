@@ -29,6 +29,7 @@
     <string name="label_desfazer">Desfazer</string>
     <string name="label_exportar">Exportar</string>
     <string name="label_importar">Importar</string>
+    <string name="label_excluir">Excluir</string>
     <string name="label_credito">CRE:</string>
     <string name="label_entrada">Entrada</string>
     <string name="label_periodo">Período</string>
