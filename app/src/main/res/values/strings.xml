@@ -46,6 +46,6 @@
     <string name="label_anos">Anos</string>
     <string name="label_hoje">Hoje</string>
     <string name="label_obs">OBS:</string>
-    <string name="label_dia">HOJ:</string>
+    <string name="label_dia">DAT:</string>
 
 </resources>
