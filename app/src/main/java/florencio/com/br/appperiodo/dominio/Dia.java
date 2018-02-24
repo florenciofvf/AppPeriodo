@@ -6,14 +6,14 @@ import android.util.Log;
 import florencio.com.br.appperiodo.util.Util;
 
 public class Dia extends Entidade {
-    private int sincronizado;
-    private Integer numero;
-    private int especial;
-    private String nome;
-    private String obs;
-    private int valido;
-    private long data;
-    private Mes mes;
+	private int sincronizado;
+	private Integer numero;
+	private int especial;
+	private String nome;
+	private String obs;
+	private int valido;
+	private long data;
+	private Mes mes;
 
     private long manhaIni;
     private long manhaFim;
