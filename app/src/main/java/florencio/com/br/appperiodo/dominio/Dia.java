@@ -119,7 +119,7 @@ public class Dia extends Entidade {
 		noiteFim = 0;
 	}
 
-	public void processar(long toleranciaSaida, long excessoExtra) {
+	public void processar(long menosHorario, long maisHorario) {
 		totalLei = 0;
 		total = 0;
 
@@ -152,21 +152,17 @@ public class Dia extends Entidade {
 
 		totalFmt = Util.totalFmt(total);
 
-		if (total < Util.OITO_HORAS - toleranciaSaida) {
-			totalLei = total;
-		} else if (total > Util.OITO_HORAS + excessoExtra) {
-			totalLei = total;
-		} else {
-			totalLei = Util.OITO_HORAS;
+		if(!ehNovo()) {
+			totalLei = (total >= Util.OITO_HORAS - menosHorario && total <= Util.OITO_HORAS + maisHorario) ? Util.OITO_HORAS : total;
 		}
 
 		totalLeiFmt = Util.totalFmt(totalLei);
 
-		if (totalLei > Util.OITO_HORAS + excessoExtra && !ehNovo()) {
+		if (totalLei > Util.OITO_HORAS + maisHorario && !ehNovo()) {
 			credito = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
 		}
 
-		if (totalLei < Util.OITO_HORAS - toleranciaSaida && !ehNovo()) {
+		if (totalLei < Util.OITO_HORAS - menosHorario && !ehNovo()) {
 			debito = Util.diferencaFmt(total, Util.OITO_HORAS);
 		}
 

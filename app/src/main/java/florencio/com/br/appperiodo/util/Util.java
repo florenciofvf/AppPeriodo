@@ -19,289 +19,304 @@ import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
 
 public class Util {
-    public static final String[] NOME_DIAS = {"DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
-    private static final DateFormat format_HH_mm = new SimpleDateFormat("HH:mm", Locale.getDefault());
-    public static long OITO_HORAS = 1000L * 60L * 60L * 8L;
-    public static final String PARAMETRO = "parametro";
-    public static final String MANHA_INI = "MANHA_INI";
-    public static final String MANHA_FIM = "MANHA_FIM";
-    public static final String TARDE_INI = "TARDE_INI";
-    public static final String TARDE_FIM = "TARDE_FIM";
-    public static final String NOITE_INI = "NOITE_INI";
-    public static final String NOITE_FIM = "NOITE_FIM";
-    public static final String ZERO_ZERO = "00:00";
-    public static final String VIBRAR = "VIBRAR";
-    public static final String M_I = "M_I";
-    public static final String M_F = "M_F";
-    public static final String T_I = "T_I";
-    public static final String T_F = "T_F";
-    public static final String N_I = "N_I";
-    public static final String N_F = "N_F";
-    public static final String OBS = "OBS";
-    public static final int UM = 1;
+	private static final String[] NOME_MESES = {"JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"};
+	private static final DateFormat format_HH_mm = new SimpleDateFormat("HH:mm", Locale.getDefault());
+	public static final String[] NOME_DIAS = {"DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
+	public static long OITO_HORAS = 1000L * 60L * 60L * 8L;
+	public static final String PARAMETRO = "parametro";
+	public static final String MANHA_INI = "MANHA_INI";
+	public static final String MANHA_FIM = "MANHA_FIM";
+	public static final String TARDE_INI = "TARDE_INI";
+	public static final String TARDE_FIM = "TARDE_FIM";
+	public static final String NOITE_INI = "NOITE_INI";
+	public static final String NOITE_FIM = "NOITE_FIM";
+	public static final String ZERO_ZERO = "00:00";
+	public static final String VIBRAR = "VIBRAR";
+	public static final String M_I = "M_I";
+	public static final String M_F = "M_F";
+	public static final String T_I = "T_I";
+	public static final String T_F = "T_F";
+	public static final String N_I = "N_I";
+	public static final String N_F = "N_F";
+	public static final String OBS = "OBS";
+	public static final int UM = 1;
 
-    public static int ANO_ATUAL;
-    public static int MES_ATUAL;
-    public static int DIA_ATUAL;
-    public static Dia diaAtual;
+	public static int ANO_ATUAL;
+	public static int MES_ATUAL;
+	public static int DIA_ATUAL;
+	public static Dia diaAtual;
 
-    public static void atualizarData() {
-        Calendar c = Calendar.getInstance();
-        ANO_ATUAL = c.get(Calendar.YEAR);
-        MES_ATUAL = c.get(Calendar.MONTH) + 1;
-        DIA_ATUAL = c.get(Calendar.DATE);
+	public static void atualizarData() {
+		Calendar c = Calendar.getInstance();
 
-        int indice = c.get(Calendar.DAY_OF_WEEK) - 1;
-        String nome = NOME_DIAS[indice];
+		ANO_ATUAL = c.get(Calendar.YEAR);
+		MES_ATUAL = c.get(Calendar.MONTH) + 1;
+		DIA_ATUAL = c.get(Calendar.DATE);
 
-        Ano a = new Ano(ANO_ATUAL);
-        Mes m = new Mes(MES_ATUAL, null, a, null);
-        diaAtual = new Dia(DIA_ATUAL, m, nome);
-    }
+		int indice = c.get(Calendar.DAY_OF_WEEK) - 1;
 
-    public static long criarData(Dia dia) {
-        Calendar c = Calendar.getInstance();
+		Ano ano = new Ano(ANO_ATUAL);
+		Mes mes = new Mes(MES_ATUAL, NOME_MESES[MES_ATUAL - 1], ano, -1);
+		diaAtual = new Dia(DIA_ATUAL, mes, NOME_DIAS[indice]);
+	}
 
-        c.set(Calendar.MILLISECOND, 0);
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.HOUR, 0);
-        c.set(Calendar.YEAR, dia.getMes().getAno().getNumero());
-        c.set(Calendar.MONTH, dia.getMes().getNumero() - 1);
-        c.set(Calendar.DATE, dia.getNumero());
+	public static long criarData(Dia dia) {
+		Calendar c = criarCalendarZero();
 
-        return c.getTimeInMillis();
-    }
+		c.set(Calendar.YEAR, dia.getMes().getAno().getNumero());
+		c.set(Calendar.MONTH, dia.getMes().getNumero() - 1);
+		c.set(Calendar.DATE, dia.getNumero());
 
-    public static Calendar criarCalendarZero() {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.DAY_OF_MONTH, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MONTH, 0);
-        c.set(Calendar.DATE, 0);
-        c.set(Calendar.YEAR, 0);
-        return c;
-    }
+		return c.getTimeInMillis();
+	}
 
-    public static String formatarHora(long milisegundos) {
-        if (milisegundos == 0) {
-            return ZERO_ZERO;
-        }
+	public static Calendar criarCalendarZero() {
+		Calendar c = Calendar.getInstance();
 
-        return format_HH_mm.format(new Date(milisegundos));
-    }
+		c.set(Calendar.DAY_OF_MONTH, 0);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MONTH, 0);
+		c.set(Calendar.YEAR, 0);
+		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.DATE, 0);
 
-    private static Integer getHora(long milisegundos) {
-        if (milisegundos == 0) {
-            return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        }
+		return c;
+	}
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date(milisegundos));
+	public static String formatarHora(long milisegundos) {
+		if (milisegundos == 0) {
+			return ZERO_ZERO;
+		}
 
-        return c.get(Calendar.HOUR_OF_DAY);
-    }
+		return format_HH_mm.format(new Date(milisegundos));
+	}
 
-    private static Integer getMinuto(long milisegundos) {
-        if (milisegundos == 0) {
-            return Calendar.getInstance().get(Calendar.MINUTE);
-        }
+	private static Integer getHora(long milisegundos) {
+		if (milisegundos == 0) {
+			return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		}
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date(milisegundos));
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date(milisegundos));
 
-        return c.get(Calendar.MINUTE);
-    }
+		return c.get(Calendar.HOUR_OF_DAY);
+	}
 
-    public static long diferenca(long inicio, long termino) {
-        return termino - inicio;
-    }
+	private static Integer getMinuto(long milisegundos) {
+		if (milisegundos == 0) {
+			return Calendar.getInstance().get(Calendar.MINUTE);
+		}
 
-    public static String diferencaFmt(long inicio, long termino) {
-        long dif = diferenca(inicio, termino);
-        return totalFmt(dif);
-    }
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date(milisegundos));
 
-    public static String totalFmt(long milisegundos) {
-        if (milisegundos == 0) {
-            return ZERO_ZERO;
-        }
+		return c.get(Calendar.MINUTE);
+	}
 
-        long min = getMinutos(milisegundos);
-        min = min % 60;
+	public static long diferenca(long inicio, long termino) {
+		return termino - inicio;
+	}
 
-        long hor = getHoras(milisegundos);
+	public static String diferencaFmt(long inicio, long termino) {
+		long dif = diferenca(inicio, termino);
+		return totalFmt(dif);
+	}
 
-        return get00(hor) + ":" + get00(min);
-    }
+	public static String totalFmt(long milisegundos) {
+		if (milisegundos == 0) {
+			return ZERO_ZERO;
+		}
 
-    private static String get00(long valor) {
-        return valor < 10 ? "0" + valor : "" + valor;
-    }
+		long hor = getHoras(milisegundos);
+		long min = getMinutos(milisegundos) % 60;
 
-    public static String get00(String s) {
-        return s.length() == 1 ? "0" + s : s;
-    }
+		return get00(hor) + ":" + get00(min);
+	}
 
-    private static long getMinutos(long milisegundos) {
-        return milisegundos / 1000 / 60;
-    }
+	private static String get00(long valor) {
+		return valor < 10 ? "0" + valor : "" + valor;
+	}
 
-    private static long getHoras(long milisegundos) {
-        return milisegundos / 1000 / 60 / 60;
-    }
+	public static String get00(String s) {
+		return s.length() == 1 ? "0" + s : s;
+	}
 
-    public static Integer getHora(String campo, Dia dia) {
-        if (MANHA_INI.equals(campo)) {
-            return getHora(dia.getManhaIni());
-        } else if (MANHA_FIM.equals(campo)) {
-            return getHora(dia.getManhaFim());
-        } else if (TARDE_INI.equals(campo)) {
-            return getHora(dia.getTardeIni());
-        } else if (TARDE_FIM.equals(campo)) {
-            return getHora(dia.getTardeFim());
-        } else if (NOITE_INI.equals(campo)) {
-            return getHora(dia.getNoiteIni());
-        } else if (NOITE_FIM.equals(campo)) {
-            return getHora(dia.getNoiteFim());
-        }
+	private static long getMinutos(long milisegundos) {
+		return milisegundos / 1000 / 60;
+	}
 
-        return 0;
-    }
+	private static long getHoras(long milisegundos) {
+		return milisegundos / 1000 / 60 / 60;
+	}
 
-    public static Integer getMinuto(String campo, Dia dia) {
-        if (MANHA_INI.equals(campo)) {
-            return getMinuto(dia.getManhaIni());
-        } else if (MANHA_FIM.equals(campo)) {
-            return getMinuto(dia.getManhaFim());
-        } else if (TARDE_INI.equals(campo)) {
-            return getMinuto(dia.getTardeIni());
-        } else if (TARDE_FIM.equals(campo)) {
-            return getMinuto(dia.getTardeFim());
-        } else if (NOITE_INI.equals(campo)) {
-            return getMinuto(dia.getNoiteIni());
-        } else if (NOITE_FIM.equals(campo)) {
-            return getMinuto(dia.getNoiteFim());
-        }
+	public static Integer getHora(String campo, Dia dia) {
+		if (MANHA_INI.equals(campo)) {
+			return getHora(dia.getManhaIni());
 
-        return 0;
-    }
+		} else if (MANHA_FIM.equals(campo)) {
+			return getHora(dia.getManhaFim());
 
-    public static void atualizarText(String campo, Dia dia, TextView button, Context context) {
-        if (Util.MANHA_INI.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getManhaIni()));
-            button.setBackground(getBackground(dia.getManhaIni(), context));
-        } else if (Util.MANHA_FIM.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getManhaFim()));
-            button.setBackground(getBackground(dia.getManhaFim(), context));
-        } else if (Util.TARDE_INI.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getTardeIni()));
-            button.setBackground(getBackground(dia.getTardeIni(), context));
-        } else if (Util.TARDE_FIM.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getTardeFim()));
-            button.setBackground(getBackground(dia.getTardeFim(), context));
-        } else if (Util.NOITE_INI.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getNoiteIni()));
-            button.setBackground(getBackground(dia.getNoiteIni(), context));
-        } else if (Util.NOITE_FIM.equals(campo)) {
-            button.setText(Util.formatarHora(dia.getNoiteFim()));
-            button.setBackground(getBackground(dia.getNoiteFim(), context));
-        }
-    }
+		} else if (TARDE_INI.equals(campo)) {
+			return getHora(dia.getTardeIni());
 
-    public static Drawable getBackground(long l, Context context) {
-        return l != 0 ? context.getDrawable(R.drawable.bg_atual_360) : context.getDrawable(R.drawable.bg_padrao_360);
-    }
+		} else if (TARDE_FIM.equals(campo)) {
+			return getHora(dia.getTardeFim());
 
-    public static boolean isVazio(CharSequence cs) {
-        return cs == null || cs.length() == 0;
-    }
+		} else if (NOITE_INI.equals(campo)) {
+			return getHora(dia.getNoiteIni());
 
-    public static Drawable getBackground(Dia dia, Context context) {
-        if (dia != null) {
-            if (dia.isEspecial()) {
-                return context.getDrawable(R.drawable.bg_especial);
-            }
+		} else if (NOITE_FIM.equals(campo)) {
+			return getHora(dia.getNoiteFim());
+		}
 
-            if (dia.isAtual()) {
-                return context.getDrawable(R.drawable.bg_atual);
-            }
+		return 0;
+	}
 
-            if ("SAB".equals(dia.getNome())) {
-                return context.getDrawable(R.drawable.bg_sabado);
-            }
+	public static Integer getMinuto(String campo, Dia dia) {
+		if (MANHA_INI.equals(campo)) {
+			return getMinuto(dia.getManhaIni());
 
-            if ("DOM".equals(dia.getNome())) {
-                return context.getDrawable(R.drawable.bg_domingo);
-            }
+		} else if (MANHA_FIM.equals(campo)) {
+			return getMinuto(dia.getManhaFim());
 
-            return context.getDrawable(R.drawable.bg_padrao);
-        }
+		} else if (TARDE_INI.equals(campo)) {
+			return getMinuto(dia.getTardeIni());
 
-        return null;
-    }
+		} else if (TARDE_FIM.equals(campo)) {
+			return getMinuto(dia.getTardeFim());
 
-    public static long parseHora(String string) {
-        String[] strings = string.split(":");
+		} else if (NOITE_INI.equals(campo)) {
+			return getMinuto(dia.getNoiteIni());
 
-        int horas = Integer.parseInt(strings[0]);
-        int minutos = Integer.parseInt(strings[1]);
+		} else if (NOITE_FIM.equals(campo)) {
+			return getMinuto(dia.getNoiteFim());
+		}
 
-        Calendar c = criarCalendarZero();
-        c.set(Calendar.HOUR_OF_DAY, horas);
-        c.set(Calendar.MINUTE, minutos);
+		return 0;
+	}
 
-        return c.getTimeInMillis();
-    }
+	public static void atualizarText(String campo, Dia dia, TextView button, Context context) {
+		if (Util.MANHA_INI.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getManhaIni()));
+			button.setBackground(getBackground(dia.getManhaIni(), context));
 
-    public static long parseHora2(String string) {
-        String[] strings = string.split(":");
+		} else if (Util.MANHA_FIM.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getManhaFim()));
+			button.setBackground(getBackground(dia.getManhaFim(), context));
 
-        long horas = 1000L * 60L * 60L * Long.parseLong(strings[0]);
-        long minutos = 1000L * 60L * Long.parseLong(strings[1]);
+		} else if (Util.TARDE_INI.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getTardeIni()));
+			button.setBackground(getBackground(dia.getTardeIni(), context));
 
-        return horas + minutos;
-    }
+		} else if (Util.TARDE_FIM.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getTardeFim()));
+			button.setBackground(getBackground(dia.getTardeFim(), context));
 
-    public static Lei getLei(Context context) {
-        String stringTolerancia = getStringPref(context, R.string.tolerancia_saida, R.string.tolerancia_saida_default);
-        String stringExcesso = getStringPref(context, R.string.excesso_hora_extra, R.string.excesso_hora_extra_default);
-        return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
-    }
+		} else if (Util.NOITE_INI.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getNoiteIni()));
+			button.setBackground(getBackground(dia.getNoiteIni(), context));
 
-    public static void atualizarComprimentoHorario(Context context) {
-        String string = getStringPref(context, R.string.comprimento_horario, R.string.comprimento_horario_default);
-        OITO_HORAS = parseHora2(string);
-    }
+		} else if (Util.NOITE_FIM.equals(campo)) {
+			button.setText(Util.formatarHora(dia.getNoiteFim()));
+			button.setBackground(getBackground(dia.getNoiteFim(), context));
+		}
+	}
 
-    public static String getStringPref(Context context, String chave, String padrao) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(chave, padrao);
-    }
+	public static Drawable getBackground(long l, Context context) {
+		return l != 0 ? context.getDrawable(R.drawable.bg_atual_360) : context.getDrawable(R.drawable.bg_padrao_360);
+	}
 
-    public static String getStringPref(Context context, int chave, int padrao) {
-        return getStringPref(context, context.getString(chave), context.getString(padrao));
-    }
+	public static boolean isVazio(CharSequence cs) {
+		return cs == null || cs.length() == 0;
+	}
 
-    public static long[] getArrayLong(String vibrar) {
-        String[] strings = vibrar.split(",");
-        long[] array = new long[strings.length];
+	public static Drawable getBackground(Dia dia, Context context) {
+		if (dia != null) {
+			if (dia.isEspecial()) {
+				return context.getDrawable(R.drawable.bg_especial);
+			}
 
-        for(int i=0; i<strings.length; i++) {
-            array[i] = Long.parseLong(strings[i]);
-        }
+			if (dia.isAtual()) {
+				return context.getDrawable(R.drawable.bg_atual);
+			}
 
-        return array;
-    }
+			if ("SAB".equals(dia.getNome())) {
+				return context.getDrawable(R.drawable.bg_sabado);
+			}
+
+			if ("DOM".equals(dia.getNome())) {
+				return context.getDrawable(R.drawable.bg_domingo);
+			}
+
+			return context.getDrawable(R.drawable.bg_padrao);
+		}
+
+		return null;
+	}
+
+	public static long parseHora(String string) {
+		String[] strings = string.split(":");
+
+		int horas = Integer.parseInt(strings[0]);
+		int minutos = Integer.parseInt(strings[1]);
+
+		Calendar c = criarCalendarZero();
+		c.set(Calendar.HOUR_OF_DAY, horas);
+		c.set(Calendar.MINUTE, minutos);
+
+		return c.getTimeInMillis();
+	}
+
+	public static long parseHora2(String string) {
+		String[] strings = string.split(":");
+
+		long horas = 1000L * 60L * 60L * Long.parseLong(strings[0]);
+		long minutos = 1000L * 60L * Long.parseLong(strings[1]);
+
+		return horas + minutos;
+	}
+
+	public static Lei getLei(Context context) {
+		String stringTolerancia = getStringPref(context, R.string.tolerancia_saida, R.string.tolerancia_saida_default);
+		String stringExcesso = getStringPref(context, R.string.excesso_hora_extra, R.string.excesso_hora_extra_default);
+		return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
+	}
+
+	public static void atualizarComprimentoHorario(Context context) {
+		String string = getStringPref(context, R.string.comprimento_horario, R.string.comprimento_horario_default);
+		OITO_HORAS = parseHora2(string);
+	}
+
+	public static String getStringPref(Context context, String chave, String padrao) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getString(chave, padrao);
+	}
+
+	public static String getStringPref(Context context, int chave, int padrao) {
+		return getStringPref(context, context.getString(chave), context.getString(padrao));
+	}
+
+	public static long[] getArrayLong(String vibrar) {
+		String[] strings = vibrar.split(",");
+		long[] array = new long[strings.length];
+
+		for (int i = 0; i < strings.length; i++) {
+			array[i] = Long.parseLong(strings[i]);
+		}
+
+		return array;
+	}
 
 	public static void requireNonNull(Object[] objetos) {
-  	  	if(objetos == null || objetos.length == 0) {
-    		throw new NullPointerException();
+		if (objetos == null || objetos.length == 0) {
+			throw new NullPointerException();
 		}
-		for(int i=0; i<objetos.length; i++) {
-			Objects.requireNonNull(objetos[i]);
+
+		for (Object obj : objetos) {
+			Objects.requireNonNull(obj);
 		}
 	}
 }
