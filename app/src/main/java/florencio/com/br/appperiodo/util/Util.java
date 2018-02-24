@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
@@ -294,4 +295,13 @@ public class Util {
 
         return array;
     }
+
+	public static void requireNonNull(Object[] objetos) {
+  	  	if(objetos == null || objetos.length == 0) {
+    		throw new NullPointerException();
+		}
+		for(int i=0; i<objetos.length; i++) {
+			Objects.requireNonNull(objetos[i]);
+		}
+	}
 }

@@ -15,158 +15,165 @@ public class Dia extends Entidade {
 	private long data;
 	private Mes mes;
 
-    private long manhaIni;
-    private long manhaFim;
-    private String manhaIniFmt;
-    private String manhaFimFmt;
-    private String manhaCalFmt;
+	private long manhaIni;
+	private long manhaFim;
+	private String manhaIniFmt;
+	private String manhaFimFmt;
+	private String manhaCalFmt;
 
-    private long tardeIni;
-    private long tardeFim;
-    private String tardeIniFmt;
-    private String tardeFimFmt;
-    private String tardeCalFmt;
+	private long tardeIni;
+	private long tardeFim;
+	private String tardeIniFmt;
+	private String tardeFimFmt;
+	private String tardeCalFmt;
 
-    private long noiteIni;
-    private long noiteFim;
-    private String noiteIniFmt;
-    private String noiteFimFmt;
-    private String noiteCalFmt;
+	private long noiteIni;
+	private long noiteFim;
+	private String noiteIniFmt;
+	private String noiteFimFmt;
+	private String noiteCalFmt;
 
-    private String totalLeiFmt;
-    private String totalFmt;
-    private String credito;
-    private String debito;
-    private long totalLei;
-    private long total;
+	private String totalLeiFmt;
+	private String totalFmt;
+	private String credito;
+	private String debito;
+	private long totalLei;
+	private long total;
 
-    public Dia(Integer numero, Mes mes, String nome) {
-        this.numero = numero;
-        this.nome = nome;
-        this.mes = mes;
-    }
+	public Dia(Integer numero, Mes mes, String nome) {
+		Util.requireNonNull(new Object[]{numero, mes, nome});
+		this.numero = numero;
+		this.nome = nome;
+		this.mes = mes;
+	}
 
-    public void copiar(Dia d) {
-        _id = d._id;
+	public void copiar(Dia d) {
+		_id = d._id;
 
-        sincronizado = d.sincronizado;
-        especial = d.especial;
-        numero = d.numero;
-        valido = d.valido;
-        nome = d.nome;
-        data = d.data;
-        obs = d.obs;
-        mes = d.mes;
+		sincronizado = d.sincronizado;
+		especial = d.especial;
+		numero = d.numero;
+		valido = d.valido;
+		nome = d.nome;
+		data = d.data;
+		obs = d.obs;
+		mes = d.mes;
 
-        manhaIni = d.manhaIni;
-        manhaFim = d.manhaFim;
-        tardeIni = d.tardeIni;
-        tardeFim = d.tardeFim;
-        noiteIni = d.noiteIni;
-        noiteFim = d.noiteFim;
-    }
+		manhaIni = d.manhaIni;
+		manhaFim = d.manhaFim;
+		tardeIni = d.tardeIni;
+		tardeFim = d.tardeFim;
+		noiteIni = d.noiteIni;
+		noiteFim = d.noiteFim;
+	}
 
-    public void importar(String[] strings) {
-        try {
-            for (int i = 2; i < strings.length; i++) {
-                String s = strings[i];
-                String[] strings1 = s.split("=");
+	public void importar(String[] strings) {
+		try {
+			for (int i = 2; i < strings.length; i++) {
+				String s = strings[i];
+				String[] ponto = s.split("=");
 
-                if (Util.M_I.equals(strings1[0])) {
-                    manhaIni = Util.parseHora(strings1[1]);
-                } else if (Util.M_F.equals(strings1[0])) {
-                    manhaFim = Util.parseHora(strings1[1]);
-                } else if (Util.T_I.equals(strings1[0])) {
-                    tardeIni = Util.parseHora(strings1[1]);
-                } else if (Util.T_F.equals(strings1[0])) {
-                    tardeFim = Util.parseHora(strings1[1]);
-                } else if (Util.N_I.equals(strings1[0])) {
-                    noiteIni = Util.parseHora(strings1[1]);
-                } else if (Util.N_F.equals(strings1[0])) {
-                    noiteFim = Util.parseHora(strings1[1]);
-                } else if (Util.OBS.equals(strings1[0])) {
-                    obs = resto(i, strings);
-                }
-            }
-        } catch (Exception e) {
-            Log.i("ERRO>>>", e.getMessage());
-        }
-    }
+				if (Util.M_I.equals(ponto[0])) {
+					manhaIni = Util.parseHora(ponto[1]);
 
-    private String resto(int indice, String[] strings) {
-        StringBuilder sb = new StringBuilder();
+				} else if (Util.M_F.equals(ponto[0])) {
+					manhaFim = Util.parseHora(ponto[1]);
 
-        for (int i = indice; i < strings.length; i++) {
-            sb.append(strings[i]).append(" ");
-        }
+				} else if (Util.T_I.equals(ponto[0])) {
+					tardeIni = Util.parseHora(ponto[1]);
 
-        return sb.toString().substring(Util.OBS.length() + 1);
-    }
+				} else if (Util.T_F.equals(ponto[0])) {
+					tardeFim = Util.parseHora(ponto[1]);
 
-    public void limparHorarios() {
-        manhaIni = 0;
-        manhaFim = 0;
-        tardeIni = 0;
-        tardeFim = 0;
-        noiteIni = 0;
-        noiteFim = 0;
-    }
+				} else if (Util.N_I.equals(ponto[0])) {
+					noiteIni = Util.parseHora(ponto[1]);
 
-    public void processar(long toleranciaSaida, long excessoExtra) {
-        totalLei = 0;
-        total = 0;
+				} else if (Util.N_F.equals(ponto[0])) {
+					noiteFim = Util.parseHora(ponto[1]);
 
-        manhaCalFmt = Util.ZERO_ZERO;
-        tardeCalFmt = Util.ZERO_ZERO;
-        noiteCalFmt = Util.ZERO_ZERO;
-        credito = Util.ZERO_ZERO;
-        debito = Util.ZERO_ZERO;
+				} else if (Util.OBS.equals(ponto[0])) {
+					obs = resto(i, strings);
+				}
+			}
+		} catch (Exception e) {
+			Log.i("ERRO>>>", e.getMessage());
+		}
+	}
 
-        manhaIniFmt = Util.formatarHora(manhaIni);
-        manhaFimFmt = Util.formatarHora(manhaFim);
-        if (checado(manhaIni, manhaFim)) {
-            total += Util.diferenca(manhaIni, manhaFim);
-            manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
-        }
+	private String resto(int indice, String[] strings) {
+		StringBuilder sb = new StringBuilder();
 
-        tardeIniFmt = Util.formatarHora(tardeIni);
-        tardeFimFmt = Util.formatarHora(tardeFim);
-        if (checado(tardeIni, tardeFim)) {
-            total += Util.diferenca(tardeIni, tardeFim);
-            tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
-        }
+		for (int i = indice; i < strings.length; i++) {
+			sb.append(strings[i]).append(" ");
+		}
 
-        noiteIniFmt = Util.formatarHora(noiteIni);
-        noiteFimFmt = Util.formatarHora(noiteFim);
-        if (checado(noiteIni, noiteFim)) {
-            total += Util.diferenca(noiteIni, noiteFim);
-            noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
-        }
+		return sb.toString().substring(Util.OBS.length() + 1);
+	}
 
-        totalFmt = Util.totalFmt(total);
+	public void limparHorarios() {
+		manhaIni = 0;
+		manhaFim = 0;
+		tardeIni = 0;
+		tardeFim = 0;
+		noiteIni = 0;
+		noiteFim = 0;
+	}
 
-        if(total < Util.OITO_HORAS - toleranciaSaida) {
-            totalLei = total;
-        } else if(total > Util.OITO_HORAS + excessoExtra) {
-            totalLei = total;
-        } else {
-            totalLei = Util.OITO_HORAS;
-        }
+	public void processar(long toleranciaSaida, long excessoExtra) {
+		totalLei = 0;
+		total = 0;
 
-        totalLeiFmt = Util.totalFmt(totalLei);
+		manhaCalFmt = Util.ZERO_ZERO;
+		tardeCalFmt = Util.ZERO_ZERO;
+		noiteCalFmt = Util.ZERO_ZERO;
+		credito = Util.ZERO_ZERO;
+		debito = Util.ZERO_ZERO;
 
-        if (totalLei > Util.OITO_HORAS + excessoExtra && !ehNovo()) {
-            credito = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
-        }
+		manhaIniFmt = Util.formatarHora(manhaIni);
+		manhaFimFmt = Util.formatarHora(manhaFim);
+		if (checado(manhaIni, manhaFim)) {
+			total += Util.diferenca(manhaIni, manhaFim);
+			manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
+		}
 
-        if (totalLei < Util.OITO_HORAS - toleranciaSaida && !ehNovo()) {
-            debito = Util.diferencaFmt(total, Util.OITO_HORAS);
-        }
+		tardeIniFmt = Util.formatarHora(tardeIni);
+		tardeFimFmt = Util.formatarHora(tardeFim);
+		if (checado(tardeIni, tardeFim)) {
+			total += Util.diferenca(tardeIni, tardeFim);
+			tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
+		}
 
-        atual = numero == Util.DIA_ATUAL
-                && mes.getNumero() == Util.MES_ATUAL
-                && mes.getAno().getNumero() == Util.ANO_ATUAL;
-    }
+		noiteIniFmt = Util.formatarHora(noiteIni);
+		noiteFimFmt = Util.formatarHora(noiteFim);
+		if (checado(noiteIni, noiteFim)) {
+			total += Util.diferenca(noiteIni, noiteFim);
+			noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
+		}
+
+		totalFmt = Util.totalFmt(total);
+
+		if (total < Util.OITO_HORAS - toleranciaSaida) {
+			totalLei = total;
+		} else if (total > Util.OITO_HORAS + excessoExtra) {
+			totalLei = total;
+		} else {
+			totalLei = Util.OITO_HORAS;
+		}
+
+		totalLeiFmt = Util.totalFmt(totalLei);
+
+		if (totalLei > Util.OITO_HORAS + excessoExtra && !ehNovo()) {
+			credito = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
+		}
+
+		if (totalLei < Util.OITO_HORAS - toleranciaSaida && !ehNovo()) {
+			debito = Util.diferencaFmt(total, Util.OITO_HORAS);
+		}
+
+		atual = numero == Util.DIA_ATUAL
+				&& mes.getNumero() == Util.MES_ATUAL
+				&& mes.getAno().getNumero() == Util.ANO_ATUAL;
+	}
 
     private boolean checado(long ini, long fim) {
         return ini != 0 && fim != 0;

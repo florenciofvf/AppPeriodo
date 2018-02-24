@@ -2,12 +2,15 @@ package florencio.com.br.appperiodo.dominio;
 
 import android.content.ContentValues;
 
+import java.util.Objects;
+
 import florencio.com.br.appperiodo.util.Util;
 
 public class Ano extends Entidade {
 	final private Integer numero;
 
 	public Ano(Integer numero) {
+		Objects.requireNonNull(numero);
 		this.numero = numero;
 	}
 
