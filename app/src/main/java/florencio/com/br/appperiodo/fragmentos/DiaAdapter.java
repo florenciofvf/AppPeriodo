@@ -276,16 +276,16 @@ class DiaAdapter extends BaseExpandableListAdapter {
             txtNoiteCal.setText(obj.getNoiteCalFmt());
 
             txtTotal.setText(obj.getTotalFmt());
-            txtDebito.setText(obj.getDebito());
-            txtCredito.setText(obj.getCredito());
+            txtDebito.setText(obj.getDebitoFmt());
+            txtCredito.setText(obj.getCreditoFmt());
             txtTotalLei.setText(obj.getTotalLeiFmt());
 
             txtTotalLei.setTextColor(obj.isValido() ? Color.BLUE : Color.BLACK);
             txtTotal.setTextColor(obj.isValido() ? Color.BLUE : Color.BLACK);
 
             if (obj.isValido()) {
-                txtDebito.setTextColor(Util.ZERO_ZERO.equals(obj.getDebito()) ? Color.BLACK : Color.RED);
-                txtCredito.setTextColor(Util.ZERO_ZERO.equals(obj.getCredito()) ? Color.BLACK : Color.MAGENTA);
+                txtDebito.setTextColor(Util.ZERO_ZERO.equals(obj.getDebitoFmt()) ? Color.BLACK : Color.RED);
+                txtCredito.setTextColor(Util.ZERO_ZERO.equals(obj.getCreditoFmt()) ? Color.BLACK : Color.MAGENTA);
             } else {
                 txtDebito.setTextColor(Color.BLACK);
                 txtCredito.setTextColor(Color.BLACK);

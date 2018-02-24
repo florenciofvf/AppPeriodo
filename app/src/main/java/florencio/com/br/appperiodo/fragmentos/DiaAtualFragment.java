@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -200,11 +199,11 @@ public class DiaAtualFragment extends Fragment {
         txtTotalLei.setText(dia.getTotalLeiFmt());
         chkEspecial.setChecked(dia.isEspecial());
         chkSincronizado.setChecked(dia.isSincronizado());
-        txtCredito.setText(dia.getCredito());
+        txtCredito.setText(dia.getCreditoFmt());
         chkValido.setChecked(dia.isValido());
         txtTotal.setText(dia.getTotalFmt());
         txtTitulo.setText(criarTitulo(dia));
-        txtDebito.setText(dia.getDebito());
+        txtDebito.setText(dia.getDebitoFmt());
         txtDia.setText(dia.getNome());
         txtObs.setText(dia.getObs());
         //edtObs.setText(dia.getObs());
@@ -213,8 +212,8 @@ public class DiaAtualFragment extends Fragment {
         txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
 
         if (dia.isValido()) {
-            txtDebito.setTextColor(Util.ZERO_ZERO.equals(dia.getDebito()) ? Color.BLACK : Color.RED);
-            txtCredito.setTextColor(Util.ZERO_ZERO.equals(dia.getCredito()) ? Color.BLACK : Color.MAGENTA);
+            txtDebito.setTextColor(Util.ZERO_ZERO.equals(dia.getDebitoFmt()) ? Color.BLACK : Color.RED);
+            txtCredito.setTextColor(Util.ZERO_ZERO.equals(dia.getCreditoFmt()) ? Color.BLACK : Color.MAGENTA);
         } else {
             txtDebito.setTextColor(Color.BLACK);
             txtCredito.setTextColor(Color.BLACK);

@@ -33,11 +33,16 @@ public class Dia extends Entidade {
 	private String noiteFimFmt;
 	private String noiteCalFmt;
 
+	private String creditoFmt;
+	private long credito;
+
+	private String debitoFmt;
+	private long debito;
+
 	private String totalLeiFmt;
-	private String totalFmt;
-	private String credito;
-	private String debito;
 	private long totalLei;
+
+	private String totalFmt;
 	private long total;
 
 	public Dia(Integer numero, Mes mes, String nome) {
@@ -120,31 +125,36 @@ public class Dia extends Entidade {
 	}
 
 	public void processar(long menosHorario, long maisHorario) {
+		atual = numero == Util.DIA_ATUAL && mes.getNumero() == Util.MES_ATUAL && mes.getAno().getNumero() == Util.ANO_ATUAL;
+
 		totalLei = 0;
+		credito = 0;
+		debito = 0;
 		total = 0;
+
+		manhaIniFmt = Util.formatarHora(manhaIni);
+		manhaFimFmt = Util.formatarHora(manhaFim);
+		tardeIniFmt = Util.formatarHora(tardeIni);
+		tardeFimFmt = Util.formatarHora(tardeFim);
+		noiteIniFmt = Util.formatarHora(noiteIni);
+		noiteFimFmt = Util.formatarHora(noiteFim);
 
 		manhaCalFmt = Util.ZERO_ZERO;
 		tardeCalFmt = Util.ZERO_ZERO;
 		noiteCalFmt = Util.ZERO_ZERO;
-		credito = Util.ZERO_ZERO;
-		debito = Util.ZERO_ZERO;
+		creditoFmt = Util.ZERO_ZERO;
+		debitoFmt = Util.ZERO_ZERO;
 
-		manhaIniFmt = Util.formatarHora(manhaIni);
-		manhaFimFmt = Util.formatarHora(manhaFim);
 		if (checado(manhaIni, manhaFim)) {
 			total += Util.diferenca(manhaIni, manhaFim);
 			manhaCalFmt = Util.diferencaFmt(manhaIni, manhaFim);
 		}
 
-		tardeIniFmt = Util.formatarHora(tardeIni);
-		tardeFimFmt = Util.formatarHora(tardeFim);
 		if (checado(tardeIni, tardeFim)) {
 			total += Util.diferenca(tardeIni, tardeFim);
 			tardeCalFmt = Util.diferencaFmt(tardeIni, tardeFim);
 		}
 
-		noiteIniFmt = Util.formatarHora(noiteIni);
-		noiteFimFmt = Util.formatarHora(noiteFim);
 		if (checado(noiteIni, noiteFim)) {
 			total += Util.diferenca(noiteIni, noiteFim);
 			noiteCalFmt = Util.diferencaFmt(noiteIni, noiteFim);
@@ -159,16 +169,12 @@ public class Dia extends Entidade {
 		totalLeiFmt = Util.totalFmt(totalLei);
 
 		if (totalLei > Util.OITO_HORAS + maisHorario && !ehNovo()) {
-			credito = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
+			creditoFmt = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
 		}
 
 		if (totalLei < Util.OITO_HORAS - menosHorario && !ehNovo()) {
-			debito = Util.diferencaFmt(total, Util.OITO_HORAS);
+			debitoFmt = Util.diferencaFmt(total, Util.OITO_HORAS);
 		}
-
-		atual = numero == Util.DIA_ATUAL
-				&& mes.getNumero() == Util.MES_ATUAL
-				&& mes.getAno().getNumero() == Util.ANO_ATUAL;
 	}
 
     private boolean checado(long ini, long fim) {
@@ -287,12 +293,12 @@ public class Dia extends Entidade {
         return nome;
     }
 
-    public String getDebito() {
-        return debito;
+    public String getDebitoFmt() {
+        return debitoFmt;
     }
 
-    public String getCredito() {
-        return credito;
+    public String getCreditoFmt() {
+        return creditoFmt;
     }
 
     public long getTotal() {

@@ -39,9 +39,6 @@
     <string name="label_pontos">Pontos</string>
     <string name="label_total">TOT:</string>
     <string name="app_name">Períodos</string>
-    <string name="label_manha">Manhã</string>
-    <string name="label_tarde">Tarde</string>
-    <string name="label_noite">Noite</string>
     <string name="label_saida">Saída</string>
     <string name="label_anos">Anos</string>
     <string name="label_hoje">Hoje</string>
