@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="cinza_claro">#DDDDDD</color>
-    <color name="domingo">#FF888888</color>
-    <color name="laranja">#FFFFAA00</color>
-    <color name="sabado">#FFCCCCCC</color>
-    <color name="atual">#FF88EE88</color>
-    <color name="branco">#FFFFFF</color>
-    <color name="preto">#777777</color>
-
+	<color name="colorPrimaryDark">#303F9F</color>
+	<color name="colorPrimary">#3F51B5</color>
+	<color name="colorAccent">#FF4081</color>
+	<color name="cinza_claro">#DDDDDD</color>
+	<color name="domingo">#FF888888</color>
+	<color name="laranja">#FFFFAA00</color>
+	<color name="sabado">#FFCCCCCC</color>
+	<color name="atual">#FF88EE88</color>
+	<color name="branco">#FFFFFF</color>
+	<color name="preto">#777777</color>
 </resources>

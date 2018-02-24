@@ -168,252 +168,264 @@ public class Dia extends Entidade {
 
 		totalLeiFmt = Util.totalFmt(totalLei);
 
-		if (totalLei > Util.OITO_HORAS + maisHorario && !ehNovo()) {
-			creditoFmt = Util.diferencaFmt(Util.OITO_HORAS, totalLei);
-		}
-
-		if (totalLei < Util.OITO_HORAS - menosHorario && !ehNovo()) {
-			debitoFmt = Util.diferencaFmt(total, Util.OITO_HORAS);
+		if(!ehNovo()) {
+			if (total > Util.OITO_HORAS) {
+				credito = Util.diferenca(Util.OITO_HORAS, total);
+				creditoFmt = Util.diferencaFmt(Util.OITO_HORAS, total);
+			}
+			if (total < Util.OITO_HORAS) {
+				debito = Util.diferenca(total, Util.OITO_HORAS);
+				debitoFmt = Util.diferencaFmt(total, Util.OITO_HORAS);
+			}
 		}
 	}
 
-    private boolean checado(long ini, long fim) {
-        return ini != 0 && fim != 0;
-    }
+	private boolean checado(long ini, long fim) {
+		return ini != 0 && fim != 0;
+	}
 
-    public String getTotalFmt() {
-        return totalFmt;
-    }
+	public String getTotalFmt() {
+		return totalFmt;
+	}
 
-    public String getTotalLeiFmt() {
-        return totalLeiFmt;
-    }
+	public String getTotalLeiFmt() {
+		return totalLeiFmt;
+	}
 
-    public Integer getNumero() {
-        return numero;
-    }
+	public Integer getNumero() {
+		return numero;
+	}
 
-    public String getObs() {
-        return obs;
-    }
+	public String getObs() {
+		return obs;
+	}
 
-    public void setObs(String obs) {
-        this.obs = obs;
-    }
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
 
-    public Mes getMes() {
-        return mes;
-    }
+	public Mes getMes() {
+		return mes;
+	}
 
-    public long getManhaIni() {
-        return manhaIni;
-    }
+	public long getManhaIni() {
+		return manhaIni;
+	}
 
-    public void setManhaIni(long manhaIni) {
-        this.manhaIni = manhaIni;
-    }
+	public void setManhaIni(long manhaIni) {
+		this.manhaIni = manhaIni;
+	}
 
-    public long getManhaFim() {
-        return manhaFim;
-    }
+	public long getManhaFim() {
+		return manhaFim;
+	}
 
-    public void setManhaFim(long manhaFim) {
-        this.manhaFim = manhaFim;
-    }
+	public void setManhaFim(long manhaFim) {
+		this.manhaFim = manhaFim;
+	}
 
-    public String getManhaIniFmt() {
-        return manhaIniFmt;
-    }
+	public String getManhaIniFmt() {
+		return manhaIniFmt;
+	}
 
-    public String getManhaFimFmt() {
-        return manhaFimFmt;
-    }
+	public String getManhaFimFmt() {
+		return manhaFimFmt;
+	}
 
-    public String getManhaCalFmt() {
-        return manhaCalFmt;
-    }
+	public String getManhaCalFmt() {
+		return manhaCalFmt;
+	}
 
-    public long getTardeIni() {
-        return tardeIni;
-    }
+	public long getTardeIni() {
+		return tardeIni;
+	}
 
-    public void setTardeIni(long tardeIni) {
-        this.tardeIni = tardeIni;
-    }
+	public void setTardeIni(long tardeIni) {
+		this.tardeIni = tardeIni;
+	}
 
-    public long getTardeFim() {
-        return tardeFim;
-    }
+	public long getTardeFim() {
+		return tardeFim;
+	}
 
-    public void setTardeFim(long tardeFim) {
-        this.tardeFim = tardeFim;
-    }
+	public void setTardeFim(long tardeFim) {
+		this.tardeFim = tardeFim;
+	}
 
-    public String getTardeIniFmt() {
-        return tardeIniFmt;
-    }
+	public String getTardeIniFmt() {
+		return tardeIniFmt;
+	}
 
-    public String getTardeFimFmt() {
-        return tardeFimFmt;
-    }
+	public String getTardeFimFmt() {
+		return tardeFimFmt;
+	}
 
-    public String getTardeCalFmt() {
-        return tardeCalFmt;
-    }
+	public String getTardeCalFmt() {
+		return tardeCalFmt;
+	}
 
-    public long getNoiteIni() {
-        return noiteIni;
-    }
+	public long getNoiteIni() {
+		return noiteIni;
+	}
 
-    public void setNoiteIni(long noiteIni) {
-        this.noiteIni = noiteIni;
-    }
+	public void setNoiteIni(long noiteIni) {
+		this.noiteIni = noiteIni;
+	}
 
-    public long getNoiteFim() {
-        return noiteFim;
-    }
+	public long getNoiteFim() {
+		return noiteFim;
+	}
 
-    public void setNoiteFim(long noiteFim) {
-        this.noiteFim = noiteFim;
-    }
+	public void setNoiteFim(long noiteFim) {
+		this.noiteFim = noiteFim;
+	}
 
-    public String getNoiteIniFmt() {
-        return noiteIniFmt;
-    }
+	public String getNoiteIniFmt() {
+		return noiteIniFmt;
+	}
 
-    public String getNoiteFimFmt() {
-        return noiteFimFmt;
-    }
+	public String getNoiteFimFmt() {
+		return noiteFimFmt;
+	}
 
-    public String getNoiteCalFmt() {
-        return noiteCalFmt;
-    }
+	public String getNoiteCalFmt() {
+		return noiteCalFmt;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public String getDebitoFmt() {
-        return debitoFmt;
-    }
+	public long getDebito() {
+		return debito;
+	}
 
-    public String getCreditoFmt() {
-        return creditoFmt;
-    }
+	public String getDebitoFmt() {
+		return debitoFmt;
+	}
 
-    public long getTotal() {
-        return total;
-    }
+	public long getCredito() {
+		return credito;
+	}
 
-    public long getTotalLei() {
-        return totalLei;
-    }
+	public String getCreditoFmt() {
+		return creditoFmt;
+	}
 
-    public boolean isValido() {
-        return valido == 1;
-    }
+	public long getTotal() {
+		return total;
+	}
 
-    public boolean isEspecial() {
-        return especial == 1;
-    }
+	public long getTotalLei() {
+		return totalLei;
+	}
 
-    public void setValido(int valido) {
-        this.valido = valido;
-    }
+	public boolean isValido() {
+		return valido == 1;
+	}
 
-    public void setEspecial(int especial) {
-        this.especial = especial;
-    }
+	public boolean isEspecial() {
+		return especial == 1;
+	}
 
-    public boolean isAtual() {
-        return atual;
-    }
+	public void setValido(int valido) {
+		this.valido = valido;
+	}
 
-    public void setData(long data) {
-        this.data = data;
-    }
+	public void setEspecial(int especial) {
+		this.especial = especial;
+	}
 
-    public boolean isSincronizado() {
-        return sincronizado == 1;
-    }
+	public boolean isAtual() {
+		return atual;
+	}
 
-    public void setSincronizado(int sincronizado) {
-        this.sincronizado = sincronizado;
-    }
+	public void setData(long data) {
+		this.data = data;
+	}
 
-    public ContentValues criarContentValues() {
-        if (data == 0) {
-            data = Util.criarData(this);
-        }
+	public boolean isSincronizado() {
+		return sincronizado == 1;
+	}
 
-        ContentValues cv = new ContentValues();
-        cv.put("mes_id", mes.get_id());
-        cv.put("numero", numero);
-        cv.put("nome", nome);
-        cv.put("obs", obs);
-        cv.put("manha_ini", manhaIni);
-        cv.put("manha_fim", manhaFim);
-        cv.put("tarde_ini", tardeIni);
-        cv.put("tarde_fim", tardeFim);
-        cv.put("noite_ini", noiteIni);
-        cv.put("noite_fim", noiteFim);
-        cv.put("especial", especial);
-        cv.put("valido", valido);
-        cv.put("sincronizado", sincronizado);
-        cv.put("data", data);
-        return cv;
-    }
+	public void setSincronizado(int sincronizado) {
+		this.sincronizado = sincronizado;
+	}
 
-    public String gerarConteudoEmail() {
-        if (!ehNovo()) {
-            return Util.get00(getNumero().toString()) + " " + getNome() + " " +
-                    auxHora(Util.M_I, getManhaIniFmt()) +
-                    auxHora(Util.M_F, getManhaFimFmt()) +
-                    auxHora(Util.T_I, getTardeIniFmt()) +
-                    auxHora(Util.T_F, getTardeFimFmt()) +
-                    auxHora(Util.N_I, getNoiteIniFmt()) +
-                    auxHora(Util.N_F, getNoiteFimFmt()) +
-                    auxDesc(Util.OBS, getObs()) + "\n";
-        }
+	public ContentValues criarContentValues() {
+		if (data == 0) {
+			data = Util.criarData(this);
+		}
 
-        return "";
-    }
+		ContentValues cv = new ContentValues();
+		cv.put("mes_id", mes.get_id());
+		cv.put("numero", numero);
+		cv.put("nome", nome);
+		cv.put("obs", obs);
+		cv.put("manha_ini", manhaIni);
+		cv.put("manha_fim", manhaFim);
+		cv.put("tarde_ini", tardeIni);
+		cv.put("tarde_fim", tardeFim);
+		cv.put("noite_ini", noiteIni);
+		cv.put("noite_fim", noiteFim);
+		cv.put("especial", especial);
+		cv.put("valido", valido);
+		cv.put("sincronizado", sincronizado);
+		cv.put("data", data);
 
-    public String gerarConteudoDados() {
-        if (!ehNovo()) {
-            return Util.get00(getNumero().toString()) + " " + getNome() + " " +
-                    auxHora("", getManhaIniFmt()) +
-                    auxHora("", getManhaFimFmt()) +
-                    auxHora("", getTardeIniFmt()) +
-                    auxHora("", getTardeFimFmt()) +
-                    auxHora("", getNoiteIniFmt()) +
-                    auxHora("", getNoiteFimFmt()) +
-                    auxDesc("", getObs()) + "\n";
-        }
+		return cv;
+	}
 
-        return "";
-    }
+	public String gerarConteudoEmail() {
+		if (!ehNovo()) {
+			return Util.get00(getNumero().toString()) + " " + getNome() + " " +
+					auxHora(Util.M_I, getManhaIniFmt()) +
+					auxHora(Util.M_F, getManhaFimFmt()) +
+					auxHora(Util.T_I, getTardeIniFmt()) +
+					auxHora(Util.T_F, getTardeFimFmt()) +
+					auxHora(Util.N_I, getNoiteIniFmt()) +
+					auxHora(Util.N_F, getNoiteFimFmt()) +
+					auxDesc(Util.OBS, getObs()) + "\n";
+		}
 
-    private String auxHora(String prefixo, String string) {
-        if (string == null || Util.ZERO_ZERO.equals(string)) {
-            return "";
-        }
+		return Util.VAZIO;
+	}
 
-        return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
-    }
+	public String gerarConteudoDados() {
+		if (!ehNovo()) {
+			return Util.get00(getNumero().toString()) + " " + getNome() + " " +
+					auxHora(Util.VAZIO, getManhaIniFmt()) +
+					auxHora(Util.VAZIO, getManhaFimFmt()) +
+					auxHora(Util.VAZIO, getTardeIniFmt()) +
+					auxHora(Util.VAZIO, getTardeFimFmt()) +
+					auxHora(Util.VAZIO, getNoiteIniFmt()) +
+					auxHora(Util.VAZIO, getNoiteFimFmt()) +
+					auxDesc(Util.VAZIO, getObs()) + "\n";
+		}
 
-    private String auxDesc(String prefixo, String string) {
-        if (string == null || string.length() == 0) {
-            return "";
-        }
+		return Util.VAZIO;
+	}
 
-        return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
-    }
+	private String auxHora(String prefixo, String string) {
+		if (string == null || Util.ZERO_ZERO.equals(string)) {
+			return Util.VAZIO;
+		}
 
-    @Override
-    public String toString() {
-        return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +
-                ", TARDE_INI=" + tardeIni + ", TARDE_FIM=" + tardeFim +
-                ", NOITE_INI=" + noiteIni + ", NOITE_FIM=" + noiteFim;
-    }
+		return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
+	}
+
+	private String auxDesc(String prefixo, String string) {
+		if (string == null || string.length() == 0) {
+			return Util.VAZIO;
+		}
+
+		return prefixo.length() > 0 ? prefixo + "=" + string + " " : string + " ";
+	}
+
+	@Override
+	public String toString() {
+		return "MANHA_INI=" + manhaIni + ", MANHA_FIM=" + manhaFim +
+				", TARDE_INI=" + tardeIni + ", TARDE_FIM=" + tardeFim +
+				", NOITE_INI=" + noiteIni + ", NOITE_FIM=" + noiteFim;
+	}
 }

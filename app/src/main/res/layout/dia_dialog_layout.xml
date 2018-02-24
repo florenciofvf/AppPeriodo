@@ -1,202 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 
-        <TextView
-            android:elevation="@dimen/cinco_dp"
-            android:background="@drawable/bg_atual"
-            android:id="@+id/txtTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/um_dp"
-            android:layout_marginBottom="@dimen/dez_dp"
-            android:textAppearance="?android:textAppearanceLarge" />
+		<TextView
+			android:id="@+id/txtTitulo"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/dez_dp"
+			android:layout_marginTop="@dimen/um_dp"
+			android:background="@drawable/bg_atual"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:textAppearance="?android:textAppearanceLarge" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+		<android.support.design.widget.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edtObs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_observacao" />
-        </android.support.design.widget.TextInputLayout>
+			<EditText
+				android:id="@+id/edtObs"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:hint="@string/label_observacao" />
+		</android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="@dimen/dez_dp"
-            android:background="@drawable/bg_padrao"
-            android:elevation="@dimen/cinco_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/dez_dp"
+			android:background="@drawable/bg_padrao"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/chkValido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_valido" />
+			<CheckBox
+				android:id="@+id/chkValido"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_valido" />
 
-            <CheckBox
-                android:id="@+id/chkEspecial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_especial" />
+			<CheckBox
+				android:id="@+id/chkEspecial"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_especial" />
 
-            <CheckBox
-                android:id="@+id/chkSincronizado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_sincronizado" />
-        </LinearLayout>
+			<CheckBox
+				android:id="@+id/chkSincronizado"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_sincronizado" />
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="@dimen/dez_dp"
-            android:background="@drawable/bg_padrao"
-            android:elevation="@dimen/cinco_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/dez_dp"
+			android:background="@drawable/bg_padrao"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_entrada" />
 
-            <TextView
-                android:id="@+id/btnManhaIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
+			<TextView
+				android:id="@+id/btnManhaIni"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_saida" />
 
-            <TextView
-                android:id="@+id/btnManhaFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
-        </LinearLayout>
+			<TextView
+				android:id="@+id/btnManhaFim"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="@dimen/dez_dp"
-            android:background="@drawable/bg_padrao"
-            android:elevation="@dimen/cinco_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/dez_dp"
+			android:background="@drawable/bg_padrao"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_entrada" />
 
-            <TextView
-                android:id="@+id/btnTardeIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
+			<TextView
+				android:id="@+id/btnTardeIni"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_saida" />
 
-            <TextView
-                android:id="@+id/btnTardeFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
-        </LinearLayout>
+			<TextView
+				android:id="@+id/btnTardeFim"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="@dimen/dez_dp"
-            android:background="@drawable/bg_padrao"
-            android:elevation="@dimen/cinco_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/dez_dp"
+			android:background="@drawable/bg_padrao"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_entrada" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_entrada" />
 
-            <TextView
-                android:id="@+id/btnNoiteIni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
+			<TextView
+				android:id="@+id/btnNoiteIni"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_saida" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_saida" />
 
-            <TextView
-                android:id="@+id/btnNoiteFim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/quinze_dp"
-                android:elevation="@dimen/doze_dp"
-                android:padding="@dimen/vinte_dp" />
-        </LinearLayout>
+			<TextView
+				android:id="@+id/btnNoiteFim"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/quinze_dp"
+				android:elevation="@dimen/doze_dp"
+				android:padding="@dimen/vinte_dp" />
+		</LinearLayout>
 
-        <LinearLayout
-            android:layout_marginBottom="@dimen/sete_dp"
-            android:background="@drawable/bg_padrao"
-            android:elevation="@dimen/cinco_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/sete_dp"
+			android:background="@drawable/bg_padrao"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnExcluir"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_excluir" />
+			<Button
+				android:id="@+id/btnExcluir"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_excluir" />
 
-            <Button
-                android:id="@+id/btnCancelar"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_cancelar" />
+			<Button
+				android:id="@+id/btnSalvar"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_salvar" />
 
-            <Button
-                android:id="@+id/btnSalvar"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_salvar" />
-        </LinearLayout>
+			<Button
+				android:id="@+id/btnCancelar"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/label_cancelar" />
+		</LinearLayout>
 
-    </LinearLayout>
+	</LinearLayout>
 
 </ScrollView>

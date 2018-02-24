@@ -138,7 +138,7 @@ class DiaAdapter extends BaseExpandableListAdapter {
         Dia obj = getObjeto(groupPosition);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_grupo_layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_grupo_cabecalho_layout, null);
             convertView.setTag(new ViewHolderGrupo(convertView));
         }
 
@@ -189,7 +189,7 @@ class DiaAdapter extends BaseExpandableListAdapter {
         Dia obj = getObjeto(groupPosition);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_detalhe_layout, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.dia_item_grupo_detalhe_layout, null);
             convertView.setTag(new ViewHolderDetalhe(convertView));
         }
 

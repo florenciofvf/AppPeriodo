@@ -39,6 +39,7 @@ public class Util {
 	public static final String N_I = "N_I";
 	public static final String N_F = "N_F";
 	public static final String OBS = "OBS";
+	public static final String VAZIO = "";
 	public static final int UM = 1;
 
 	public static int ANO_ATUAL;
