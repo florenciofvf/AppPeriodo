@@ -187,7 +187,7 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 		if (debito > credito) {
 			return " NEGATIVO: " + Util.totalFmt(debito - credito);
 		} else {
-			return " POSITIVO" + Util.totalFmt(credito - debito);
+			return " POSITIVO: " + Util.totalFmt(credito - debito);
 		}
 	}
 
