@@ -245,7 +245,7 @@ public class Repositorio {
 	}
 
 	public void excluirDia(Dia d) {
-		if(!d.ehNovo()) {
+		if (!d.ehNovo()) {
 			SQLiteDatabase db = helper.getWritableDatabase();
 			db.delete("Dia", "_id=" + d.get_id(), null);
 			db.close();

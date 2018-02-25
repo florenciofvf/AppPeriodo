@@ -28,17 +28,50 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
 		android:layout_marginRight="@dimen/sete_dp"
+		android:background="@drawable/bg_360_atual"
 		android:elevation="@dimen/dez_dp"
 		android:gravity="center"
-		android:maxHeight="@dimen/sete_dp"
-		android:maxWidth="@dimen/sete_dp"
-		android:minHeight="@dimen/sete_dp"
-		android:minWidth="@dimen/sete_dp"
+		android:maxHeight="@dimen/dez_dp"
+		android:maxWidth="@dimen/dez_dp"
+		android:minHeight="@dimen/dez_dp"
+		android:minWidth="@dimen/dez_dp"
 		android:paddingLeft="@dimen/sete_dp"
 		android:paddingRight="@dimen/sete_dp" />
 
 	<TextView
-		android:id="@+id/txtManhaIni"
+		android:id="@+id/txtVal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_360_valido"
+		android:layout_gravity="center"
+		android:layout_marginRight="@dimen/sete_dp"
+		android:elevation="@dimen/dez_dp"
+		android:gravity="center"
+		android:maxHeight="@dimen/dez_dp"
+		android:maxWidth="@dimen/dez_dp"
+		android:minHeight="@dimen/dez_dp"
+		android:minWidth="@dimen/dez_dp"
+		android:paddingLeft="@dimen/sete_dp"
+		android:paddingRight="@dimen/sete_dp" />
+
+	<TextView
+		android:id="@+id/txtId"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_360_id"
+		android:layout_gravity="center"
+		android:layout_marginRight="@dimen/sete_dp"
+		android:elevation="@dimen/dez_dp"
+		android:gravity="center"
+		android:maxHeight="@dimen/dez_dp"
+		android:maxWidth="@dimen/dez_dp"
+		android:minHeight="@dimen/dez_dp"
+		android:minWidth="@dimen/dez_dp"
+		android:paddingLeft="@dimen/sete_dp"
+		android:paddingRight="@dimen/sete_dp" />
+
+	<TextView
+		android:id="@+id/txtTotal"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="@dimen/cinco_dp"
@@ -49,32 +82,32 @@
 		android:textColor="@color/branco" />
 
 	<TextView
-		android:id="@+id/txtManhaFim"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginRight="@dimen/vinte_dp"
-		android:background="@drawable/bg_hora"
-		android:elevation="@dimen/vinte_dp"
-		android:paddingLeft="@dimen/sete_dp"
-		android:paddingRight="@dimen/sete_dp"
-		android:textColor="@color/branco" />
-
-	<TextView
-		android:id="@+id/txtTardeIni"
+		android:id="@+id/txtTotalLei"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="@dimen/cinco_dp"
-		android:background="@drawable/bg_hora"
+		android:background="@drawable/bg_valido"
 		android:elevation="@dimen/vinte_dp"
 		android:paddingLeft="@dimen/sete_dp"
 		android:paddingRight="@dimen/sete_dp"
 		android:textColor="@color/branco" />
 
 	<TextView
-		android:id="@+id/txtTardeFim"
+		android:id="@+id/txtDebito"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:background="@drawable/bg_hora"
+		android:layout_marginRight="@dimen/cinco_dp"
+		android:background="@drawable/bg_debito"
+		android:elevation="@dimen/vinte_dp"
+		android:paddingLeft="@dimen/sete_dp"
+		android:paddingRight="@dimen/sete_dp"
+		android:textColor="@color/branco" />
+
+	<TextView
+		android:id="@+id/txtCredito"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bg_credito"
 		android:elevation="@dimen/vinte_dp"
 		android:paddingLeft="@dimen/sete_dp"
 		android:paddingRight="@dimen/sete_dp"

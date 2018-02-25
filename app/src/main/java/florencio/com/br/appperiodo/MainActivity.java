@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 		if (item.getItemId() == R.id.itemAno) {
+
 			FragmentManager manager = getSupportFragmentManager();
 			Fragment f = manager.findFragmentByTag("FRAGMENTO");
 			FragmentTransaction transaction = manager.beginTransaction();
@@ -106,9 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				transaction.addToBackStack(null);
 				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			}
+
 			transaction.commit();
 
 		} else if (item.getItemId() == R.id.itemHoje) {
+
 			FragmentManager manager = getSupportFragmentManager();
 			Fragment f = manager.findFragmentByTag("FRAGMENTO");
 			FragmentTransaction transaction = manager.beginTransaction();
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				transaction.addToBackStack(null);
 				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 			}
+
 			transaction.commit();
 
 		} else if (item.getItemId() == R.id.itemPref) {
@@ -191,6 +195,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 
 		Toast.makeText(this, R.string.label_registro_salvo, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void excluirDia(Dia dia) {
+		if (!dia.ehNovo()) {
+			repositorio.excluirDia(dia);
+
+			FragmentManager manager = getSupportFragmentManager();
+			Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
+
+			if (fragment instanceof DiaFragment) {
+				((DiaFragment) fragment).atualizarExclusao();
+				Toast.makeText(this, R.string.label_registro_excluido, Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override

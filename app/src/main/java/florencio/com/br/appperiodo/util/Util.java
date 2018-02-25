@@ -32,6 +32,7 @@ public class Util {
 	public static final String NOITE_FIM = "NOITE_FIM";
 	public static final String ZERO_ZERO = "00:00";
 	public static final String VIBRAR = "VIBRAR";
+	public static final String QUEBRA = "\n";
 	public static final String M_I = "M_I";
 	public static final String M_F = "M_F";
 	public static final String T_I = "T_I";
@@ -146,6 +147,10 @@ public class Util {
 		return valor < 10 ? "0" + valor : "" + valor;
 	}
 
+	private static String get00(Integer valor) {
+		return valor < 10 ? "0" + valor.toString() : valor.toString();
+	}
+
 	public static String get00(String s) {
 		return s.length() == 1 ? "0" + s : s;
 	}
@@ -156,6 +161,10 @@ public class Util {
 
 	private static long getHoras(long milisegundos) {
 		return milisegundos / 1000 / 60 / 60;
+	}
+
+	public static String criarTitulo(Dia dia) {
+		return get00(dia.getNumero()) + "/" + get00(dia.getMes().getNumero()) + "/" + get00(dia.getMes().getAno().getNumero());
 	}
 
 	public static Integer getHora(String campo, Dia dia) {
@@ -231,7 +240,7 @@ public class Util {
 		}
 	}
 
-	public static Drawable getBackground(long l, Context context) {
+	private static Drawable getBackground(long l, Context context) {
 		return l != 0 ? context.getDrawable(R.drawable.bg_360_atual) : context.getDrawable(R.drawable.bg_360_padrao);
 	}
 

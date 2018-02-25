@@ -5,6 +5,7 @@
 	<string name="label_tolerancia_para_saida">Posso sair faltando até</string>
 	<string name="label_excesso_para_extra">Não hora extra para até</string>
 	<string name="label_click_para_atualizar">Click para atualizar</string>
+	<string name="label_registro_excluido">Registro excluído.</string>
 	<string name="comprimento_horario">comprimento_horario</string>
 	<string name="label_url_importacao">URL de importação</string>
 	<string name="excesso_hora_extra">excesso_hora_extra</string>

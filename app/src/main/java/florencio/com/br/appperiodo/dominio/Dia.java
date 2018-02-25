@@ -162,13 +162,13 @@ public class Dia extends Entidade {
 
 		totalFmt = Util.totalFmt(total);
 
-		if(!ehNovo()) {
+		if (!ehNovo() && isValido()) {
 			totalLei = (total >= Util.OITO_HORAS - menosHorario && total <= Util.OITO_HORAS + maisHorario) ? Util.OITO_HORAS : total;
 		}
 
 		totalLeiFmt = Util.totalFmt(totalLei);
 
-		if(!ehNovo()) {
+		if (!ehNovo() && isValido()) {
 			if (total > Util.OITO_HORAS) {
 				credito = Util.diferenca(Util.OITO_HORAS, total);
 				creditoFmt = Util.diferencaFmt(Util.OITO_HORAS, total);
