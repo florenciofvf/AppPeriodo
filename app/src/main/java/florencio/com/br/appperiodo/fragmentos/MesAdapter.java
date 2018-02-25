@@ -14,68 +14,68 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Mes;
 
 class MesAdapter extends BaseAdapter {
-    private final List<Mes> objetos;
-    private final Context context;
+	private final List<Mes> objetos;
+	private final Context context;
 
-    MesAdapter(List<Mes> objetos, Context context) {
-        this.objetos = objetos;
-        this.context = context;
-    }
+	MesAdapter(List<Mes> objetos, Context context) {
+		this.objetos = objetos;
+		this.context = context;
+	}
 
-    @Override
-    public int getCount() {
-        return objetos.size();
-    }
+	@Override
+	public int getCount() {
+		return objetos.size();
+	}
 
-    @Override
-    public Object getItem(int position) {
-        return objetos.get(position);
-    }
+	@Override
+	public Object getItem(int position) {
+		return objetos.get(position);
+	}
 
-    @Override
-    public long getItemId(int position) {
-        Mes obj = objetos.get(position);
-        return obj.get_id();
-    }
+	@Override
+	public long getItemId(int position) {
+		Mes obj = objetos.get(position);
+		return obj.get_id();
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Mes obj = objetos.get(position);
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		Mes obj = objetos.get(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.mes_item_layout, null);
-            convertView.setTag(new ViewHolder(convertView));
-        }
+		if (convertView == null) {
+			convertView = LayoutInflater.from(context).inflate(R.layout.mes_item_layout, null);
+			convertView.setTag(new ViewHolder(convertView));
+		}
 
-        ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.atualizarView(obj);
+		ViewHolder holder = (ViewHolder) convertView.getTag();
+		holder.atualizarView(obj);
 
-        boolean config = false;
+		boolean config = false;
 
-        if (obj.isAtual()) {
-            convertView.setBackground(context.getDrawable(R.drawable.bg_atual));
-            config = true;
-        }
+		if (obj.isAtual()) {
+			convertView.setBackground(context.getDrawable(R.drawable.bg_atual));
+			config = true;
+		}
 
-        if(!config) {
-            convertView.setBackground(holder.corOriginal);
-        }
+		if (!config) {
+			convertView.setBackground(holder.corOriginal);
+		}
 
-        return convertView;
-    }
+		return convertView;
+	}
 
-    private class ViewHolder {
-        final Drawable corOriginal;
-        final TextView txtNome;
+	private class ViewHolder {
+		final Drawable corOriginal;
+		final TextView txtNome;
 
-        ViewHolder(View view) {
-            corOriginal = view.getBackground();
+		ViewHolder(View view) {
+			corOriginal = view.getBackground();
 
-            txtNome = view.findViewById(R.id.txtNome);
-        }
+			txtNome = view.findViewById(R.id.txtNome);
+		}
 
-        void atualizarView(Mes obj) {
-            txtNome.setText(obj.getNome());
-        }
-    }
+		void atualizarView(Mes obj) {
+			txtNome.setText(obj.getNome());
+		}
+	}
 }

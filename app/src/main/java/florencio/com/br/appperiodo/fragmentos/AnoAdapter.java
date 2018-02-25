@@ -14,68 +14,68 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Ano;
 
 class AnoAdapter extends BaseAdapter {
-    private final List<Ano> objetos;
-    private final Context context;
+	private final List<Ano> objetos;
+	private final Context context;
 
-    AnoAdapter(List<Ano> objetos, Context context) {
-        this.objetos = objetos;
-        this.context = context;
-    }
+	AnoAdapter(List<Ano> objetos, Context context) {
+		this.objetos = objetos;
+		this.context = context;
+	}
 
-    @Override
-    public int getCount() {
-        return objetos.size();
-    }
+	@Override
+	public int getCount() {
+		return objetos.size();
+	}
 
-    @Override
-    public Object getItem(int position) {
-        return objetos.get(position);
-    }
+	@Override
+	public Object getItem(int position) {
+		return objetos.get(position);
+	}
 
-    @Override
-    public long getItemId(int position) {
-        Ano obj = objetos.get(position);
-        return obj.get_id();
-    }
+	@Override
+	public long getItemId(int position) {
+		Ano obj = objetos.get(position);
+		return obj.get_id();
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Ano obj = objetos.get(position);
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		Ano obj = objetos.get(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.ano_item_layout, null);
-            convertView.setTag(new ViewHolder(convertView));
-        }
+		if (convertView == null) {
+			convertView = LayoutInflater.from(context).inflate(R.layout.ano_item_layout, null);
+			convertView.setTag(new ViewHolder(convertView));
+		}
 
-        ViewHolder holder = (ViewHolder) convertView.getTag();
-        holder.atualizarView(obj);
+		ViewHolder holder = (ViewHolder) convertView.getTag();
+		holder.atualizarView(obj);
 
-        boolean config = false;
+		boolean config = false;
 
-        if (obj.isAtual()) {
-            convertView.setBackground(context.getDrawable(R.drawable.bg_atual));
-            config = true;
-        }
+		if (obj.isAtual()) {
+			convertView.setBackground(context.getDrawable(R.drawable.bg_atual));
+			config = true;
+		}
 
-        if(!config) {
-            convertView.setBackground(holder.corOriginal);
-        }
+		if (!config) {
+			convertView.setBackground(holder.corOriginal);
+		}
 
-        return convertView;
-    }
+		return convertView;
+	}
 
-    private class ViewHolder {
-        final Drawable corOriginal;
-        final TextView txtNumero;
+	private class ViewHolder {
+		final Drawable corOriginal;
+		final TextView txtNumero;
 
-        ViewHolder(View view) {
-            corOriginal = view.getBackground();
+		ViewHolder(View view) {
+			corOriginal = view.getBackground();
 
-            txtNumero = view.findViewById(R.id.txtNumero);
-        }
+			txtNumero = view.findViewById(R.id.txtNumero);
+		}
 
-        void atualizarView(Ano obj) {
-            txtNumero.setText(String.valueOf(obj.getNumero()));
-        }
-    }
+		void atualizarView(Ano obj) {
+			txtNumero.setText(String.valueOf(obj.getNumero()));
+		}
+	}
 }

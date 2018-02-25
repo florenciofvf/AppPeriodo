@@ -67,7 +67,7 @@ public class Util {
 	}
 
 	public static long criarData(Dia dia) {
-		Calendar c = criarCalendarZero();
+		Calendar c = Calendar.getInstance();
 
 		c.set(Calendar.YEAR, dia.getMes().getAno().getNumero());
 		c.set(Calendar.MONTH, dia.getMes().getNumero() - 1);

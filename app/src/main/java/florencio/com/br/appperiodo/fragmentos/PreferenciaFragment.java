@@ -11,41 +11,45 @@ import florencio.com.br.appperiodo.util.Util;
 
 public class PreferenciaFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferencias);
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addPreferencesFromResource(R.xml.preferencias);
 
-        EditTextPreference edit = (EditTextPreference) findPreference(getString(R.string.comprimento_horario));
-        edit.setOnPreferenceChangeListener(this);
-        atualizar(edit);
+		EditTextPreference edit = (EditTextPreference) findPreference(getString(R.string.comprimento_horario));
+		edit.setOnPreferenceChangeListener(this);
+		atualizar(edit);
 
-        edit = (EditTextPreference) findPreference(getString(R.string.excesso_hora_extra));
-        edit.setOnPreferenceChangeListener(this);
-        atualizar(edit);
+		edit = (EditTextPreference) findPreference(getString(R.string.excesso_hora_extra));
+		edit.setOnPreferenceChangeListener(this);
+		atualizar(edit);
 
-        edit = (EditTextPreference) findPreference(getString(R.string.tolerancia_saida));
-        edit.setOnPreferenceChangeListener(this);
-        atualizar(edit);
+		edit = (EditTextPreference) findPreference(getString(R.string.tolerancia_saida));
+		edit.setOnPreferenceChangeListener(this);
+		atualizar(edit);
 
-        edit = (EditTextPreference) findPreference(getString(R.string.url_importacao));
-        edit.setOnPreferenceChangeListener(this);
-        atualizar(edit);
-    }
+		edit = (EditTextPreference) findPreference(getString(R.string.url_importacao));
+		edit.setOnPreferenceChangeListener(this);
+		atualizar(edit);
 
-    @Override
-    public boolean onPreferenceChange(Preference pref, Object newValue) {
-        pref.setSummary(newValue.toString());
+		edit = (EditTextPreference) findPreference(getString(R.string.vibrar));
+		edit.setOnPreferenceChangeListener(this);
+		atualizar(edit);
+	}
 
-        if (pref.getKey().equals(getString(R.string.comprimento_horario))) {
-            Util.OITO_HORAS = Util.parseHora2(newValue.toString());
-        }
+	@Override
+	public boolean onPreferenceChange(Preference pref, Object newValue) {
+		pref.setSummary(newValue.toString());
 
-        return true;
-    }
+		if (pref.getKey().equals(getString(R.string.comprimento_horario))) {
+			Util.OITO_HORAS = Util.parseHora2(newValue.toString());
+		}
 
-    private void atualizar(Preference pref) {
-        String newValue = Util.getStringPref(getActivity(), pref.getKey(), pref.getSummary().toString());
-        onPreferenceChange(pref, newValue);
-    }
+		return true;
+	}
+
+	private void atualizar(Preference pref) {
+		String newValue = Util.getStringPref(getActivity(), pref.getKey(), pref.getSummary().toString());
+		onPreferenceChange(pref, newValue);
+	}
 }
