@@ -1,8 +1,8 @@
 <resources>
 	<string name="url_importacao_default">https://raw.githubusercontent.com/florenciofvf/AppPeriodo/master/app/src/main/res/raw/temp.txt</string>
 	<string name="label_comprimento_horario_diario">Comprimento de horário diário</string>
-	<string name="label_tolerancia_para_saida">Tolerância para saída</string>
-	<string name="label_excesso_para_extra">Excesso para hora extra</string>
+	<string name="label_tolerancia_para_saida">Posso sair faltando até</string>
+	<string name="label_excesso_para_extra">Não hora extra para até</string>
 	<string name="label_click_para_atualizar">Click para atualizar</string>
 	<string name="comprimento_horario">comprimento_horario</string>
 	<string name="label_url_importacao">URL de importação</string>

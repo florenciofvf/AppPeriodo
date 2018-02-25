@@ -227,7 +227,7 @@ public class Util {
 	}
 
 	public static Drawable getBackground(long l, Context context) {
-		return l != 0 ? context.getDrawable(R.drawable.bg_atual_360) : context.getDrawable(R.drawable.bg_padrao_360);
+		return l != 0 ? context.getDrawable(R.drawable.bg_360_atual) : context.getDrawable(R.drawable.bg_360_padrao);
 	}
 
 	public static boolean isVazio(CharSequence cs) {
