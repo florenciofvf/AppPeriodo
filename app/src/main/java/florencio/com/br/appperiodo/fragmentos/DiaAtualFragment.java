@@ -24,7 +24,7 @@ import florencio.com.br.appperiodo.MainActivity;
 import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
-import florencio.com.br.appperiodo.util.Lei;
+import florencio.com.br.appperiodo.util.Tolerancia;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaAtualFragment extends Fragment {
@@ -124,9 +124,9 @@ public class DiaAtualFragment extends Fragment {
         btnDefazer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Lei lei = Util.getLei(getActivity());
+                Tolerancia tolerancia = Util.getTolerancia(getActivity());
                 dia.limparHorarios();
-                repositorio.sincronizarDia(dia, lei.getToleranciaSaida(), lei.getExcessoExtra());
+                repositorio.sincronizarDia(dia, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
                 atualizar(getActivity());
                 btnDefazer.setEnabled(false);
             }
@@ -147,7 +147,7 @@ public class DiaAtualFragment extends Fragment {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Intent it = new Intent(getActivity(), MainActivity.class);
-                it.putExtra(Util.VIBRAR, "100,500,200,500,300,500,400,500,500,500");
+                it.putExtra(Util.VIBRAR, Util.getStringPref(getActivity(), R.string.vibrar, R.string.vibrar_default));
 
                 PendingIntent pi = PendingIntent.getActivity(getActivity(), 0, it, 0);
 
@@ -288,9 +288,9 @@ public class DiaAtualFragment extends Fragment {
                 desfazer = valor != dia.getNoiteFim();
                 dia.setNoiteFim(valor);
             }
-            Lei lei = Util.getLei(getActivity());
+            Tolerancia tolerancia = Util.getTolerancia(getActivity());
             btnDefazer.setEnabled(desfazer);
-            dia.processar(lei.getToleranciaSaida(), lei.getExcessoExtra());
+            dia.processar(tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
             atualizar(getActivity());
         }
     }

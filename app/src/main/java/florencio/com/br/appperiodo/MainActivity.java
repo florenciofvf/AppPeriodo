@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
 import florencio.com.br.appperiodo.dominio.Ano;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
@@ -27,192 +25,189 @@ import florencio.com.br.appperiodo.fragmentos.DiaDialogFragment;
 import florencio.com.br.appperiodo.fragmentos.DiaFragment;
 import florencio.com.br.appperiodo.fragmentos.MesFragment;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
-import florencio.com.br.appperiodo.util.Lei;
+import florencio.com.br.appperiodo.util.Tolerancia;
 import florencio.com.br.appperiodo.util.Util;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        AnoFragment.AnoFragmentListener, MesFragment.MesFragmentListener,
-        DiaFragment.DiaFragmentListener, DiaDialogFragment.DiaDialogListener,
-        DiaAtualFragment.DiaAtualFragmentListener {
+		AnoFragment.AnoFragmentListener, MesFragment.MesFragmentListener,
+		DiaFragment.DiaFragmentListener, DiaDialogFragment.DiaDialogListener,
+		DiaAtualFragment.DiaAtualFragmentListener {
 
-    private DrawerLayout drawerLayout;
-    private Repositorio repositorio;
-    private Toolbar toolbar;
+	private DrawerLayout drawerLayout;
+	private Repositorio repositorio;
+	private Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_layout);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_layout);
 
-        Intent it = getIntent();
-        if (it != null) {
-            String vibrar = it.getStringExtra(Util.VIBRAR);
-            if (!Util.isVazio(vibrar)) {
-                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (vibrator != null && vibrator.hasVibrator()) {
-                    vibrator.vibrate(Util.getArrayLong(vibrar), -1);
-                }
-            }
-        }
+		Intent it = getIntent();
 
-        Util.atualizarComprimentoHorario(this);
-        Util.atualizarData();
-        repositorio = new Repositorio(this);
-        Lei lei = Util.getLei(this);
-        repositorio.sincronizarDia(Util.diaAtual, lei.getToleranciaSaida(), lei.getExcessoExtra());
+		if (it != null) {
+			String vibrar = it.getStringExtra(Util.VIBRAR);
 
-        drawerLayout = findViewById(R.id.drawerLayout);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
-        drawerToggle.syncState();
+			if (!Util.isVazio(vibrar)) {
+				Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+				if (vibrator != null && vibrator.hasVibrator()) {
+					vibrator.vibrate(Util.getArrayLong(vibrar), -1);
+				}
+			}
+		}
 
-        DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
-        transaction.replace(R.id.container, fragment, "FRAGMENTO");
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+		Util.atualizarComprimentoHorario(this);
+		Util.atualizarData();
 
-    private void titulo(Ano ano, Mes mes/*, Dia dia*/) {
-        if (ano != null) {
-            toolbar.setTitle(ano.getNumero().toString());
-        }
+		repositorio = new Repositorio(this);
 
-        if (mes != null) {
-            toolbar.setTitle(mes.getNome() + "/" + mes.getAno().getNumero());
-        }
+		Tolerancia tolerancia = Util.getTolerancia(this);
+		repositorio.sincronizarDia(Util.diaAtual, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
 
-        //if (dia != null) {
-        //    toolbar.setTitle(DiaDialogFragment.criarTitulo(dia));
-        //}
-    }
+		drawerLayout = findViewById(R.id.drawerLayout);
+		toolbar = findViewById(R.id.toolbar);
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		setSupportActionBar(toolbar);
+		ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+		NavigationView navigationView = findViewById(R.id.navigationView);
+		navigationView.setNavigationItemSelectedListener(this);
+		drawerToggle.syncState();
 
-        if (item.getItemId() == R.id.itemAno) {
-            FragmentManager manager = getSupportFragmentManager();
-            Fragment f = manager.findFragmentByTag("FRAGMENTO");
-            FragmentTransaction transaction = manager.beginTransaction();
+		FragmentManager manager = getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
 
-            AnoFragment fragment = AnoFragment.newInstance(getAnoAtual());
-            transaction.replace(R.id.container, fragment, "FRAGMENTO");
+		DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
+		transaction.replace(R.id.container, fragment, "FRAGMENTO");
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
 
-            if (f != null) {
-                transaction.addToBackStack(null);
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            }
-            transaction.commit();
+	private void titulo(Ano ano, Mes mes) {
+		if (ano != null) {
+			toolbar.setTitle(ano.getNumero().toString());
+		}
 
-        } else if (item.getItemId() == R.id.itemHoje) {
-            FragmentManager manager = getSupportFragmentManager();
-            Fragment f = manager.findFragmentByTag("FRAGMENTO");
-            FragmentTransaction transaction = manager.beginTransaction();
+		if (mes != null) {
+			toolbar.setTitle(mes.getNome() + "/" + mes.getAno().getNumero());
+		}
+	}
 
-            Lei lei = Util.getLei(this);
-            repositorio.sincronizarDia(Util.diaAtual, lei.getToleranciaSaida(), lei.getExcessoExtra());
-            DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
-            transaction.replace(R.id.container, fragment, "FRAGMENTO");
+	@Override
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		if (item.getItemId() == R.id.itemAno) {
+			FragmentManager manager = getSupportFragmentManager();
+			Fragment f = manager.findFragmentByTag("FRAGMENTO");
+			FragmentTransaction transaction = manager.beginTransaction();
 
-            if (f != null) {
-                transaction.addToBackStack(null);
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            }
-            transaction.commit();
+			AnoFragment fragment = AnoFragment.newInstance(Util.getAnoAtual());
+			transaction.replace(R.id.container, fragment, "FRAGMENTO");
 
-        } else if (item.getItemId() == R.id.itemPref) {
-            startActivity(new Intent(this, PreferenciaActivity.class));
-        }
+			if (f != null) {
+				transaction.addToBackStack(null);
+				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			}
+			transaction.commit();
 
-        drawerLayout.closeDrawers();
+		} else if (item.getItemId() == R.id.itemHoje) {
+			FragmentManager manager = getSupportFragmentManager();
+			Fragment f = manager.findFragmentByTag("FRAGMENTO");
+			FragmentTransaction transaction = manager.beginTransaction();
 
-        return true;
-    }
+			Tolerancia tolerancia = Util.getTolerancia(this);
+			repositorio.sincronizarDia(Util.diaAtual, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
 
-    private Integer getAnoAtual() {
-        Calendar c = Calendar.getInstance();
-        return c.get(Calendar.YEAR);
-    }
+			DiaAtualFragment fragment = DiaAtualFragment.newInstance(Util.diaAtual);
+			transaction.replace(R.id.container, fragment, "FRAGMENTO");
 
-    @Override
-    public void exibirMeses(Ano ano) {
-        titulo(ano, null);
+			if (f != null) {
+				transaction.addToBackStack(null);
+				transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			}
+			transaction.commit();
 
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment f = manager.findFragmentByTag("FRAGMENTO");
-        FragmentTransaction transaction = manager.beginTransaction();
-        MesFragment fragment = MesFragment.newInstance(ano);
-        transaction.replace(R.id.container, fragment, "FRAGMENTO");
+		} else if (item.getItemId() == R.id.itemPref) {
+			startActivity(new Intent(this, PreferenciaActivity.class));
+		}
 
-        if (f != null) {
-            transaction.addToBackStack(null);
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        }
+		drawerLayout.closeDrawers();
 
-        transaction.commit();
-    }
+		return true;
+	}
 
-    @Override
-    public void exibirDias(Mes mes) {
-        titulo(null, mes);
+	@Override
+	public void exibirMeses(Ano ano) {
+		titulo(ano, null);
 
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment f = manager.findFragmentByTag("FRAGMENTO");
-        FragmentTransaction transaction = manager.beginTransaction();
-        DiaFragment fragment = DiaFragment.newInstance(mes);
-        transaction.replace(R.id.container, fragment, "FRAGMENTO");
+		FragmentManager manager = getSupportFragmentManager();
+		Fragment f = manager.findFragmentByTag("FRAGMENTO");
+		FragmentTransaction transaction = manager.beginTransaction();
+		MesFragment fragment = MesFragment.newInstance(ano);
+		transaction.replace(R.id.container, fragment, "FRAGMENTO");
 
-        if (f != null) {
-            transaction.addToBackStack(null);
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        }
+		if (f != null) {
+			transaction.addToBackStack(null);
+			transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		}
 
-        transaction.commit();
-    }
+		transaction.commit();
+	}
 
-    @Override
-    public void clickDia(Dia dia) {
-        DiaDialogFragment dialog = DiaDialogFragment.newInstance(dia);
-        dialog.show(getSupportFragmentManager(), "DIA_DIALOG");
-    }
+	@Override
+	public void exibirDias(Mes mes) {
+		titulo(null, mes);
 
-    @Override
-    public void salvarDia(Dia dia) {
-        Lei lei = Util.getLei(this);
-        repositorio.salvarDia(dia, lei.getToleranciaSaida(), lei.getExcessoExtra());
+		FragmentManager manager = getSupportFragmentManager();
+		Fragment f = manager.findFragmentByTag("FRAGMENTO");
+		FragmentTransaction transaction = manager.beginTransaction();
+		DiaFragment fragment = DiaFragment.newInstance(mes);
+		transaction.replace(R.id.container, fragment, "FRAGMENTO");
 
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
+		if (f != null) {
+			transaction.addToBackStack(null);
+			transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		}
 
-        if (fragment instanceof DiaFragment) {
-            ((DiaFragment) fragment).atualizar();
-        } else if (fragment instanceof DiaAtualFragment) {
-            ((DiaAtualFragment) fragment).atualizar(this);
-        }
+		transaction.commit();
+	}
 
-        Toast.makeText(this, R.string.label_registro_salvo, Toast.LENGTH_SHORT).show();
-    }
+	@Override
+	public void clickDia(Dia dia) {
+		DiaDialogFragment dialog = DiaDialogFragment.newInstance(dia);
+		dialog.show(getSupportFragmentManager(), "DIA_DIALOG");
+	}
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
+	@Override
+	public void salvarDia(Dia dia) {
+		Tolerancia tolerancia = Util.getTolerancia(this);
+		repositorio.salvarDia(dia, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
 
-        if (fragment != null) {
-            Object obj = fragment.getArguments().getSerializable(Util.PARAMETRO);
-            if (obj instanceof Ano) {
-                titulo((Ano) obj, null);
-            } else if (obj instanceof Mes) {
-                titulo(null, (Mes) obj);
-            } else {
-                toolbar.setTitle(R.string.app_name);
-            }
-        }
-    }
+		FragmentManager manager = getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
+
+		if (fragment instanceof DiaFragment) {
+			((DiaFragment) fragment).atualizar();
+		} else if (fragment instanceof DiaAtualFragment) {
+			((DiaAtualFragment) fragment).atualizar(this);
+		}
+
+		Toast.makeText(this, R.string.label_registro_salvo, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		FragmentManager manager = getSupportFragmentManager();
+		Fragment fragment = manager.findFragmentByTag("FRAGMENTO");
+
+		if (fragment != null) {
+			Object obj = fragment.getArguments().getSerializable(Util.PARAMETRO);
+			if (obj instanceof Ano) {
+				titulo((Ano) obj, null);
+			} else if (obj instanceof Mes) {
+				titulo(null, (Mes) obj);
+			} else {
+				toolbar.setTitle(R.string.app_name);
+			}
+		}
+	}
 }

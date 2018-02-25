@@ -31,4 +31,11 @@
 		android:summary="@string/url_importacao_default"
 		android:title="@string/label_url_importacao" />
 
+	<EditTextPreference
+		android:defaultValue="@string/vibrar_default"
+		android:inputType="text"
+		android:key="@string/vibrar"
+		android:singleLine="true"
+		android:summary="@string/vibrar_default"
+		android:title="@string/label_vibrar" />
 </PreferenceScreen>

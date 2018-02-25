@@ -47,6 +47,11 @@ public class Util {
 	public static int DIA_ATUAL;
 	public static Dia diaAtual;
 
+	public static Integer getAnoAtual() {
+		Calendar c = Calendar.getInstance();
+		return c.get(Calendar.YEAR);
+	}
+
 	public static void atualizarData() {
 		Calendar c = Calendar.getInstance();
 
@@ -280,10 +285,10 @@ public class Util {
 		return horas + minutos;
 	}
 
-	public static Lei getLei(Context context) {
+	public static Tolerancia getTolerancia(Context context) {
 		String stringTolerancia = getStringPref(context, R.string.tolerancia_saida, R.string.tolerancia_saida_default);
 		String stringExcesso = getStringPref(context, R.string.excesso_hora_extra, R.string.excesso_hora_extra_default);
-		return new Lei(parseHora2(stringTolerancia), parseHora2(stringExcesso));
+		return new Tolerancia(parseHora2(stringTolerancia), parseHora2(stringExcesso));
 	}
 
 	public static void atualizarComprimentoHorario(Context context) {

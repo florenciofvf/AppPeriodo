@@ -31,7 +31,7 @@ import florencio.com.br.appperiodo.R;
 import florencio.com.br.appperiodo.dominio.Dia;
 import florencio.com.br.appperiodo.dominio.Mes;
 import florencio.com.br.appperiodo.persistencia.Repositorio;
-import florencio.com.br.appperiodo.util.Lei;
+import florencio.com.br.appperiodo.util.Tolerancia;
 import florencio.com.br.appperiodo.util.Util;
 
 public class DiaFragment extends Fragment implements ExpandableListView.OnChildClickListener {
@@ -140,8 +140,8 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
         @Override
         protected List<Dia> doInBackground(Mes... params) {
             Mes obj = params[0];
-            Lei lei = Util.getLei(getActivity());
-            return repositorio.montarDiasDoMes(obj, lei.getToleranciaSaida(), lei.getExcessoExtra());
+            Tolerancia tolerancia = Util.getTolerancia(getActivity());
+            return repositorio.montarDiasDoMes(obj, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
         }
 
         @Override
@@ -229,8 +229,8 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 
         @Override
         protected void onPostExecute(List<String> lista) {
-            Lei lei = Util.getLei(getActivity());
-            adapter.importarConteudo(lista, lei.getToleranciaSaida(), lei.getExcessoExtra());
+            Tolerancia tolerancia = Util.getTolerancia(getActivity());
+            adapter.importarConteudo(lista, tolerancia.getMenosHorario(), tolerancia.getMaisHorario());
             atualizar();
         }
     }

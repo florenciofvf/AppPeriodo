@@ -144,65 +144,66 @@ public class Repositorio {
         return lista;
     }
 
-    public void sincronizarDia(Dia d, long toleranciaSaida, long excessoExtra) {
-        SQLiteDatabase db = helper.getReadableDatabase();
+	public void sincronizarDia(Dia d, long menosHorario, long maisHorario) {
+		SQLiteDatabase db = helper.getReadableDatabase();
 
-        String sb = "";
-        sb = sb.concat("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial, d.sincronizado from Dia d")
-        .concat(" inner join Mes m on m._id = d.mes_id")
-        .concat(" inner join Ano a on a._id = m.ano_id")
-        .concat(" where d.numero=").concat(String.valueOf(d.getNumero()))
-        .concat(" and m.numero=").concat(String.valueOf(d.getMes().getNumero()))
-        .concat(" and a.numero=").concat(String.valueOf(d.getMes().getAno().getNumero()));
+		String sb = "";
+		sb = sb.concat("select d._id, d.numero, d.obs, d.manha_ini, d.manha_fim, d.tarde_ini, d.tarde_fim, d.noite_ini, d.noite_fim, d.nome, d.mes_id, d.data, d.valido, d.especial, d.sincronizado from Dia d")
+				.concat(" inner join Mes m on m._id = d.mes_id")
+				.concat(" inner join Ano a on a._id = m.ano_id")
+				.concat(" where d.numero=").concat(String.valueOf(d.getNumero()))
+				.concat(" and m.numero=").concat(String.valueOf(d.getMes().getNumero()))
+				.concat(" and a.numero=").concat(String.valueOf(d.getMes().getAno().getNumero()));
 
-        Cursor cursor = db.rawQuery(sb, null);
+		Cursor cursor = db.rawQuery(sb, null);
 
-        int _id_idx = cursor.getColumnIndex("_id");
-        int num_idx = cursor.getColumnIndex("numero");
-        int obs_idx = cursor.getColumnIndex("obs");
-        int nom_idx = cursor.getColumnIndex("nome");
-        int mes_idx = cursor.getColumnIndex("mes_id");
+		int _id_idx = cursor.getColumnIndex("_id");
+		int num_idx = cursor.getColumnIndex("numero");
+		int obs_idx = cursor.getColumnIndex("obs");
+		int nom_idx = cursor.getColumnIndex("nome");
+		int mes_idx = cursor.getColumnIndex("mes_id");
 
-        int dat_idx = cursor.getColumnIndex("data");
-        int val_idx = cursor.getColumnIndex("valido");
-        int esp_idx = cursor.getColumnIndex("especial");
-        int sin_idx = cursor.getColumnIndex("sincronizado");
+		int dat_idx = cursor.getColumnIndex("data");
+		int val_idx = cursor.getColumnIndex("valido");
+		int esp_idx = cursor.getColumnIndex("especial");
+		int sin_idx = cursor.getColumnIndex("sincronizado");
 
-        int m_i_idx = cursor.getColumnIndex("manha_ini");
-        int m_f_idx = cursor.getColumnIndex("manha_fim");
+		int m_i_idx = cursor.getColumnIndex("manha_ini");
+		int m_f_idx = cursor.getColumnIndex("manha_fim");
 
-        int t_i_idx = cursor.getColumnIndex("tarde_ini");
-        int t_f_idx = cursor.getColumnIndex("tarde_fim");
+		int t_i_idx = cursor.getColumnIndex("tarde_ini");
+		int t_f_idx = cursor.getColumnIndex("tarde_fim");
 
-        int n_i_idx = cursor.getColumnIndex("noite_ini");
-        int n_f_idx = cursor.getColumnIndex("noite_fim");
+		int n_i_idx = cursor.getColumnIndex("noite_ini");
+		int n_f_idx = cursor.getColumnIndex("noite_fim");
 
-        while (cursor.moveToNext()) {
-            Dia dia = new Dia(cursor.getInt(num_idx), d.getMes(), cursor.getString(nom_idx));
+		while (cursor.moveToNext()) {
+			Dia dia = new Dia(cursor.getInt(num_idx), d.getMes(), cursor.getString(nom_idx));
 
-            dia.set_id(cursor.getLong(_id_idx));
-            dia.setObs(cursor.getString(obs_idx));
-            dia.setManhaIni(cursor.getLong(m_i_idx));
-            dia.setManhaFim(cursor.getLong(m_f_idx));
-            dia.setTardeIni(cursor.getLong(t_i_idx));
-            dia.setTardeFim(cursor.getLong(t_f_idx));
-            dia.setNoiteIni(cursor.getLong(n_i_idx));
-            dia.setNoiteFim(cursor.getLong(n_f_idx));
+			dia.set_id(cursor.getLong(_id_idx));
+			dia.setObs(cursor.getString(obs_idx));
 
-            d.getMes().set_id(cursor.getLong(mes_idx));
+			dia.setManhaIni(cursor.getLong(m_i_idx));
+			dia.setManhaFim(cursor.getLong(m_f_idx));
+			dia.setTardeIni(cursor.getLong(t_i_idx));
+			dia.setTardeFim(cursor.getLong(t_f_idx));
+			dia.setNoiteIni(cursor.getLong(n_i_idx));
+			dia.setNoiteFim(cursor.getLong(n_f_idx));
 
-            dia.setData(cursor.getLong(dat_idx));
-            dia.setValido(cursor.getInt(val_idx));
-            dia.setEspecial(cursor.getInt(esp_idx));
-            dia.setSincronizado(cursor.getInt(sin_idx));
+			d.getMes().set_id(cursor.getLong(mes_idx));
 
-            d.copiar(dia);
-        }
+			dia.setData(cursor.getLong(dat_idx));
+			dia.setValido(cursor.getInt(val_idx));
+			dia.setEspecial(cursor.getInt(esp_idx));
+			dia.setSincronizado(cursor.getInt(sin_idx));
 
-        d.processar(toleranciaSaida, excessoExtra);
-        cursor.close();
-        db.close();
-    }
+			d.copiar(dia);
+		}
+
+		d.processar(menosHorario, maisHorario);
+		cursor.close();
+		db.close();
+	}
 
     public void salvarDia(Dia dia, long toleranciaSaida, long excessoExtra) {
         if (dia.getMes().ehNovo()) {
