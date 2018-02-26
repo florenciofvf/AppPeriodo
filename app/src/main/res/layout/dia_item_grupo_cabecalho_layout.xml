@@ -75,7 +75,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="@dimen/cinco_dp"
-		android:background="@drawable/bg_hora"
+		android:background="@drawable/bg_total"
 		android:elevation="@dimen/vinte_dp"
 		android:paddingLeft="@dimen/sete_dp"
 		android:paddingRight="@dimen/sete_dp"

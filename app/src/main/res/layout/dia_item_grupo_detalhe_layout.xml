@@ -132,7 +132,8 @@
 		<TextView
 			android:id="@+id/txtTotal"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/tres_dp" />
 	</LinearLayout>
 
 	<LinearLayout
@@ -152,7 +153,8 @@
 		<TextView
 			android:id="@+id/txtTotalLei"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/tres_dp" />
 	</LinearLayout>
 
 	<LinearLayout
@@ -172,7 +174,8 @@
 		<TextView
 			android:id="@+id/txtDebito"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/tres_dp" />
 	</LinearLayout>
 
 	<LinearLayout
@@ -192,14 +195,15 @@
 		<TextView
 			android:id="@+id/txtCredito"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/tres_dp" />
 	</LinearLayout>
 
 	<LinearLayout
 		android:id="@+id/lltObs"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:paddingBottom="@dimen/cinco_dp"
 		android:paddingTop="@dimen/cinco_dp">
 
@@ -207,12 +211,13 @@
 			android:id="@+id/lblObs"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/label_observacao" />
+			android:text="@string/label_obs" />
 
 		<TextView
 			android:id="@+id/txtObs"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/tres_dp" />
 	</LinearLayout>
 
 	<LinearLayout
