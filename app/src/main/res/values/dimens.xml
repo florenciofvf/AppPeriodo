@@ -8,5 +8,6 @@
 	<dimen name="tres_dp">3dp</dimen>
 	<dimen name="sete_dp">7dp</dimen>
 	<dimen name="dez_dp">10dp</dimen>
+	<dimen name="onze_dp">11dp</dimen>
 	<dimen name="um_dp">1dp</dimen>
 </resources>

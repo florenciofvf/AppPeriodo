@@ -187,9 +187,9 @@ class DiaAdapter extends BaseExpandableListAdapter {
 		}
 
 		void atualizarView(Dia obj) {
-			txtSinc.setVisibility(obj.isSincronizado() ? View.VISIBLE : View.GONE);
-			txtVal.setVisibility(obj.isValido() ? View.VISIBLE : View.GONE);
-			txtId.setVisibility(!obj.ehNovo() ? View.VISIBLE : View.GONE);
+			txtSinc.setVisibility(obj.isSincronizado() ? View.VISIBLE : View.INVISIBLE);
+			txtVal.setVisibility(obj.isValido() ? View.VISIBLE : View.INVISIBLE);
+			txtId.setVisibility(!obj.ehNovo() ? View.VISIBLE : View.INVISIBLE);
 
 			txtNumero.setText(Util.get00(obj.getNumero().toString()));
 

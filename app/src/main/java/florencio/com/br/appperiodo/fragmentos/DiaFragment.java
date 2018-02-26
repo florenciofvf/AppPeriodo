@@ -170,7 +170,8 @@ public class DiaFragment extends Fragment implements ExpandableListView.OnChildC
 			total += d.getTotal();
 		}
 
-		String sb = "TOTAL: " + Util.totalFmt(total) + Util.QUEBRA +
+		String sb = "SINCRONIZADO|VALIDO|COM_ID" + Util.QUEBRA +
+				" TOTAL: " + Util.totalFmt(total) + Util.QUEBRA +
 				" VÁLIDO: " + Util.totalFmt(totalLei) + Util.QUEBRA +
 				" DÉBITO: " + Util.totalFmt(debito) + Util.QUEBRA +
 				" CRÉDITO: " + Util.totalFmt(credito) + Util.QUEBRA +
