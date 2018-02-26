@@ -47,4 +47,5 @@
 	<string name="label_obs">OBS:</string>
 	<string name="label_dia">DAT:</string>
 	<string name="vibrar">vibrar</string>
+	<string name="agendado">agendado</string>
 </resources>
