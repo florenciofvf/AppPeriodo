@@ -7,6 +7,9 @@
 	<color name="domingo">#FF888888</color>
 	<color name="laranja">#FFFFAA00</color>
 	<color name="credito">#FFFF00FF</color>
+	<color name="cancelar">#FF0000</color>
+	<color name="progresso">#008800</color>
+	<color name="agendamento">#0000FF</color>
 	<color name="sabado">#FFCCCCCC</color>
 	<color name="debito">#FFFF0000</color>
 	<color name="valido">#FF0000FF</color>

@@ -295,13 +295,13 @@ public class Util {
 	}
 
 	public static Tolerancia getTolerancia(Context context) {
-		String stringTolerancia = getStringPref(context, R.string.tolerancia_saida, R.string.tolerancia_saida_default);
-		String stringExcesso = getStringPref(context, R.string.excesso_hora_extra, R.string.excesso_hora_extra_default);
+		String stringTolerancia = getStringPref(context, R.string.tolerancia_saida_key, R.string.tolerancia_saida_default);
+		String stringExcesso = getStringPref(context, R.string.excesso_hora_extra_key, R.string.excesso_hora_extra_default);
 		return new Tolerancia(parseHora2(stringTolerancia), parseHora2(stringExcesso));
 	}
 
 	public static void atualizarComprimentoHorario(Context context) {
-		String string = getStringPref(context, R.string.comprimento_horario, R.string.comprimento_horario_default);
+		String string = getStringPref(context, R.string.comprimento_horario_diario_key, R.string.comprimento_horario_diario_default);
 		OITO_HORAS = parseHora2(string);
 	}
 

@@ -32,6 +32,7 @@ public class DiaAtualFragment extends Fragment {
 	private DiaAtualFragmentListener listener;
 	private CheckBox chkSincronizado;
 	private Repositorio repositorio;
+	private TextView txtAgendamento;
 	private TextView txtManhaCal;
 	private TextView txtTardeCal;
 	private TextView txtNoiteCal;
@@ -83,6 +84,7 @@ public class DiaAtualFragment extends Fragment {
 		View view = inflater.inflate(R.layout.dia_atual_layout, null);
 
 		chkSincronizado = view.findViewById(R.id.chkSincronizado);
+		txtAgendamento = view.findViewById(R.id.txtAgendamento);
 		txtManhaCal = view.findViewById(R.id.txtManhaCal);
 		txtTardeCal = view.findViewById(R.id.txtTardeCal);
 		txtNoiteCal = view.findViewById(R.id.txtNoiteCal);
@@ -144,7 +146,7 @@ public class DiaAtualFragment extends Fragment {
 			@Override
 			public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 				Intent it = new Intent(getActivity(), MainActivity.class);
-				it.putExtra(Util.VIBRAR, Util.getStringPref(getActivity(), R.string.vibrar, R.string.vibrar_default));
+				it.putExtra(Util.VIBRAR, Util.getStringPref(getActivity(), R.string.vibrar_key, R.string.vibrar_default));
 
 				PendingIntent pi = PendingIntent.getActivity(getActivity(), 0, it, 0);
 
@@ -193,6 +195,7 @@ public class DiaAtualFragment extends Fragment {
 
 		txtTotalLei.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
 		txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
+		txtAgendamento.setText(Util.formatarHora(dia.getAgendamento()));
 		chkSincronizado.setChecked(dia.isSincronizado());
 		txtManhaCal.setText(dia.getManhaCalFmt());
 		txtTardeCal.setText(dia.getTardeCalFmt());

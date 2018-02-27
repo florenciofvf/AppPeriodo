@@ -16,23 +16,23 @@ public class PreferenciaFragment extends PreferenceFragment implements Preferenc
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferencias);
 
-		EditTextPreference edit = (EditTextPreference) findPreference(getString(R.string.comprimento_horario));
+		EditTextPreference edit = (EditTextPreference) findPreference(getString(R.string.comprimento_horario_diario_key));
 		edit.setOnPreferenceChangeListener(this);
 		atualizar(edit);
 
-		edit = (EditTextPreference) findPreference(getString(R.string.excesso_hora_extra));
+		edit = (EditTextPreference) findPreference(getString(R.string.excesso_hora_extra_key));
 		edit.setOnPreferenceChangeListener(this);
 		atualizar(edit);
 
-		edit = (EditTextPreference) findPreference(getString(R.string.tolerancia_saida));
+		edit = (EditTextPreference) findPreference(getString(R.string.tolerancia_saida_key));
 		edit.setOnPreferenceChangeListener(this);
 		atualizar(edit);
 
-		edit = (EditTextPreference) findPreference(getString(R.string.url_importacao));
+		edit = (EditTextPreference) findPreference(getString(R.string.url_importacao_key));
 		edit.setOnPreferenceChangeListener(this);
 		atualizar(edit);
 
-		edit = (EditTextPreference) findPreference(getString(R.string.vibrar));
+		edit = (EditTextPreference) findPreference(getString(R.string.vibrar_key));
 		edit.setOnPreferenceChangeListener(this);
 		atualizar(edit);
 	}
@@ -41,7 +41,7 @@ public class PreferenciaFragment extends PreferenceFragment implements Preferenc
 	public boolean onPreferenceChange(Preference pref, Object newValue) {
 		pref.setSummary(newValue.toString());
 
-		if (pref.getKey().equals(getString(R.string.comprimento_horario))) {
+		if (pref.getKey().equals(getString(R.string.comprimento_horario_diario_key))) {
 			Util.OITO_HORAS = Util.parseHora2(newValue.toString());
 		}
 

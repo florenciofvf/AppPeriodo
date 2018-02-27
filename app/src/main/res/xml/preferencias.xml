@@ -1,41 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<EditTextPreference
-		android:defaultValue="@string/comprimento_horario_default"
+		android:defaultValue="@string/comprimento_horario_diario_default"
 		android:inputType="text"
-		android:key="comprimento_horario"
+		android:key="@string/comprimento_horario_diario_key"
 		android:singleLine="true"
-		android:summary="@string/comprimento_horario_default"
-		android:title="@string/label_comprimento_horario_diario" />
+		android:summary="@string/comprimento_horario_diario_default"
+		android:title="@string/comprimento_horario_diario_label" />
 
 	<EditTextPreference
 		android:defaultValue="@string/tolerancia_saida_default"
 		android:inputType="text"
-		android:key="@string/tolerancia_saida"
+		android:key="@string/tolerancia_saida_key"
 		android:singleLine="true"
 		android:summary="@string/tolerancia_saida_default"
-		android:title="@string/label_tolerancia_para_saida" />
+		android:title="@string/tolerancia_saida_label" />
 
 	<EditTextPreference
 		android:defaultValue="@string/excesso_hora_extra_default"
 		android:inputType="text"
-		android:key="@string/excesso_hora_extra"
+		android:key="@string/excesso_hora_extra_key"
 		android:singleLine="true"
 		android:summary="@string/excesso_hora_extra_default"
-		android:title="@string/label_excesso_para_extra" />
+		android:title="@string/excesso_hora_extra_label" />
 
 	<EditTextPreference
 		android:defaultValue="@string/url_importacao_default"
 		android:inputType="text"
-		android:key="@string/url_importacao"
+		android:key="@string/url_importacao_key"
+		android:singleLine="true"
 		android:summary="@string/url_importacao_default"
-		android:title="@string/label_url_importacao" />
+		android:title="@string/url_importacao_label" />
 
 	<EditTextPreference
 		android:defaultValue="@string/vibrar_default"
 		android:inputType="text"
-		android:key="@string/vibrar"
+		android:key="@string/vibrar_key"
 		android:singleLine="true"
 		android:summary="@string/vibrar_default"
-		android:title="@string/label_vibrar" />
+		android:title="@string/vibrar_label" />
+
+	<PreferenceScreen android:key="sub_screen" android:title="@string/label_pontos">
+		<EditTextPreference
+			android:defaultValue="@string/MANHA_INI_default"
+			android:inputType="text"
+			android:key="@string/MANHA_INI_key"
+			android:singleLine="true"
+			android:summary="@string/MANHA_INI_default"
+			android:title="@string/MANHA_INI_label" />
+
+		<EditTextPreference
+			android:defaultValue="@string/MANHA_FIM_default"
+			android:inputType="text"
+			android:key="@string/MANHA_FIM_key"
+			android:singleLine="true"
+			android:summary="@string/MANHA_FIM_default"
+			android:title="@string/MANHA_FIM_label" />
+
+		<EditTextPreference
+			android:defaultValue="@string/TARDE_INI_default"
+			android:inputType="text"
+			android:key="@string/TARDE_INI_key"
+			android:singleLine="true"
+			android:summary="@string/TARDE_INI_default"
+			android:title="@string/TARDE_INI_label" />
+
+		<EditTextPreference
+			android:defaultValue="@string/TARDE_FIM_default"
+			android:inputType="text"
+			android:key="@string/TARDE_FIM_key"
+			android:singleLine="true"
+			android:summary="@string/TARDE_FIM_default"
+			android:title="@string/TARDE_FIM_label" />
+
+		<EditTextPreference
+			android:defaultValue="@string/NOITE_INI_default"
+			android:inputType="text"
+			android:key="@string/NOITE_INI_key"
+			android:singleLine="true"
+			android:summary="@string/NOITE_INI_default"
+			android:title="@string/NOITE_INI_label" />
+
+		<EditTextPreference
+			android:defaultValue="@string/NOITE_FIM_default"
+			android:inputType="text"
+			android:key="@string/NOITE_FIM_key"
+			android:singleLine="true"
+			android:summary="@string/NOITE_FIM_default"
+			android:title="@string/NOITE_FIM_label" />
+	</PreferenceScreen>
 </PreferenceScreen>

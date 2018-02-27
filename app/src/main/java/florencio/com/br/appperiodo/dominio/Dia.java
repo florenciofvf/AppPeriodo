@@ -6,7 +6,8 @@ import android.util.Log;
 import florencio.com.br.appperiodo.util.Util;
 
 public class Dia extends Entidade {
-	private int sincronizado;
+	private long sincronizado;
+	private int agendamento;
 	private Integer numero;
 	private int especial;
 	private String nome;
@@ -56,6 +57,7 @@ public class Dia extends Entidade {
 		_id = d._id;
 
 		sincronizado = d.sincronizado;
+		agendamento = d.agendamento;
 		especial = d.especial;
 		numero = d.numero;
 		valido = d.valido;
@@ -352,6 +354,14 @@ public class Dia extends Entidade {
 		this.sincronizado = sincronizado;
 	}
 
+	public int getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(int agendamento) {
+		this.agendamento = agendamento;
+	}
+
 	public ContentValues criarContentValues() {
 		if (data == 0) {
 			data = Util.criarData(this);
@@ -371,6 +381,7 @@ public class Dia extends Entidade {
 		cv.put("especial", especial);
 		cv.put("valido", valido);
 		cv.put("sincronizado", sincronizado);
+		cv.put("agendamento", agendamento);
 		cv.put("data", data);
 
 		return cv;

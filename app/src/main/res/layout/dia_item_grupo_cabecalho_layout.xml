@@ -71,6 +71,22 @@
 		android:paddingRight="@dimen/sete_dp" />
 
 	<TextView
+		android:id="@+id/txtObs"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_marginRight="@dimen/sete_dp"
+		android:background="@drawable/bg_360_obs"
+		android:elevation="@dimen/dez_dp"
+		android:gravity="center"
+		android:maxHeight="@dimen/doze_dp"
+		android:maxWidth="@dimen/doze_dp"
+		android:minHeight="@dimen/doze_dp"
+		android:minWidth="@dimen/doze_dp"
+		android:paddingLeft="@dimen/sete_dp"
+		android:paddingRight="@dimen/sete_dp" />
+
+	<TextView
 		android:id="@+id/txtTotal"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

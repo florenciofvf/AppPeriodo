@@ -171,6 +171,7 @@ class DiaAdapter extends BaseExpandableListAdapter {
 		final TextView txtNome;
 		final TextView txtSinc;
 		final TextView txtVal;
+		final TextView txtObs;
 		final TextView txtId;
 
 		ViewHolderGrupo(View view) {
@@ -183,10 +184,12 @@ class DiaAdapter extends BaseExpandableListAdapter {
 			txtNome = view.findViewById(R.id.txtNome);
 			txtSinc = view.findViewById(R.id.txtSinc);
 			txtVal = view.findViewById(R.id.txtVal);
+			txtObs = view.findViewById(R.id.txtObs);
 			txtId = view.findViewById(R.id.txtId);
 		}
 
 		void atualizarView(Dia obj) {
+			txtObs.setVisibility(!Util.isVazio(obj.getObs()) ? View.VISIBLE : View.INVISIBLE);
 			txtSinc.setVisibility(obj.isSincronizado() ? View.VISIBLE : View.INVISIBLE);
 			txtVal.setVisibility(obj.isValido() ? View.VISIBLE : View.INVISIBLE);
 			txtId.setVisibility(!obj.ehNovo() ? View.VISIBLE : View.INVISIBLE);

@@ -1,24 +1,55 @@
 <resources>
+	<string name="comprimento_horario_diario_default">08:00</string>
+	<string name="comprimento_horario_diario_label">Comprimento de horário diário</string>
+	<string name="comprimento_horario_diario_key">comprimento_horario</string>
+
+	<string name="tolerancia_saida_default">00:10</string>
+	<string name="tolerancia_saida_label">Posso sair faltando até</string>
+	<string name="tolerancia_saida_key">tolerancia_saida</string>
+
+	<string name="excesso_hora_extra_default">00:00</string>
+	<string name="excesso_hora_extra_label">Não hora extra para até</string>
+	<string name="excesso_hora_extra_key">excesso_hora_extra</string>
+
 	<string name="url_importacao_default">https://raw.githubusercontent.com/florenciofvf/AppPeriodo/master/app/src/main/res/raw/temp.txt</string>
-	<string name="label_comprimento_horario_diario">Comprimento de horário diário</string>
+	<string name="url_importacao_label">URL de importação</string>
+	<string name="url_importacao_key">url_importacao</string>
+
 	<string name="vibrar_default">100,500,200,500,300,500,400,500,500,500</string>
-	<string name="label_tolerancia_para_saida">Posso sair faltando até</string>
-	<string name="label_excesso_para_extra">Não hora extra para até</string>
+	<string name="vibrar_label">Vibrar</string>
+	<string name="vibrar_key">vibrar</string>
+
+	<string name="MANHA_INI_default">00:00</string>
+	<string name="MANHA_INI_label">Manhã INI</string>
+	<string name="MANHA_INI_key">manha_ini</string>
+
+	<string name="MANHA_FIM_default">00:00</string>
+	<string name="MANHA_FIM_label">Manhã FIM</string>
+	<string name="MANHA_FIM_key">manha_fim</string>
+
+	<string name="TARDE_INI_default">00:00</string>
+	<string name="TARDE_INI_label">Tarde INI</string>
+	<string name="TARDE_INI_key">tarde_ini</string>
+
+	<string name="TARDE_FIM_default">00:00</string>
+	<string name="TARDE_FIM_label">Tarde FIM</string>
+	<string name="TARDE_FIM_key">tarde_fim</string>
+
+	<string name="NOITE_INI_default">00:00</string>
+	<string name="NOITE_INI_label">Noite INI</string>
+	<string name="NOITE_INI_key">noite_ini</string>
+
+	<string name="NOITE_FIM_default">00:00</string>
+	<string name="NOITE_FIM_label">Noite FIM</string>
+	<string name="NOITE_FIM_key">noite_fim</string>
+
 	<string name="label_click_para_atualizar">Click para atualizar</string>
 	<string name="label_registro_excluido">Registro excluído.</string>
-	<string name="comprimento_horario">comprimento_horario</string>
-	<string name="label_url_importacao">URL de importação</string>
-	<string name="excesso_hora_extra">excesso_hora_extra</string>
 	<string name="label_registro_salvo">Registro salvo.</string>
 	<string name="label_exportar_dados">Exportar dados</string>
-	<string name="comprimento_horario_default">08:00</string>
 	<string name="label_configuracoes">Configurações</string>
-	<string name="tolerancia_saida">tolerancia_saida</string>
-	<string name="excesso_hora_extra_default">00:00</string>
 	<string name="label_preferencias">Preferências</string>
 	<string name="label_sincronizado">Sincronizado</string>
-	<string name="tolerancia_saida_default">00:10</string>
-	<string name="url_importacao">url_importacao</string>
 	<string name="label_bater_ponto">Bater Ponto</string>
 	<string name="label_observacao">Observação:</string>
 	<string name="label_relatorios">Relatórios</string>
@@ -33,7 +64,6 @@
 	<string name="label_entrada">Entrada</string>
 	<string name="label_periodo">Período</string>
 	<string name="label_total_lei">VAL:</string>
-	<string name="label_vibrar">Vibrar</string>
 	<string name="label_salvar">Salvar</string>
 	<string name="label_valido">Válido</string>
 	<string name="label_pontos">Pontos</string>
@@ -46,6 +76,4 @@
 	<string name="label_hoje">Hoje</string>
 	<string name="label_obs">OBS:</string>
 	<string name="label_dia">DAT:</string>
-	<string name="vibrar">vibrar</string>
-	<string name="agendado">agendado</string>
 </resources>

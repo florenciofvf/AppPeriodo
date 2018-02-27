@@ -12,12 +12,62 @@
 			android:id="@+id/txtTitulo"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/dez_dp"
+			android:layout_marginBottom="@dimen/cinco_dp"
 			android:layout_marginTop="@dimen/um_dp"
 			android:background="@drawable/bg_atual"
 			android:elevation="@dimen/cinco_dp"
 			android:gravity="center"
 			android:textAppearance="?android:textAppearanceLarge" />
+
+		<ProgressBar
+			android:id="@+id/progressBar"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/zero_dp"
+			android:max="100"
+			android:progress="56" />
+
+		<LinearLayout
+			android:layout_marginTop="@dimen/um_dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/oito_dp"
+			android:elevation="@dimen/cinco_dp"
+			android:gravity="center"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_marginLeft="@dimen/vinte_dp"
+				android:layout_marginRight="@dimen/vinte_dp"
+				android:padding="@dimen/dez_dp"
+				android:background="@drawable/bg_cancelar"
+				android:text="Cancelar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:elevation="@dimen/doze_dp" />
+
+			<TextView
+				android:layout_marginLeft="@dimen/vinte_dp"
+				android:layout_marginRight="@dimen/vinte_dp"
+				android:padding="@dimen/dez_dp"
+				android:background="@drawable/bg_progresso"
+				android:text="03:17"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:elevation="@dimen/doze_dp" />
+
+			<TextView
+				android:layout_marginLeft="@dimen/vinte_dp"
+				android:layout_marginRight="@dimen/vinte_dp"
+				android:padding="@dimen/dez_dp"
+				android:background="@drawable/bg_agendamento"
+				android:text="Teste"
+				android:id="@+id/txtAgendamento"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:elevation="@dimen/doze_dp" />
+		</LinearLayout>
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -45,22 +95,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_sincronizado" />
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/dez_dp"
-			android:background="@drawable/bg_domingo"
-			android:elevation="@dimen/cinco_dp"
-			android:gravity="center"
-			android:layout_margin="@dimen/quinze_dp"
-			android:orientation="horizontal">
-
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/agendado" />
 		</LinearLayout>
 
 		<LinearLayout
@@ -285,7 +319,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/sete_dp"
+			android:layout_marginBottom="@dimen/cinco_dp"
 			android:background="@drawable/bg_padrao"
 			android:elevation="@dimen/cinco_dp"
 			android:gravity="center"
