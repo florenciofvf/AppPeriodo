@@ -40,53 +40,51 @@
 		android:summary="@string/vibrar_default"
 		android:title="@string/vibrar_label" />
 
-	<PreferenceScreen android:key="sub_screen" android:title="@string/label_pontos">
-		<EditTextPreference
-			android:defaultValue="@string/MANHA_INI_default"
-			android:inputType="text"
-			android:key="@string/MANHA_INI_key"
-			android:singleLine="true"
-			android:summary="@string/MANHA_INI_default"
-			android:title="@string/MANHA_INI_label" />
+	<EditTextPreference
+		android:defaultValue="@string/MANHA_INI_default"
+		android:inputType="text"
+		android:key="@string/MANHA_INI_key"
+		android:singleLine="true"
+		android:summary="@string/MANHA_INI_default"
+		android:title="@string/MANHA_INI_label" />
 
-		<EditTextPreference
-			android:defaultValue="@string/MANHA_FIM_default"
-			android:inputType="text"
-			android:key="@string/MANHA_FIM_key"
-			android:singleLine="true"
-			android:summary="@string/MANHA_FIM_default"
-			android:title="@string/MANHA_FIM_label" />
+	<EditTextPreference
+		android:defaultValue="@string/MANHA_FIM_default"
+		android:inputType="text"
+		android:key="@string/MANHA_FIM_key"
+		android:singleLine="true"
+		android:summary="@string/MANHA_FIM_default"
+		android:title="@string/MANHA_FIM_label" />
 
-		<EditTextPreference
-			android:defaultValue="@string/TARDE_INI_default"
-			android:inputType="text"
-			android:key="@string/TARDE_INI_key"
-			android:singleLine="true"
-			android:summary="@string/TARDE_INI_default"
-			android:title="@string/TARDE_INI_label" />
+	<EditTextPreference
+		android:defaultValue="@string/TARDE_INI_default"
+		android:inputType="text"
+		android:key="@string/TARDE_INI_key"
+		android:singleLine="true"
+		android:summary="@string/TARDE_INI_default"
+		android:title="@string/TARDE_INI_label" />
 
-		<EditTextPreference
-			android:defaultValue="@string/TARDE_FIM_default"
-			android:inputType="text"
-			android:key="@string/TARDE_FIM_key"
-			android:singleLine="true"
-			android:summary="@string/TARDE_FIM_default"
-			android:title="@string/TARDE_FIM_label" />
+	<EditTextPreference
+		android:defaultValue="@string/TARDE_FIM_default"
+		android:inputType="text"
+		android:key="@string/TARDE_FIM_key"
+		android:singleLine="true"
+		android:summary="@string/TARDE_FIM_default"
+		android:title="@string/TARDE_FIM_label" />
 
-		<EditTextPreference
-			android:defaultValue="@string/NOITE_INI_default"
-			android:inputType="text"
-			android:key="@string/NOITE_INI_key"
-			android:singleLine="true"
-			android:summary="@string/NOITE_INI_default"
-			android:title="@string/NOITE_INI_label" />
+	<EditTextPreference
+		android:defaultValue="@string/NOITE_INI_default"
+		android:inputType="text"
+		android:key="@string/NOITE_INI_key"
+		android:singleLine="true"
+		android:summary="@string/NOITE_INI_default"
+		android:title="@string/NOITE_INI_label" />
 
-		<EditTextPreference
-			android:defaultValue="@string/NOITE_FIM_default"
-			android:inputType="text"
-			android:key="@string/NOITE_FIM_key"
-			android:singleLine="true"
-			android:summary="@string/NOITE_FIM_default"
-			android:title="@string/NOITE_FIM_label" />
-	</PreferenceScreen>
+	<EditTextPreference
+		android:defaultValue="@string/NOITE_FIM_default"
+		android:inputType="text"
+		android:key="@string/NOITE_FIM_key"
+		android:singleLine="true"
+		android:summary="@string/NOITE_FIM_default"
+		android:title="@string/NOITE_FIM_label" />
 </PreferenceScreen>
