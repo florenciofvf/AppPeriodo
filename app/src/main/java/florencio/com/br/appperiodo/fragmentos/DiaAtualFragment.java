@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,12 +37,21 @@ public class DiaAtualFragment extends Fragment {
 	private TextView txtManhaCal;
 	private TextView txtTardeCal;
 	private TextView txtNoiteCal;
+
 	private TextView btnManhaIni;
 	private TextView btnManhaFim;
 	private TextView btnTardeIni;
 	private TextView btnTardeFim;
 	private TextView btnNoiteIni;
 	private TextView btnNoiteFim;
+
+	private TextView lblManhaIni;
+	private TextView lblManhaFim;
+	private TextView lblTardeIni;
+	private TextView lblTardeFim;
+	private TextView lblNoiteIni;
+	private TextView lblNoiteFim;
+
 	private CheckBox chkEspecial;
 	private TextView txtTotalLei;
 	private TextView txtCredito;
@@ -138,6 +148,20 @@ public class DiaAtualFragment extends Fragment {
 		btnNoiteIni = view.findViewById(R.id.btnNoiteIni);
 		btnNoiteFim = view.findViewById(R.id.btnNoiteFim);
 
+		lblManhaIni = view.findViewById(R.id.lblManhaIni);
+		lblManhaFim = view.findViewById(R.id.lblManhaFim);
+		lblTardeIni = view.findViewById(R.id.lblTardeIni);
+		lblTardeFim = view.findViewById(R.id.lblTardeFim);
+		lblNoiteIni = view.findViewById(R.id.lblNoiteIni);
+		lblNoiteFim = view.findViewById(R.id.lblNoiteFim);
+
+		lblManhaIni.setPaintFlags(lblManhaIni.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		lblManhaFim.setPaintFlags(lblManhaFim.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		lblTardeIni.setPaintFlags(lblTardeIni.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		lblTardeFim.setPaintFlags(lblTardeFim.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		lblNoiteIni.setPaintFlags(lblNoiteIni.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+		lblNoiteFim.setPaintFlags(lblNoiteFim.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
 		return view;
 	}
 
@@ -195,7 +219,7 @@ public class DiaAtualFragment extends Fragment {
 
 		txtTotalLei.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
 		txtTotal.setTextColor(dia.isValido() ? Color.BLUE : Color.BLACK);
-		txtAgendamento.setText(Util.formatarHora(dia.getAgendamento()));
+		//txtAgendamento.setText(Util.formatarHora(dia.getAgendamento()));
 		chkSincronizado.setChecked(dia.isSincronizado());
 		txtManhaCal.setText(dia.getManhaCalFmt());
 		txtTardeCal.setText(dia.getTardeCalFmt());

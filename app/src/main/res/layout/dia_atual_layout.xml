@@ -19,54 +19,88 @@
 			android:gravity="center"
 			android:textAppearance="?android:textAppearanceLarge" />
 
-		<ProgressBar
-			android:id="@+id/progressBar"
-			style="?android:attr/progressBarStyleHorizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/zero_dp"
-			android:max="100"
-			android:progress="56" />
-
 		<LinearLayout
-			android:layout_marginTop="@dimen/um_dp"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/oito_dp"
-			android:elevation="@dimen/cinco_dp"
+			android:layout_marginBottom="@dimen/cinco_dp"
+			android:background="@drawable/bg_agendamento"
 			android:gravity="center"
-			android:orientation="horizontal">
+			android:orientation="vertical">
 
-			<TextView
-				android:layout_marginLeft="@dimen/vinte_dp"
-				android:layout_marginRight="@dimen/vinte_dp"
-				android:padding="@dimen/dez_dp"
-				android:background="@drawable/bg_cancelar"
-				android:text="Cancelar"
-				android:layout_width="wrap_content"
+			<LinearLayout
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:elevation="@dimen/doze_dp" />
+				android:elevation="@dimen/cinco_dp"
+				android:orientation="horizontal">
 
-			<TextView
-				android:layout_marginLeft="@dimen/vinte_dp"
-				android:layout_marginRight="@dimen/vinte_dp"
-				android:padding="@dimen/dez_dp"
-				android:background="@drawable/bg_progresso"
-				android:text="03:17"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:elevation="@dimen/doze_dp" />
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/quinze_dp"
+					android:layout_weight="2"
+					android:text="12:02"
+					android:textAlignment="center" />
 
-			<TextView
-				android:layout_marginLeft="@dimen/vinte_dp"
-				android:layout_marginRight="@dimen/vinte_dp"
-				android:padding="@dimen/dez_dp"
-				android:background="@drawable/bg_agendamento"
-				android:text="Teste"
-				android:id="@+id/txtAgendamento"
-				android:layout_width="wrap_content"
+				<ProgressBar
+					android:id="@+id/progressBar"
+					style="?android:attr/progressBarStyleHorizontal"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/zero_dp"
+					android:layout_weight="12"
+					android:max="100"
+					android:progress="56" />
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="@dimen/quinze_dp"
+					android:layout_weight="2"
+					android:text="14:02"
+					android:textAlignment="center" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:elevation="@dimen/doze_dp" />
+				android:elevation="@dimen/cinco_dp"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/cinco_dp"
+					android:layout_marginRight="@dimen/doze_dp"
+					android:elevation="@dimen/doze_dp"
+					android:padding="@dimen/dez_dp"
+					android:text="Cancelar alarme" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/doze_dp"
+					android:layout_marginRight="@dimen/doze_dp"
+					android:elevation="@dimen/doze_dp"
+					android:text="00:37" />
+
+				<TextView
+					android:id="@+id/txtAgendamento"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/doze_dp"
+					android:layout_marginRight="@dimen/doze_dp"
+					android:elevation="@dimen/doze_dp"
+					android:text="32%" />
+
+				<TextView
+					android:id="@+id/txtStatus"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/doze_dp"
+					android:layout_marginRight="@dimen/doze_dp"
+					android:elevation="@dimen/doze_dp"
+					android:text="DESATIVADO" />
+			</LinearLayout>
 		</LinearLayout>
 
 		<LinearLayout
@@ -107,6 +141,7 @@
 			android:orientation="horizontal">
 
 			<TextView
+				android:id="@+id/lblManhaIni"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_entrada" />
@@ -120,6 +155,7 @@
 				android:padding="@dimen/vinte_dp" />
 
 			<TextView
+				android:id="@+id/lblManhaFim"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_saida" />
@@ -149,6 +185,7 @@
 			android:orientation="horizontal">
 
 			<TextView
+				android:id="@+id/lblTardeIni"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_entrada" />
@@ -162,6 +199,7 @@
 				android:padding="@dimen/vinte_dp" />
 
 			<TextView
+				android:id="@+id/lblTardeFim"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_saida" />
@@ -191,6 +229,7 @@
 			android:orientation="horizontal">
 
 			<TextView
+				android:id="@+id/lblNoiteIni"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_entrada" />
@@ -204,6 +243,7 @@
 				android:padding="@dimen/vinte_dp" />
 
 			<TextView
+				android:id="@+id/lblNoiteFim"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/label_saida" />
@@ -263,9 +303,9 @@
 					android:layout_marginLeft="@dimen/tres_dp" />
 
 				<TextView
-					android:layout_marginLeft="@dimen/quinze_dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/quinze_dp"
 					android:text="@string/label_total_lei" />
 
 				<TextView
@@ -275,9 +315,9 @@
 					android:layout_marginLeft="@dimen/tres_dp" />
 
 				<TextView
-					android:layout_marginLeft="@dimen/quinze_dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/quinze_dp"
 					android:text="@string/label_debito" />
 
 				<TextView
@@ -287,9 +327,9 @@
 					android:layout_marginLeft="@dimen/tres_dp" />
 
 				<TextView
-					android:layout_marginLeft="@dimen/quinze_dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/quinze_dp"
 					android:text="@string/label_credito" />
 
 				<TextView
